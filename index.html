@@ -602,7 +602,6 @@
     <thead>
       <tr>
         <th>Firm</th>
-        <th>Role</th>
         <th>Tier</th>
         <th>Status</th>
         <th>Deadline</th>
@@ -610,7 +609,7 @@
       </tr>
     </thead>
     <tbody id="tracker-body">
-      <tr><td colspan="6" style="text-align:center;color:var(--gray400);padding:20px;">No jobs loaded yet.</td></tr>
+      <tr><td colspan="5" style="text-align:center;color:var(--gray400);padding:20px;">Loading firms…</td></tr>
     </tbody>
   </table>
 </div>
@@ -847,20 +846,25 @@ function renderExpiringSoon() {
   const state     = loadTrackerState();
   const section   = document.getElementById('expiring-section');
 
+  // Dedupe by firm — one expiring entry per firm even if multiple roles
+  const seenFirms = new Set();
   const expiring = ALL_JOBS.filter(j => {
     if (dismissed.has(j.id)) return false;
-    const d = daysUntil(state[j.id]?.deadline);
-    return d !== null && d <= 14;
+    if (seenFirms.has(j.firm)) return false;
+    const d = daysUntil(state[j.firm]?.deadline);
+    if (d === null || d > 14) return false;
+    seenFirms.add(j.firm);
+    return true;
   }).sort((a,b) => {
-    const dA = daysUntil(state[a.id]?.deadline);
-    const dB = daysUntil(state[b.id]?.deadline);
+    const dA = daysUntil(state[a.firm]?.deadline);
+    const dB = daysUntil(state[b.firm]?.deadline);
     return dA - dB;
   });
 
   if (!expiring.length) { section.style.display = 'none'; return; }
 
   const rows = expiring.map(j => {
-    const dl  = state[j.id]?.deadline || '';
+    const dl  = state[j.firm]?.deadline || '';
     const tag = deadlineTag(dl);
     return `
       <div class="expiring-row">
@@ -952,7 +956,7 @@ function renderGrid() {
 
       const roleRows = group.jobs.map(job => {
         const roleBadge = isNew(job) ? `<span class="new-badge" style="font-size:.58rem;vertical-align:middle">NEW</span> ` : '';
-        const trackerDL = loadTrackerState()[job.id]?.deadline || '';
+        const trackerDL = loadTrackerState()[job.firm]?.deadline || '';
         const meta = [
           job.location    ? `📍 ${job.location}`    : '',
           job.posted_date ? `📅 ${job.posted_date}` : '',
@@ -1028,35 +1032,41 @@ function saveTrackerState(state) {
 
 function renderTracker() {
   const state = loadTrackerState();
-  const body = document.getElementById('tracker-body');
-  if (!ALL_JOBS.length) return;
+  const body  = document.getElementById('tracker-body');
+  if (!ALL_FIRMS.length) return;
 
-  body.innerHTML = ALL_JOBS.map(job => {
-    const saved      = state[job.id] || {};
-    const statusVal  = saved.status   || '—';
-    const notesVal   = saved.notes    || '';
+  const tierOrder = { homerun:0, reach:1, target:2, safety:3 };
+  const sorted = [...ALL_FIRMS].sort((a,b) =>
+    (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9) || a.name.localeCompare(b.name)
+  );
+
+  const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
+               'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
+
+  body.innerHTML = sorted.map(firm => {
+    const key         = firm.name;
+    const saved       = state[key] || {};
+    const statusVal   = saved.status   || '—';
+    const notesVal    = saved.notes    || '';
     const deadlineVal = saved.deadline || '';
-    const statusOpts = STATUS_OPTS.map(s =>
+    const statusOpts  = STATUS_OPTS.map(s =>
       `<option value="${s}" ${s===statusVal?'selected':''}>${s}</option>`
     ).join('');
-    const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
-                 'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
     return `<tr>
-      <td style="font-weight:600">${escHtml(job.firm)}</td>
-      <td>${escHtml(job.title)}</td>
-      <td><span class="tier-badge tier-${job.tier}" style="font-size:.65rem">${TIER_LABELS[job.tier]}</span></td>
+      <td style="font-weight:600">${escHtml(firm.name)}</td>
+      <td><span class="tier-badge tier-${firm.tier}" style="font-size:.65rem">${TIER_LABELS[firm.tier]}</span></td>
       <td>
-        <select class="status-select ${sc[statusVal]||''}" data-id="${job.id}" onchange="onStatusChange(this)">
+        <select class="status-select ${sc[statusVal]||''}" data-firm="${escHtml(firm.name)}" onchange="onStatusChange(this)">
           ${statusOpts}
         </select>
       </td>
       <td>
-        <input class="deadline-input" type="date" data-id="${job.id}"
+        <input class="deadline-input" type="date" data-firm="${escHtml(firm.name)}"
           value="${escHtml(deadlineVal)}" onchange="onDeadlineChange(this)" />
       </td>
       <td>
         <input class="notes-input" type="text" placeholder="Add note…"
-          value="${escHtml(notesVal)}" data-id="${job.id}"
+          value="${escHtml(notesVal)}" data-firm="${escHtml(firm.name)}"
           onchange="onNotesChange(this)" />
       </td>
     </tr>`;
@@ -1065,10 +1075,10 @@ function renderTracker() {
 
 function onStatusChange(el) {
   const state = loadTrackerState();
-  if (!state[el.dataset.id]) state[el.dataset.id] = {};
-  state[el.dataset.id].status = el.value;
+  const key   = el.dataset.firm;
+  if (!state[key]) state[key] = {};
+  state[key].status = el.value;
   saveTrackerState(state);
-  // Update select color class
   const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
                'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
   el.className = `status-select ${sc[el.value]||''}`;
@@ -1077,32 +1087,34 @@ function onStatusChange(el) {
 
 function onNotesChange(el) {
   const state = loadTrackerState();
-  if (!state[el.dataset.id]) state[el.dataset.id] = {};
-  state[el.dataset.id].notes = el.value;
+  const key   = el.dataset.firm;
+  if (!state[key]) state[key] = {};
+  state[key].notes = el.value;
   saveTrackerState(state);
 }
 
 function onDeadlineChange(el) {
   const state = loadTrackerState();
-  if (!state[el.dataset.id]) state[el.dataset.id] = {};
-  state[el.dataset.id].deadline = el.value;
+  const key   = el.dataset.firm;
+  if (!state[key]) state[key] = {};
+  state[key].deadline = el.value;
   saveTrackerState(state);
   renderExpiringSoon();
-  renderGrid();           // refresh deadline tags in role rows
+  renderGrid();
 }
 
 // ── Charts ────────────────────────────────────────────────────────────────────
 function renderCharts() {
   const state = loadTrackerState();
   const statusCounts = { Applied:0, 'Phone Screen':0, Superday:0, Offer:0, Rejected:0, Tracking:0 };
-  ALL_JOBS.forEach(j => {
-    const s = state[j.id]?.status || '—';
+  ALL_FIRMS.forEach(f => {
+    const s = state[f.name]?.status || '—';
     if (s === '—') statusCounts['Tracking']++;
     else if (statusCounts[s] !== undefined) statusCounts[s]++;
   });
 
   const tierCounts = { homerun:0, reach:0, target:0, safety:0 };
-  ALL_JOBS.forEach(j => { if (tierCounts[j.tier]!==undefined) tierCounts[j.tier]++; });
+  ALL_FIRMS.forEach(f => { if (tierCounts[f.tier]!==undefined) tierCounts[f.tier]++; });
 
   // Pipeline doughnut
   if (pipelineChart) pipelineChart.destroy();
