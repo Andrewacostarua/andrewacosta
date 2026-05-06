@@ -540,6 +540,33 @@
     .tgc-target  .tgc-label { color: #1d4ed8; }
     .tgc-safety  .tgc-label { color: #065f46; }
     .tgc-desc { font-size: .75rem; color: var(--gray600); line-height: 1.5; }
+
+    /* Add Firm form */
+    .addfirm-form { background: var(--gray50); border: 1px solid var(--gray200); border-radius: 8px; padding: 16px; margin-top: 12px; }
+    .af-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .af-row:last-child { margin-bottom: 0; }
+    .af-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
+    .af-wide { flex: 2; min-width: 260px; }
+    .af-field label { font-size: .72rem; font-weight: 600; color: var(--gray600); text-transform: uppercase; letter-spacing: .3px; }
+    .af-field input, .af-field select {
+      border: 1px solid var(--gray200); border-radius: 6px; padding: 7px 10px;
+      font-size: .82rem; font-family: inherit; background: #fff; color: var(--navy);
+      outline: none; transition: border-color .15s;
+    }
+    .af-field input:focus, .af-field select:focus { border-color: var(--gold); }
+    .code-output-wrap { position: relative; }
+    .code-output {
+      background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px;
+      font-size: .78rem; font-family: 'SF Mono', 'Fira Code', monospace;
+      white-space: pre; overflow-x: auto; margin: 0; line-height: 1.6;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.12);
+      color: #e2e8f0; border: none; border-radius: 5px; padding: 4px 10px;
+      font-size: .72rem; cursor: pointer; transition: background .15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,.22); }
+    .copy-btn.copied { background: #10b981; color: #fff; }
   </style>
 </head>
 <body>
@@ -559,12 +586,12 @@
 </header>
 
 <div class="stats-bar" id="stats-bar">
-  <div class="stat"><strong id="s-total">—</strong> total roles</div>
+  <div class="stat"><strong id="s-total">—</strong> open roles</div>
   <div class="stat"><strong id="s-new">—</strong> new this week</div>
-  <div class="stat"><strong id="s-homerun">—</strong> homerun</div>
-  <div class="stat"><strong id="s-reach">—</strong> reach</div>
-  <div class="stat"><strong id="s-target">—</strong> target</div>
-  <div class="stat"><strong id="s-safety">—</strong> safety</div>
+  <div class="stat"><strong id="s-homerun">—</strong> homerun firms</div>
+  <div class="stat"><strong id="s-reach">—</strong> reach firms</div>
+  <div class="stat"><strong id="s-target">—</strong> target firms</div>
+  <div class="stat"><strong id="s-safety">—</strong> safety firms</div>
 </div>
 
 <div class="filter-row">
@@ -753,6 +780,78 @@
         </div>
       </div>
 
+      <!-- Step 6 — Add Firm Generator -->
+      <div class="guide-step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">Generate the code — fill in the form, copy the snippets</div>
+          <div class="step-body">
+            <p>Fill out the fields below and the exact lines you need to paste into Python are generated automatically.</p>
+
+            <div class="addfirm-form">
+              <div class="af-row">
+                <div class="af-field">
+                  <label>Firm Name</label>
+                  <input id="af-name" type="text" placeholder="e.g. Rockwood Capital" oninput="generateFirmCode()" />
+                </div>
+                <div class="af-field">
+                  <label>Tier</label>
+                  <select id="af-tier" onchange="generateFirmCode()">
+                    <option value="homerun">Homerun</option>
+                    <option value="reach">Reach</option>
+                    <option value="target" selected>Target</option>
+                    <option value="safety">Safety</option>
+                  </select>
+                </div>
+                <div class="af-field">
+                  <label>Track</label>
+                  <select id="af-track" onchange="generateFirmCode()">
+                    <option value="repe" selected>repe — Real Estate PE</option>
+                    <option value="ib">ib — Investment Banking</option>
+                    <option value="infra">infra — Infrastructure PE</option>
+                    <option value="cm">cm — Capital Markets</option>
+                  </select>
+                </div>
+                <div class="af-field">
+                  <label>ATS Type</label>
+                  <select id="af-ats" onchange="generateFirmCode()">
+                    <option value="greenhouse">Greenhouse</option>
+                    <option value="workday">Workday</option>
+                    <option value="lever">Lever</option>
+                    <option value="smartrecruiters">SmartRecruiters</option>
+                    <option value="icims">iCIMS</option>
+                    <option value="jobvite">Jobvite</option>
+                    <option value="playwright" selected>Playwright / Custom</option>
+                  </select>
+                </div>
+              </div>
+              <div class="af-row" id="af-extra-row">
+                <!-- Extra fields populated by JS based on ATS type -->
+              </div>
+              <div class="af-row">
+                <div class="af-field af-wide">
+                  <label>Careers Page URL</label>
+                  <input id="af-url" type="text" placeholder="https://firmname.com/careers" oninput="generateFirmCode()" />
+                </div>
+              </div>
+            </div>
+
+            <div id="af-output" style="display:none">
+              <p style="margin:16px 0 6px;font-weight:600;font-size:.8rem;color:var(--gray600);">Paste into the <code>FIRMS</code> list in your scraper file:</p>
+              <div class="code-output-wrap">
+                <pre id="af-scraper-code" class="code-output"></pre>
+                <button class="copy-btn" onclick="copyCode('af-scraper-code', this)">Copy</button>
+              </div>
+              <p style="margin:12px 0 6px;font-weight:600;font-size:.8rem;color:var(--gray600);">Paste into <code>MASTER_FIRMS</code> in <code>scraper.py</code>:</p>
+              <div class="code-output-wrap">
+                <pre id="af-master-code" class="code-output"></pre>
+                <button class="copy-btn" onclick="copyCode('af-master-code', this)">Copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /guide-steps -->
   </div><!-- /guide-body -->
 </div>
@@ -806,9 +905,7 @@ function updateLastChecked(ts) {
 }
 
 function isNew(job) {
-  if (!job.first_seen) return false;
-  const diff = (Date.now() - new Date(job.first_seen).getTime()) / 86400000;
-  return diff <= NEW_WINDOW_DAYS;
+  return job.is_new === true;
 }
 
 // ── Stats bar ────────────────────────────────────────────────────────────────
@@ -816,12 +913,12 @@ function updateStats() {
   const newCount = ALL_JOBS.filter(isNew).length;
   document.getElementById('s-total').textContent   = ALL_JOBS.length;
   document.getElementById('s-new').textContent     = newCount;
-  document.getElementById('s-homerun').textContent = ALL_JOBS.filter(j=>j.tier==='homerun').length;
-  document.getElementById('s-reach').textContent   = ALL_JOBS.filter(j=>j.tier==='reach').length;
-  document.getElementById('s-target').textContent  = ALL_JOBS.filter(j=>j.tier==='target').length;
-  document.getElementById('s-safety').textContent  = ALL_JOBS.filter(j=>j.tier==='safety').length;
+  document.getElementById('s-homerun').textContent = ALL_FIRMS.filter(f=>f.tier==='homerun').length;
+  document.getElementById('s-reach').textContent   = ALL_FIRMS.filter(f=>f.tier==='reach').length;
+  document.getElementById('s-target').textContent  = ALL_FIRMS.filter(f=>f.tier==='target').length;
+  document.getElementById('s-safety').textContent  = ALL_FIRMS.filter(f=>f.tier==='safety').length;
   document.getElementById('header-count').textContent =
-    `${ALL_JOBS.length} role${ALL_JOBS.length!==1?'s':''} tracked`;
+    `${ALL_JOBS.length} role${ALL_JOBS.length!==1?'s':''} across ${ALL_FIRMS.length} firms`;
 }
 
 // ── Deadline helpers ─────────────────────────────────────────────────────────
@@ -1170,6 +1267,74 @@ document.getElementById('search-input').addEventListener('input', e => {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function escHtml(s) {
   return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Add Firm code generator ───────────────────────────────────────────────────
+const ATS_EXTRA_FIELDS = {
+  greenhouse:      [{ id: 'af-slug',      label: 'Board Slug',  placeholder: 'e.g. rockwoodcapital' }],
+  workday:         [{ id: 'af-subdomain', label: 'Subdomain',   placeholder: 'e.g. rockwood' },
+                   { id: 'af-jobsite',   label: 'Jobsite Slug', placeholder: 'e.g. RockwoodCareers' }],
+  lever:           [{ id: 'af-slug',      label: 'Lever Slug',  placeholder: 'e.g. rockwood-capital' }],
+  smartrecruiters: [{ id: 'af-slug',      label: 'Company ID',  placeholder: 'e.g. RockwoodCapital' }],
+  icims:           [{ id: 'af-slug',      label: 'iCIMS ID',    placeholder: 'e.g. 12345' }],
+  jobvite:         [{ id: 'af-slug',      label: 'Jobvite Key', placeholder: 'e.g. rockwoodcap' }],
+  playwright:      [],
+};
+
+function generateFirmCode() {
+  const name  = document.getElementById('af-name').value.trim();
+  const tier  = document.getElementById('af-tier').value;
+  const track = document.getElementById('af-track').value.split(' ')[0];
+  const ats   = document.getElementById('af-ats').value;
+  const url   = document.getElementById('af-url').value.trim();
+
+  // Render extra ATS fields
+  const extraRow = document.getElementById('af-extra-row');
+  const fields   = ATS_EXTRA_FIELDS[ats] || [];
+  extraRow.innerHTML = fields.map(f =>
+    `<div class="af-field"><label>${f.label}</label><input id="${f.id}" type="text" placeholder="${f.placeholder}" oninput="generateFirmCode()" /></div>`
+  ).join('');
+
+  if (!name) { document.getElementById('af-output').style.display = 'none'; return; }
+
+  const slug      = document.getElementById('af-slug')?.value.trim()      || '';
+  const subdomain = document.getElementById('af-subdomain')?.value.trim() || '';
+  const jobsite   = document.getElementById('af-jobsite')?.value.trim()   || '';
+
+  let scraperLine = '';
+  if (ats === 'greenhouse') {
+    scraperLine = `{ "firm": "${name}", "slug": "${slug || 'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  } else if (ats === 'workday') {
+    scraperLine = `{ "firm": "${name}", "subdomain": "${subdomain || 'SUBDOMAIN'}", "jobsite": "${jobsite || 'JOBSITE'}", "wdver": "wd1", "tier": "${tier}", "track": "${track}" }`;
+  } else if (ats === 'lever') {
+    scraperLine = `{ "firm": "${name}", "slug": "${slug || 'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  } else if (ats === 'smartrecruiters') {
+    scraperLine = `{ "firm": "${name}", "company_id": "${slug || 'COMPANY_ID'}", "tier": "${tier}", "track": "${track}" }`;
+  } else if (ats === 'icims') {
+    scraperLine = `{ "firm": "${name}", "client_id": "${slug || 'CLIENT_ID'}", "tier": "${tier}", "track": "${track}" }`;
+  } else if (ats === 'jobvite') {
+    scraperLine = `{ "firm": "${name}", "key": "${slug || 'KEY_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  } else {
+    const safeUrl = url || 'https://firmname.com/careers';
+    scraperLine = `{ "firm": "${name}", "url": "${safeUrl}", "tier": "${tier}", "track": "${track}", "bot_protected": False }`;
+  }
+
+  const masterLine = `{ "name": "${name}", "tier": "${tier}", "track": "${track}", "careers_url": "${url || 'https://firmname.com/careers'}" }`;
+
+  const atsFileMap = { greenhouse:'scrapers/greenhouse.py', workday:'scrapers/workday.py', lever:'scrapers/lever.py', smartrecruiters:'scrapers/smartrecruiters.py', icims:'scrapers/icims.py', jobvite:'scrapers/jobvite.py', playwright:'scrapers/playwright_scraper.py' };
+
+  document.getElementById('af-scraper-code').textContent = `# ${atsFileMap[ats]} → FIRMS list\n${scraperLine},`;
+  document.getElementById('af-master-code').textContent  = `# scraper.py → MASTER_FIRMS list\n${masterLine},`;
+  document.getElementById('af-output').style.display = 'block';
+}
+
+function copyCode(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
 }
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
