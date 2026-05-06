@@ -1,0 +1,205 @@
+2026-05-05T18:35:33Z === Scraper run started ===
+2026-05-05T18:35:33Z Known IDs loaded: 0
+2026-05-05T18:35:33Z Running Greenhouse scrapers...
+2026-05-05T18:35:33Z [greenhouse] Apollo Global Management: 0 match(es)
+2026-05-05T18:35:33Z [greenhouse] TPG Real Estate: 0 match(es)
+2026-05-05T18:35:33Z Running Workday scrapers...
+2026-05-05T18:35:34Z [workday] BlackRock Real Assets: 1 match(es)
+2026-05-05T18:35:34Z [workday] Blue Owl Capital: 2 match(es)
+2026-05-05T18:35:35Z [workday] LaSalle Investment: 2 match(es)
+2026-05-05T18:35:36Z [workday] Nuveen Real Estate: 1 match(es)
+2026-05-05T18:35:37Z [workday] JLL Capital Markets: 8 match(es)
+2026-05-05T18:35:39Z [workday] Cushman & Wakefield: 8 match(es)
+2026-05-05T18:35:40Z [workday] KeyBank RE: 4 match(es)
+2026-05-05T18:35:40Z Running Lever scrapers...
+2026-05-05T18:35:40Z Running Jobvite scrapers...
+2026-05-05T18:35:40Z [jobvite] W. P. Carey: 0 match(es)
+2026-05-05T18:35:40Z Running SmartRecruiters scrapers...
+2026-05-05T18:35:40Z [smartrecruiters] Ares Management: 0 match(es)
+2026-05-05T18:35:40Z Running iCIMS scrapers...
+2026-05-05T18:35:41Z [icims] Related Companies: 0 match(es)
+2026-05-05T18:35:42Z [icims] ERROR Hines (hines): 406 Client Error: Not Acceptable for url: https://login.icims.com/u/login/identifier?state=hqFo2SBZTGhDSEpLcS05SjJJUlFHc1A1SlV3eG5Tb1g0SHpVM6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDNQYUo1ZDk0NFZwRXEzaW9JWjFFeHlvcGJaX0gzdDQ0o2NpZNkgS0pBOTVEeEhPUE5PNTZVYU5SZFJZNTdwem42Q01IY22lb3JnaWS0b3JnX0RtRlJVSmZ3NlpIeTVhaXinb3JnbmFtZa5oaW5lcy1lbXBsb3llZQ
+2026-05-05T18:35:42Z [icims] ERROR Walker & Dunlop (walkerdunlop): 404 Client Error: Not Found for url: https://walkerdunlop.icims.com/jobs/search?in_jdsearch=analyst+real+estate&ss=1&pr=1&in_iframe=1&hashed=-1332571853
+2026-05-05T18:35:42Z [icims] ERROR Berkadia (berkadia): 404 Client Error: Not Found for url: https://berkadia.icims.com/jobs/search?in_jdsearch=analyst+real+estate&ss=1&pr=1&in_iframe=1&hashed=-1332571853
+2026-05-05T18:35:42Z Running Playwright scrapers...
+2026-05-05T18:35:50Z [playwright] Blackstone (BREP): 1 match(es)
+2026-05-05T18:36:15Z [playwright] Brookfield Asset Mgmt: 0 match(es)
+2026-05-05T18:36:45Z [playwright] Goldman Sachs: blocked/error (bot protection expected) — Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.goldmansachs.com/careers/search.html", waiting until "networkidle"
+
+2026-05-05T18:36:46Z [playwright] Morgan Stanley: blocked/error (bot protection expected) — Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.morganstanley.com/people-opportunities/search
+Call log:
+  - navigating to "https://www.morganstanley.com/people-opportunities/search", waiting until "networkidle"
+
+2026-05-05T18:36:46Z [playwright] ERROR Stonepeak: Page.goto: Navigation to "https://jobs.ashbyhq.com/stonepeak" is interrupted by another navigation to "chrome-error://chromewebdata/"
+Call log:
+  - navigating to "https://jobs.ashbyhq.com/stonepeak", waiting until "networkidle"
+
+2026-05-05T18:36:46Z [playwright] ERROR Pretium Partners: Page.goto: Navigation to "https://jobs.ashbyhq.com/pretium" is interrupted by another navigation to "https://jobs.ashbyhq.com/stonepeak"
+Call log:
+  - navigating to "https://jobs.ashbyhq.com/pretium", waiting until "networkidle"
+
+2026-05-05T18:36:50Z [playwright] Bridge Investment Group: 0 match(es)
+2026-05-05T18:36:55Z [playwright] KKR Real Estate: 0 match(es)
+2026-05-05T18:37:00Z [playwright] Carlyle Group: 0 match(es)
+2026-05-05T18:37:05Z [playwright] W. P. Carey: 0 match(es)
+2026-05-05T18:37:12Z [playwright] Digital Realty Trust: 0 match(es)
+2026-05-05T18:37:18Z [playwright] BentallGreenOak: 0 match(es)
+2026-05-05T18:37:27Z [playwright] CBRE Capital Markets: 4 match(es)
+2026-05-05T18:37:31Z [playwright] Wells Fargo RE: 1 match(es)
+2026-05-05T18:37:37Z [playwright] UBS Wealth Management: 0 match(es)
+2026-05-05T18:37:45Z [playwright] State Street (SSGA): 0 match(es)
+2026-05-05T18:37:50Z [playwright] Jefferies: 0 match(es)
+2026-05-05T18:37:55Z [playwright] Starwood Capital: 0 match(es)
+2026-05-05T18:37:59Z [playwright] Cerberus Capital: 0 match(es)
+2026-05-05T18:38:00Z [playwright] ERROR EQT / Exeter RE: Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://careers.eqtgroup.com/
+Call log:
+  - navigating to "https://careers.eqtgroup.com/", waiting until "networkidle"
+
+2026-05-05T18:38:00Z [playwright] ERROR Tishman Speyer: Page.goto: Navigation to "https://www.tishmanspeyer.com/about/careers" is interrupted by another navigation to "chrome-error://chromewebdata/"
+Call log:
+  - navigating to "https://www.tishmanspeyer.com/about/careers", waiting until "networkidle"
+
+2026-05-05T18:38:00Z [playwright] ERROR Rockpoint Group: Page.goto: Navigation to "https://www.rockpointgroup.com/careers" is interrupted by another navigation to "https://www.tishmanspeyer.com/about/careers"
+Call log:
+  - navigating to "https://www.rockpointgroup.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:00Z [playwright] ERROR Dune Real Estate: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.dunerep.com/
+Call log:
+  - navigating to "https://www.dunerep.com/", waiting until "networkidle"
+
+2026-05-05T18:38:01Z [playwright] ERROR Harrison Street RE: Page.goto: Navigation to "https://www.harrisonst.com/careers" is interrupted by another navigation to "chrome-error://chromewebdata/"
+Call log:
+  - navigating to "https://www.harrisonst.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:01Z [playwright] ERROR Eastdil Secured: Page.goto: Navigation to "https://www.eastdilsecured.com/careers" is interrupted by another navigation to "https://harrisonst.com/careers/"
+Call log:
+  - navigating to "https://www.eastdilsecured.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:02Z [playwright] ERROR I Squared Capital: Page.goto: Navigation to "https://isquaredcapital.com/careers" is interrupted by another navigation to "https://www.eastdilsecured.com/careers/"
+Call log:
+  - navigating to "https://isquaredcapital.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:05Z [playwright] ERROR AEW Capital Mgmt: Page.goto: net::ERR_TOO_MANY_REDIRECTS at https://www.aew.com/careers
+Call log:
+  - navigating to "https://www.aew.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:05Z [playwright] ERROR Clarion Partners: Page.goto: Navigation to "https://www.clarionpartners.com/about-us/careers" is interrupted by another navigation to "chrome-error://chromewebdata/"
+Call log:
+  - navigating to "https://www.clarionpartners.com/about-us/careers", waiting until "networkidle"
+
+2026-05-05T18:38:06Z [playwright] ERROR Heitman: Page.goto: Navigation to "https://www.heitman.com/careers" is interrupted by another navigation to "https://www.clarionpartners.com/about-us/careers"
+Call log:
+  - navigating to "https://www.heitman.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:06Z [playwright] ERROR Walton Street Capital: Page.goto: Navigation to "https://www.waltonst.com/" is interrupted by another navigation to "https://www.heitman.com/careers/"
+Call log:
+  - navigating to "https://www.waltonst.com/", waiting until "networkidle"
+
+2026-05-05T18:38:07Z [playwright] ERROR TA Realty: Page.goto: Navigation to "https://www.tarealty.com/careers" is interrupted by another navigation to "https://waltonst.com/"
+Call log:
+  - navigating to "https://www.tarealty.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:07Z [playwright] ERROR Somera Road: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.someraroad.com/
+Call log:
+  - navigating to "https://www.someraroad.com/", waiting until "networkidle"
+
+2026-05-05T18:38:08Z [playwright] ERROR Marcus & Millichap: Page.goto: Navigation to "https://www.marcusmillichap.com/careers" is interrupted by another navigation to "chrome-error://chromewebdata/"
+Call log:
+  - navigating to "https://www.marcusmillichap.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:08Z [playwright] ERROR Stifel Financial: Page.goto: Navigation to "https://www.stifel.com/careers" is interrupted by another navigation to "https://www.marcusmillichap.com/careers"
+Call log:
+  - navigating to "https://www.stifel.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:09Z [playwright] ERROR Revantage (Blackstone): Page.goto: Navigation to "https://www.revantage.com/careers" is interrupted by another navigation to "https://www.stifel.com/careers"
+Call log:
+  - navigating to "https://www.revantage.com/careers", waiting until "networkidle"
+
+2026-05-05T18:38:09Z [playwright] ERROR Fidelity Investments: Page.goto: Navigation to "https://jobs.fidelity.com/" is interrupted by another navigation to "https://www.revantage.com/careers/"
+Call log:
+  - navigating to "https://jobs.fidelity.com/", waiting until "networkidle"
+
+2026-05-05T18:38:09Z Total matches after dedup: 32
+2026-05-05T18:38:09Z New jobs this run: 32
+2026-05-05T18:38:09Z jobs.json written
+2026-05-05T18:38:09Z === Run complete in 156s — 32 total, 32 new ===
+2026-05-05T18:53:29Z === Scraper run started ===
+2026-05-05T18:53:29Z Known IDs loaded: 26
+2026-05-05T18:53:29Z Running Greenhouse scrapers...
+2026-05-05T18:53:29Z [greenhouse] Apollo Global Management: 0 match(es)
+2026-05-05T18:53:29Z [greenhouse] TPG Real Estate: 0 match(es)
+2026-05-05T18:53:29Z [greenhouse] Berkadia: 5 match(es)
+2026-05-05T18:53:29Z Running Workday scrapers...
+2026-05-05T18:53:30Z [workday] BlackRock Real Assets: 1 match(es)
+2026-05-05T18:53:30Z [workday] Blue Owl Capital: 2 match(es)
+2026-05-05T18:53:31Z [workday] LaSalle Investment: 2 match(es)
+2026-05-05T18:53:32Z [workday] Nuveen Real Estate: 1 match(es)
+2026-05-05T18:53:33Z [workday] JLL Capital Markets: 8 match(es)
+2026-05-05T18:53:35Z [workday] Cushman & Wakefield: 8 match(es)
+2026-05-05T18:53:36Z [workday] KeyBank RE: 4 match(es)
+2026-05-05T18:53:37Z [workday] Walker & Dunlop: 2 match(es)
+2026-05-05T18:53:37Z Running Lever scrapers...
+2026-05-05T18:53:37Z Running Jobvite scrapers...
+2026-05-05T18:53:37Z [jobvite] W. P. Carey: 0 match(es)
+2026-05-05T18:53:37Z Running SmartRecruiters scrapers...
+2026-05-05T18:53:37Z [smartrecruiters] Ares Management: 0 match(es)
+2026-05-05T18:53:37Z Running iCIMS scrapers...
+2026-05-05T18:53:38Z [icims] Related Companies: 0 match(es)
+2026-05-05T18:53:38Z Running Playwright scrapers...
+2026-05-05T18:53:44Z [playwright] Blackstone (BREP): 0 match(es)
+2026-05-05T18:54:05Z [playwright] Brookfield Asset Mgmt: 0 match(es)
+2026-05-05T18:54:35Z [playwright] Goldman Sachs: blocked/error (bot protection expected) — Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.goldmansachs.com/careers/search.html", waiting until "networkidle"
+
+2026-05-05T18:54:35Z [playwright] Morgan Stanley: blocked/error (bot protection expected) — Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.morganstanley.com/people-opportunities/search
+Call log:
+  - navigating to "https://www.morganstanley.com/people-opportunities/search", waiting until "networkidle"
+
+2026-05-05T18:54:40Z [playwright] Stonepeak: 0 match(es)
+2026-05-05T18:54:44Z [playwright] Pretium Partners: 0 match(es)
+2026-05-05T18:54:48Z [playwright] Bridge Investment Group: 0 match(es)
+2026-05-05T18:54:53Z [playwright] KKR Real Estate: 0 match(es)
+2026-05-05T18:54:58Z [playwright] Carlyle Group: 0 match(es)
+2026-05-05T18:55:09Z [playwright] Digital Realty Trust: 0 match(es)
+2026-05-05T18:55:14Z [playwright] BentallGreenOak: 0 match(es)
+2026-05-05T18:55:19Z [playwright] Hines: 0 match(es)
+2026-05-05T18:55:28Z [playwright] CBRE Capital Markets: 1 match(es)
+2026-05-05T18:55:32Z [playwright] Wells Fargo RE: 1 match(es)
+2026-05-05T18:55:38Z [playwright] UBS Wealth Management: 0 match(es)
+2026-05-05T18:55:45Z [playwright] State Street (SSGA): 0 match(es)
+2026-05-05T18:55:53Z [playwright] Jefferies: 0 match(es)
+2026-05-05T18:55:58Z [playwright] Starwood Capital: 0 match(es)
+2026-05-05T18:56:02Z [playwright] Cerberus Capital: 0 match(es)
+2026-05-05T18:56:02Z [playwright] ERROR EQT / Exeter RE: Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://careers.eqtgroup.com/
+Call log:
+  - navigating to "https://careers.eqtgroup.com/", waiting until "networkidle"
+
+2026-05-05T18:56:32Z [playwright] ERROR Tishman Speyer: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.tishmanspeyer.com/about/careers", waiting until "networkidle"
+
+2026-05-05T18:56:36Z [playwright] Rockpoint Group: 0 match(es)
+2026-05-05T18:56:36Z [playwright] ERROR Dune Real Estate: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.dunerep.com/
+Call log:
+  - navigating to "https://www.dunerep.com/", waiting until "networkidle"
+
+2026-05-05T18:56:41Z [playwright] Harrison Street RE: 0 match(es)
+2026-05-05T18:56:46Z [playwright] Eastdil Secured: 0 match(es)
+2026-05-05T18:56:51Z [playwright] I Squared Capital: 0 match(es)
+2026-05-05T18:56:56Z [playwright] AEW Capital Mgmt: 0 match(es)
+2026-05-05T18:57:01Z [playwright] Clarion Partners: 0 match(es)
+2026-05-05T18:57:06Z [playwright] Heitman: 1 match(es)
+2026-05-05T18:57:11Z [playwright] Walton Street Capital: 0 match(es)
+2026-05-05T18:57:15Z [playwright] TA Realty: 0 match(es)
+2026-05-05T18:57:23Z [playwright] Somera Road: 0 match(es)
+2026-05-05T18:57:29Z [playwright] Marcus & Millichap: 0 match(es)
+2026-05-05T18:57:34Z [playwright] Stifel Financial: 0 match(es)
+2026-05-05T18:57:38Z [playwright] Revantage (Blackstone): 0 match(es)
+2026-05-05T18:57:43Z [playwright] Fidelity Investments: 0 match(es)
+2026-05-05T18:57:43Z Total matches after dedup: 36
+2026-05-05T18:57:43Z New jobs this run: 10
+2026-05-05T18:57:43Z jobs.json written
+2026-05-05T18:57:43Z === Run complete in 254s — 36 total, 10 new ===

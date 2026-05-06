@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyst Job Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0f2342;
+      --navy2:   #1a3560;
+      --white:   #ffffff;
+      --gray50:  #f8fafc;
+      --gray100: #f1f5f9;
+      --gray200: #e2e8f0;
+      --gray400: #94a3b8;
+      --gray600: #475569;
+      --gray800: #1e293b;
+      --gold:    #f59e0b;
+      --gold-bg: #fffbeb;
+      --purple:  #8b5cf6;
+      --purple-bg: #f5f3ff;
+      --blue:    #3b82f6;
+      --blue-bg: #eff6ff;
+      --green:   #10b981;
+      --green-bg:#ecfdf5;
+      --red:     #ef4444;
+      --amber:   #f59e0b;
+      --new-green:#16a34a;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--gray100);
+      color: var(--gray800);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0a1628 0%, #0f2342 60%, #1a3560 100%);
+      color: var(--white);
+      padding: 22px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.4);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .header-icon {
+      width: 38px; height: 38px;
+      background: var(--gold);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(245,158,11,.35);
+    }
+    header h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.4px; }
+    header h1 span { color: var(--gold); }
+    .header-sub { font-size: .72rem; color: #93c5fd; margin-top: 1px; font-weight: 400; }
+    .header-meta { font-size: .78rem; color: #93c5fd; text-align: right; line-height: 1.7; }
+    .header-meta strong { color: var(--white); font-weight: 600; }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: var(--navy2);
+      padding: 10px 32px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .stat { font-size: .78rem; color: #93c5fd; }
+    .stat strong { color: var(--white); font-size: 1.1rem; margin-right: 4px; }
+
+    /* ── Filter row ── */
+    .filter-row {
+      padding: 16px 32px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray200);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .filter-label { font-size: .75rem; font-weight: 600; color: var(--gray600); text-transform: uppercase; letter-spacing: .5px; margin-right: 4px; }
+    .filter-btn {
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--gray200);
+      background: var(--white);
+      color: var(--gray600);
+      font-size: .8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .filter-btn.tier-homerun.active  { background: var(--gold);   border-color: var(--gold);   color: #fff; }
+    .filter-btn.tier-reach.active    { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .filter-btn.tier-target.active   { background: var(--blue);   border-color: var(--blue);   color: #fff; }
+    .filter-btn.tier-safety.active   { background: var(--green);  border-color: var(--green);  color: #fff; }
+
+    .search-input {
+      margin-left: auto;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--gray200);
+      font-size: .8rem;
+      width: 200px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .search-input:focus { border-color: var(--blue); }
+
+    /* ── Job grid ── */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+      padding: 24px 32px;
+    }
+
+    .job-card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--gray200);
+      border-left: 4px solid var(--gray200);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+    }
+    .job-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.09); transform: translateY(-2px); }
+    .job-card.tier-accent-homerun { border-left-color: var(--gold); }
+    .job-card.tier-accent-reach   { border-left-color: var(--purple); }
+    .job-card.tier-accent-target  { border-left-color: var(--blue); }
+    .job-card.tier-accent-safety  { border-left-color: var(--green); }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+
+    .tier-badge {
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tier-homerun  { background: var(--gold-bg);   color: #92400e; border: 1px solid #fde68a; }
+    .tier-reach    { background: var(--purple-bg);  color: #5b21b6; border: 1px solid #ddd6fe; }
+    .tier-target   { background: var(--blue-bg);    color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .tier-safety   { background: var(--green-bg);   color: #065f46; border: 1px solid #a7f3d0; }
+
+    .new-badge {
+      background: var(--new-green);
+      color: var(--white);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .card-firm { font-size: .95rem; font-weight: 700; color: var(--gray800); letter-spacing: -.2px; }
+    .card-title { font-size: .95rem; font-weight: 600; color: var(--gray800); line-height: 1.35; }
+    .card-meta { font-size: .76rem; color: var(--gray600); display: flex; gap: 12px; flex-wrap: wrap; }
+    .card-meta span::before { margin-right: 3px; }
+
+    .chance-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 700;
+    }
+    .chance-low    { background: #fee2e2; color: #991b1b; }
+    .chance-mid    { background: #fef3c7; color: #92400e; }
+    .chance-good   { background: #dbeafe; color: #1e40af; }
+    .chance-high   { background: #dcfce7; color: #14532d; }
+
+    .card-actions { margin-top: 4px; }
+
+    .role-list { display: flex; flex-direction: column; }
+    .role-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid var(--gray100, #f3f4f6);
+    }
+    .role-info { flex: 1; min-width: 0; }
+    .role-title { font-size: .88rem; font-weight: 600; color: var(--gray800); line-height: 1.35; }
+    .role-meta  { font-size: .73rem; color: var(--gray500, #6b7280); margin-top: 3px; }
+    .role-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; padding-top: 1px; }
+
+    .dismiss-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray400, #9ca3af);
+      font-size: .78rem;
+      padding: 3px 5px;
+      border-radius: 4px;
+      transition: color .15s, background .15s;
+      flex-shrink: 0;
+    }
+    .dismiss-btn:hover { color: #991b1b; background: #fee2e2; }
+
+    /* ── Watchlist (firms not open yet) ── */
+    .watchlist-section {
+      margin: 0 36px 28px;
+    }
+    .watchlist-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      background: var(--white);
+      border: 1px solid var(--gray200);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gray600);
+      width: 100%;
+      text-align: left;
+      transition: background .15s;
+      user-select: none;
+    }
+    .watchlist-toggle:hover { background: var(--gray50); }
+    .watchlist-toggle .wl-count {
+      background: var(--gray100);
+      color: var(--gray600);
+      border-radius: 20px;
+      padding: 1px 8px;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+    .watchlist-toggle .wl-chevron { margin-left: auto; transition: transform .2s; font-style: normal; }
+    .watchlist-toggle.open .wl-chevron { transform: rotate(180deg); }
+
+    .watchlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .watchlist-item {
+      background: var(--white);
+      border: 1px solid var(--gray200);
+      border-left: 3px solid var(--gray200);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .watchlist-item.wl-homerun { border-left-color: var(--gold); }
+    .watchlist-item.wl-reach   { border-left-color: var(--purple); }
+    .watchlist-item.wl-target  { border-left-color: var(--blue); }
+    .watchlist-item.wl-safety  { border-left-color: var(--green); }
+    .watchlist-name { font-size: .8rem; font-weight: 600; color: var(--gray700, #374151); }
+    .check-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 10px;
+      background: transparent;
+      color: var(--gray500, #6b7280);
+      border: 1px solid var(--gray200);
+      border-radius: 6px;
+      font-size: .72rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: border-color .15s, color .15s;
+      flex-shrink: 0;
+    }
+    .check-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+    .apply-btn {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 6px;
+      font-size: .78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .apply-btn:hover { background: var(--navy2); }
+
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray400);
+    }
+    .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--gray600); }
+
+    /* ── Salary row ── */
+    .salary-row {
+      font-size: .73rem;
+      color: var(--gray600);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 2px;
+      border-top: 1px solid var(--gray100);
+    }
+
+    /* ── Status tracker ── */
+    .section {
+      margin: 0 32px 32px;
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--gray200);
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray200);
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--gray50);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-header .hint { font-size: .72rem; font-weight: 400; color: var(--gray400); }
+
+    table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--gray400);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      border-bottom: 1px solid var(--gray200);
+      background: var(--gray50);
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--gray100); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--gray50); }
+
+    .status-select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--gray200);
+      font-size: .75rem;
+      background: var(--white);
+      cursor: pointer;
+    }
+    .notes-input {
+      width: 100%;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--gray200);
+      font-size: .75rem;
+    }
+    .notes-input:focus { outline: none; border-color: var(--blue); }
+    .deadline-input {
+      width: 130px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--gray200);
+      font-size: .75rem;
+    }
+    .deadline-input:focus { outline: none; border-color: var(--blue); }
+
+    /* Deadline urgency tags (role rows + expiring section) */
+    .dl-urgent { background: #fee2e2; color: #991b1b; border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 700; white-space: nowrap; }
+    .dl-warn   { background: #fef3c7; color: #92400e; border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 700; white-space: nowrap; }
+    .dl-ok     { background: var(--gray100); color: var(--gray600); border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 600; white-space: nowrap; }
+
+    /* Expiring Soon section */
+    .expiring-section {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .expiring-header {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+    .expiring-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-top: 1px solid #fde68a;
+      flex-wrap: wrap;
+    }
+    .expiring-firm  { font-size: .72rem; font-weight: 700; color: #92400e; text-transform: uppercase; flex-shrink: 0; width: 130px; }
+    .expiring-title { flex: 1; font-size: .86rem; font-weight: 600; color: #78350f; min-width: 160px; }
+
+    .status-applied      { color: #1d4ed8; }
+    .status-phone        { color: #7c3aed; }
+    .status-superday     { color: #d97706; }
+    .status-offer        { color: #059669; }
+    .status-rejected     { color: #dc2626; }
+
+    /* ── Charts ── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 0 32px 32px;
+    }
+    @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
+    .chart-card {
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--gray200);
+      padding: 20px;
+    }
+    .chart-title { font-size: .82rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+    .chart-wrap { height: 200px; position: relative; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: .73rem;
+      color: var(--gray400);
+      border-top: 1px solid var(--gray200);
+    }
+
+    /* ── Add Firm Guide ── */
+    .guide-section {
+      margin: 0 36px 36px;
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--gray200);
+      overflow: hidden;
+    }
+    .guide-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: var(--gray50);
+      border: none;
+      border-bottom: 1px solid var(--gray200);
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--navy);
+      width: 100%;
+      text-align: left;
+      transition: background .15s;
+      font-family: inherit;
+    }
+    .guide-toggle:hover { background: var(--gray100); }
+    .guide-toggle .g-chevron { margin-left: auto; transition: transform .2s; font-style: normal; font-size: .7rem; }
+    .guide-toggle.open .g-chevron { transform: rotate(180deg); }
+    .guide-body { padding: 24px 28px; display: none; }
+    .guide-body.open { display: block; }
+
+    .guide-steps { display: flex; flex-direction: column; gap: 28px; }
+    .guide-step { display: flex; gap: 18px; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      font-size: .75rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .step-content { flex: 1; }
+    .step-title { font-size: .88rem; font-weight: 700; color: var(--gray800); margin-bottom: 8px; }
+    .step-body { font-size: .8rem; color: var(--gray600); line-height: 1.65; }
+    .step-body p { margin-bottom: 6px; }
+
+    .ats-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .78rem; }
+    .ats-table th { text-align: left; padding: 6px 10px; background: var(--gray50); color: var(--gray600); font-weight: 600; font-size: .7rem; text-transform: uppercase; letter-spacing: .3px; border-bottom: 1px solid var(--gray200); }
+    .ats-table td { padding: 7px 10px; border-bottom: 1px solid var(--gray100); vertical-align: top; }
+    .ats-table tr:last-child td { border-bottom: none; }
+    .ats-table code { background: var(--gray100); padding: 1px 5px; border-radius: 4px; font-size: .75rem; font-family: 'SF Mono', 'Fira Code', monospace; color: var(--navy); }
+
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: .76rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      line-height: 1.7;
+      margin-top: 10px;
+      overflow-x: auto;
+    }
+    .code-block .cm  { color: #64748b; }
+    .code-block .ky  { color: #93c5fd; }
+    .code-block .st  { color: #86efac; }
+    .code-block .nm  { color: #fde68a; }
+
+    .tag-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag-include { background: #dcfce7; color: #14532d; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .tag-exclude { background: #fee2e2; color: #991b1b; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .tag-neutral { background: var(--gray100); color: var(--gray600); padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+
+    .tier-guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
+    .tier-guide-card { border-radius: 8px; padding: 12px 14px; border: 1px solid; }
+    .tgc-homerun { background: var(--gold-bg);   border-color: #fde68a; }
+    .tgc-reach   { background: var(--purple-bg); border-color: #ddd6fe; }
+    .tgc-target  { background: var(--blue-bg);   border-color: #bfdbfe; }
+    .tgc-safety  { background: var(--green-bg);  border-color: #a7f3d0; }
+    .tgc-label   { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 5px; }
+    .tgc-homerun .tgc-label { color: #92400e; }
+    .tgc-reach   .tgc-label { color: #5b21b6; }
+    .tgc-target  .tgc-label { color: #1d4ed8; }
+    .tgc-safety  .tgc-label { color: #065f46; }
+    .tgc-desc { font-size: .75rem; color: var(--gray600); line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="header-icon">📊</div>
+    <div>
+      <h1>Analyst Job <span>Tracker</span></h1>
+      <div class="header-sub">2027 Full-Time Recruiting · REPE &nbsp;·&nbsp; IB &nbsp;·&nbsp; Infra PE &nbsp;·&nbsp; Capital Markets</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div>Last scraped: <strong id="last-checked">—</strong></div>
+    <div id="header-count" style="color:var(--gold);font-weight:600;">Loading…</div>
+  </div>
+</header>
+
+<div class="stats-bar" id="stats-bar">
+  <div class="stat"><strong id="s-total">—</strong> total roles</div>
+  <div class="stat"><strong id="s-new">—</strong> new this week</div>
+  <div class="stat"><strong id="s-homerun">—</strong> homerun</div>
+  <div class="stat"><strong id="s-reach">—</strong> reach</div>
+  <div class="stat"><strong id="s-target">—</strong> target</div>
+  <div class="stat"><strong id="s-safety">—</strong> safety</div>
+</div>
+
+<div class="filter-row">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-tier="all">All</button>
+  <button class="filter-btn tier-homerun" data-tier="homerun">Homerun</button>
+  <button class="filter-btn tier-reach"   data-tier="reach">Reach</button>
+  <button class="filter-btn tier-target"  data-tier="target">Target</button>
+  <button class="filter-btn tier-safety"  data-tier="safety">Safety</button>
+  <input class="search-input" type="text" id="search-input" placeholder="Search firm or role…" />
+</div>
+
+<div id="expiring-section" class="expiring-section" style="display:none"></div>
+
+<div class="jobs-grid" id="jobs-grid">
+  <div class="empty-state"><h3>Loading roles…</h3></div>
+</div>
+
+<div class="watchlist-section" id="watchlist-section" style="display:none">
+  <button class="watchlist-toggle" id="watchlist-toggle" onclick="toggleWatchlist()">
+    <span>📋 Firms Not Open Yet</span>
+    <span class="wl-count" id="wl-count">0</span>
+    <em class="wl-chevron">▼</em>
+  </button>
+  <div class="watchlist-grid" id="watchlist-grid" style="display:none"></div>
+</div>
+
+<!-- Status tracker -->
+<div class="section">
+  <div class="section-header">
+    Application Tracker
+    <span class="hint">Auto-saved to your browser</span>
+  </div>
+  <table id="tracker-table">
+    <thead>
+      <tr>
+        <th>Firm</th>
+        <th>Role</th>
+        <th>Tier</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody id="tracker-body">
+      <tr><td colspan="6" style="text-align:center;color:var(--gray400);padding:20px;">No jobs loaded yet.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Charts -->
+<div class="charts-grid">
+  <div class="chart-card">
+    <div class="chart-title">Pipeline Status</div>
+    <div class="chart-wrap"><canvas id="chart-pipeline"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Roles by Tier</div>
+    <div class="chart-wrap"><canvas id="chart-tiers"></canvas></div>
+  </div>
+</div>
+
+<!-- ── Add Firm / Role Guide ─────────────────────────────────────────────── -->
+<div class="guide-section">
+  <button class="guide-toggle" id="guide-toggle" onclick="toggleGuide()">
+    ➕ How to Add a New Firm or Role
+    <em class="g-chevron">▼</em>
+  </button>
+  <div class="guide-body" id="guide-body">
+    <div class="guide-steps">
+
+      <!-- Step 1 -->
+      <div class="guide-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Identify the firm's ATS (Applicant Tracking System)</div>
+          <div class="step-body">
+            <p>Visit the firm's careers page and look at the URL. Each ATS has a recognizable pattern:</p>
+            <table class="ats-table">
+              <thead><tr><th>URL pattern</th><th>ATS</th><th>Scraper file</th></tr></thead>
+              <tbody>
+                <tr><td><code>boards.greenhouse.io/…</code> or <code>boards-api.greenhouse.io</code></td><td>Greenhouse</td><td><code>scrapers/greenhouse.py</code></td></tr>
+                <tr><td><code>*.myworkdayjobs.com</code></td><td>Workday</td><td><code>scrapers/workday.py</code></td></tr>
+                <tr><td><code>jobs.lever.co/…</code></td><td>Lever</td><td><code>scrapers/lever.py</code></td></tr>
+                <tr><td><code>*.smartrecruiters.com</code> or <code>api.smartrecruiters.com</code></td><td>SmartRecruiters</td><td><code>scrapers/smartrecruiters.py</code></td></tr>
+                <tr><td><code>*.icims.com</code></td><td>iCIMS</td><td><code>scrapers/icims.py</code></td></tr>
+                <tr><td><code>jobs.jobvite.com/…</code></td><td>Jobvite</td><td><code>scrapers/jobvite.py</code></td></tr>
+                <tr><td><code>jobs.ashbyhq.com/…</code> or any JS-rendered page</td><td>Ashby / Custom</td><td><code>scrapers/playwright_scraper.py</code></td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:10px;">If the careers page renders job listings in JavaScript with no clear ATS URL, use Playwright.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="guide-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Add the firm to the right scraper file</div>
+          <div class="step-body">
+            <p>Open the appropriate file and add one entry to the <code>FIRMS</code> list. The format depends on the ATS:</p>
+            <div class="code-block">
+<span class="cm"># scrapers/greenhouse.py — need the board slug (part after /boards/)</span>
+{ <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"slug"</span>: <span class="st">"firmslug"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span> }
+
+<span class="cm"># scrapers/workday.py — need subdomain + jobsite slug from the Workday URL</span>
+{ <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"subdomain"</span>: <span class="st">"firmname"</span>, <span class="ky">"jobsite"</span>: <span class="st">"FirmCareers"</span>, <span class="ky">"wdver"</span>: <span class="st">"wd1"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span> }
+
+<span class="cm"># scrapers/playwright_scraper.py — just need the careers page URL</span>
+{ <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"url"</span>: <span class="st">"https://firmname.com/careers"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span>, <span class="ky">"bot_protected"</span>: <span class="nm">False</span> }
+            </div>
+            <p style="margin-top:10px;"><strong>Finding Workday slugs:</strong> the Workday URL looks like <code>firmname.wd1.myworkdayjobs.com/en-US/FirmCareers</code> — subdomain is <code>firmname</code>, jobsite is <code>FirmCareers</code>.</p>
+            <p><strong>Finding Greenhouse slugs:</strong> visit <code>boards.greenhouse.io/SLUG</code> and try the firm's name, hyphenated name, or ticker until one works.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="guide-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Add the firm to <code>MASTER_FIRMS</code> in <code>scraper.py</code></div>
+          <div class="step-body">
+            <p>This is what makes the firm appear as "Not Open Yet" on the dashboard when no roles are found. Without this step, the firm is invisible.</p>
+            <div class="code-block">
+<span class="cm"># scraper.py → MASTER_FIRMS list</span>
+{ <span class="ky">"name"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span>, <span class="ky">"careers_url"</span>: <span class="st">"https://firmname.com/careers"</span> }
+            </div>
+            <p style="margin-top:10px;">The <code>name</code> must exactly match the <code>"firm"</code> field in the scraper entry — this is how open roles get linked to their firm.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 — Role match criteria -->
+      <div class="guide-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Understand which roles get included automatically</div>
+          <div class="step-body">
+            <p>The scraper filters every posting against these rules. No manual curation needed — if the title passes, it appears on the dashboard.</p>
+            <p style="margin-top:10px;font-weight:600;font-size:.78rem;color:var(--gray800);">Title must contain <code>analyst</code> or <code>associate</code> AND at least one of:</p>
+            <div class="tag-group">
+              <span class="tag-include">real estate</span><span class="tag-include">investment banking</span><span class="tag-include">capital markets</span><span class="tag-include">acquisitions</span><span class="tag-include">private equity</span><span class="tag-include">infrastructure</span><span class="tag-include">asset management</span><span class="tag-include">portfolio</span><span class="tag-include">credit</span><span class="tag-include">underwriting</span><span class="tag-include">transaction</span><span class="tag-include">equity</span><span class="tag-include">debt</span><span class="tag-include">fund</span><span class="tag-include">securities</span><span class="tag-include">multifamily</span><span class="tag-include">financial</span><span class="tag-include">structured</span><span class="tag-include">origination</span><span class="tag-include">valuation</span><span class="tag-include">net lease</span><span class="tag-include">investor relations</span>
+            </div>
+            <p style="margin-top:12px;font-weight:600;font-size:.78rem;color:var(--gray800);">Title must NOT contain any of:</p>
+            <div class="tag-group">
+              <span class="tag-exclude">senior</span><span class="tag-exclude">vice president</span><span class="tag-exclude">director</span><span class="tag-exclude">managing director</span><span class="tag-exclude">principal</span><span class="tag-exclude">technology analyst</span><span class="tag-exclude">data analyst</span><span class="tag-exclude">systems analyst</span><span class="tag-exclude">compliance analyst</span><span class="tag-exclude">legal analyst</span><span class="tag-exclude">marketing analyst</span><span class="tag-exclude">business analyst</span><span class="tag-exclude">governance analyst</span><span class="tag-exclude">workforce</span><span class="tag-exclude">payoff</span><span class="tag-exclude">procurement</span>
+            </div>
+            <p style="margin-top:10px;">To change these rules, edit <code>EXCLUDE_TERMS</code> and <code>RELEVANT_TERMS</code> in <code>scrapers/utils.py</code> — one file, applies to all scrapers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 — Tier & Track -->
+      <div class="guide-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Choose the right tier and track</div>
+          <div class="step-body">
+            <div class="tier-guide-grid">
+              <div class="tier-guide-card tgc-homerun">
+                <div class="tgc-label">Homerun</div>
+                <div class="tgc-desc">Dream firms — Blackstone, KKR, Goldman, etc. Very selective, high upside.</div>
+              </div>
+              <div class="tier-guide-card tgc-reach">
+                <div class="tgc-label">Reach</div>
+                <div class="tgc-desc">Strong targets — realistic with a great application, but competitive.</div>
+              </div>
+              <div class="tier-guide-card tgc-target">
+                <div class="tgc-label">Target</div>
+                <div class="tgc-desc">Core targets — good fit for your profile, high application-to-interview rate.</div>
+              </div>
+              <div class="tier-guide-card tgc-safety">
+                <div class="tgc-label">Safety</div>
+                <div class="tgc-desc">Backup firms — strong probability of offer, still great outcomes.</div>
+              </div>
+            </div>
+            <p style="margin-top:12px;font-weight:600;font-size:.78rem;color:var(--gray800);">Tracks:</p>
+            <div class="tag-group">
+              <span class="tag-neutral">repe — Real Estate Private Equity</span>
+              <span class="tag-neutral">ib — Investment Banking</span>
+              <span class="tag-neutral">infra — Infrastructure PE</span>
+              <span class="tag-neutral">cm — Capital Markets / Brokerage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /guide-steps -->
+  </div><!-- /guide-body -->
+</div>
+
+<footer>Analyst Job Tracker · Pulls live from jobs.json · <a href="https://github.com" style="color:var(--gray400)">GitHub</a></footer>
+
+<script>
+// ── Config ──────────────────────────────────────────────────────────────────
+const TIER_COLORS = {
+  homerun: '#f59e0b',
+  reach:   '#8b5cf6',
+  target:  '#3b82f6',
+  safety:  '#10b981',
+};
+const TIER_LABELS = { homerun:'Homerun', reach:'Reach', target:'Target', safety:'Safety' };
+const STATUS_OPTS = ['—', 'Applied', 'Phone Screen', 'Superday', 'Offer', 'Rejected'];
+const NEW_WINDOW_DAYS = 7;
+
+let ALL_JOBS   = [];
+let ALL_FIRMS  = [];   // firms status array from jobs.json (includes open_count=0 entries)
+let activeTier = 'all';
+let searchQuery = '';
+let pipelineChart, tierChart;
+
+// ── Load jobs.json ───────────────────────────────────────────────────────────
+async function loadJobs() {
+  try {
+    const r = await fetch('./jobs.json');
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    ALL_JOBS  = data.jobs  || [];
+    ALL_FIRMS = data.firms || [];
+    updateLastChecked(data.last_run);
+    updateStats();
+    renderExpiringSoon();
+    renderGrid();
+    renderTracker();
+    renderCharts();
+  } catch (e) {
+    document.getElementById('jobs-grid').innerHTML =
+      `<div class="empty-state"><h3>Could not load jobs.json</h3><p>${e.message}</p><p style="margin-top:8px;font-size:.75rem;">Run <code>python scraper.py</code> to generate it, then serve locally.</p></div>`;
+  }
+}
+
+function updateLastChecked(ts) {
+  if (!ts) return;
+  const d = new Date(ts + 'Z');
+  const fmt = d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })
+            + ' ' + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+  document.getElementById('last-checked').textContent = fmt;
+}
+
+function isNew(job) {
+  if (!job.first_seen) return false;
+  const diff = (Date.now() - new Date(job.first_seen).getTime()) / 86400000;
+  return diff <= NEW_WINDOW_DAYS;
+}
+
+// ── Stats bar ────────────────────────────────────────────────────────────────
+function updateStats() {
+  const newCount = ALL_JOBS.filter(isNew).length;
+  document.getElementById('s-total').textContent   = ALL_JOBS.length;
+  document.getElementById('s-new').textContent     = newCount;
+  document.getElementById('s-homerun').textContent = ALL_JOBS.filter(j=>j.tier==='homerun').length;
+  document.getElementById('s-reach').textContent   = ALL_JOBS.filter(j=>j.tier==='reach').length;
+  document.getElementById('s-target').textContent  = ALL_JOBS.filter(j=>j.tier==='target').length;
+  document.getElementById('s-safety').textContent  = ALL_JOBS.filter(j=>j.tier==='safety').length;
+  document.getElementById('header-count').textContent =
+    `${ALL_JOBS.length} role${ALL_JOBS.length!==1?'s':''} tracked`;
+}
+
+// ── Deadline helpers ─────────────────────────────────────────────────────────
+function daysUntil(dateStr) {
+  if (!dateStr) return null;
+  const diff = (new Date(dateStr) - new Date()) / 86400000;
+  return Math.ceil(diff);
+}
+
+function deadlineTag(dateStr) {
+  const d = daysUntil(dateStr);
+  if (d === null) return '';
+  const label = d < 0  ? `🗓 ${dateStr} (expired)` :
+                d === 0 ? `🗓 Today!` :
+                          `🗓 ${dateStr} (${d}d)`;
+  const cls = d <= 7 ? 'dl-urgent' : d <= 14 ? 'dl-warn' : 'dl-ok';
+  return `<span class="${cls}">${label}</span>`;
+}
+
+function renderExpiringSoon() {
+  const dismissed = getDismissed();
+  const state     = loadTrackerState();
+  const section   = document.getElementById('expiring-section');
+
+  const expiring = ALL_JOBS.filter(j => {
+    if (dismissed.has(j.id)) return false;
+    const d = daysUntil(state[j.id]?.deadline);
+    return d !== null && d <= 14;
+  }).sort((a,b) => {
+    const dA = daysUntil(state[a.id]?.deadline);
+    const dB = daysUntil(state[b.id]?.deadline);
+    return dA - dB;
+  });
+
+  if (!expiring.length) { section.style.display = 'none'; return; }
+
+  const rows = expiring.map(j => {
+    const dl  = state[j.id]?.deadline || '';
+    const tag = deadlineTag(dl);
+    return `
+      <div class="expiring-row">
+        <span class="expiring-firm">${escHtml(j.firm)}</span>
+        <span class="expiring-title">${escHtml(j.title)}</span>
+        ${tag}
+        <a class="apply-btn" href="${escHtml(j.url)}" target="_blank" rel="noopener" style="padding:4px 12px;font-size:.74rem">Apply →</a>
+      </div>`;
+  }).join('');
+
+  section.style.display = 'block';
+  section.innerHTML = `<div class="expiring-header">⚠️ Deadlines in the Next 2 Weeks</div>${rows}`;
+}
+
+// ── Dismiss helpers ──────────────────────────────────────────────────────────
+function getDismissed() {
+  try { return new Set(JSON.parse(localStorage.getItem('dismissed') || '[]')); }
+  catch { return new Set(); }
+}
+function dismissJob(id) {
+  const d = getDismissed();
+  d.add(id);
+  localStorage.setItem('dismissed', JSON.stringify([...d]));
+  renderGrid();
+  renderExpiringSoon();
+}
+
+// ── Job grid ─────────────────────────────────────────────────────────────────
+function filteredJobs() {
+  return ALL_JOBS.filter(j => {
+    if (activeTier !== 'all' && j.tier !== activeTier) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      if (!j.firm.toLowerCase().includes(q) && !j.title.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function chanceBadge(chance) {
+  if (!chance) return '';
+  let cls = chance < 10 ? 'chance-low' : chance < 20 ? 'chance-mid' : chance < 35 ? 'chance-good' : 'chance-high';
+  return `<span class="chance-badge ${cls}">${chance}% chance</span>`;
+}
+
+function salaryRow(job) {
+  if (!job.salary && !job.bonus && !job.hours) return '';
+  const parts = [];
+  if (job.salary) parts.push(`💰 ${job.salary}`);
+  if (job.bonus)  parts.push(`🎯 ${job.bonus}`);
+  if (job.hours)  parts.push(`⏱ ${job.hours}`);
+  return `<div class="salary-row">${parts.join('<span style="color:var(--gray200)">│</span>')}</div>`;
+}
+
+function renderGrid() {
+  const dismissed = getDismissed();
+  const grid      = document.getElementById('jobs-grid');
+  const tierOrder = { homerun:0, reach:1, target:2, safety:3 };
+
+  // Visible jobs: pass active filter AND not dismissed
+  const visibleJobs = filteredJobs().filter(j => !dismissed.has(j.id));
+
+  // Group by firm — one card per firm, all its roles inside
+  const byFirm = {};
+  for (const j of visibleJobs) {
+    if (!byFirm[j.firm]) byFirm[j.firm] = { tier: j.tier, jobs: [] };
+    byFirm[j.firm].jobs.push(j);
+  }
+
+  // Sort firm groups: any-new first, then by tier
+  const firmGroups = Object.entries(byFirm).sort(([,a],[,b]) => {
+    const aN = a.jobs.some(isNew) ? 0 : 1;
+    const bN = b.jobs.some(isNew) ? 0 : 1;
+    if (aN !== bN) return aN - bN;
+    return (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9);
+  });
+
+  // Firms with no visible roles — passed to watchlist, not rendered in grid
+  const firmsWithVisibleJobs = new Set(Object.keys(byFirm));
+  const closedFirms = ALL_FIRMS.filter(f => !firmsWithVisibleJobs.has(f.name))
+    .sort((a,b) => (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9));
+
+  if (!firmGroups.length) {
+    grid.innerHTML = `<div class="empty-state"><h3>No roles match your filter.</h3></div>`;
+  } else {
+    grid.innerHTML = firmGroups.map(([firmName, group]) => {
+      const hasNew   = group.jobs.some(isNew);
+      const newBadge = hasNew ? `<span class="new-badge">NEW</span>` : '';
+
+      const roleRows = group.jobs.map(job => {
+        const roleBadge = isNew(job) ? `<span class="new-badge" style="font-size:.58rem;vertical-align:middle">NEW</span> ` : '';
+        const trackerDL = loadTrackerState()[job.id]?.deadline || '';
+        const meta = [
+          job.location    ? `📍 ${job.location}`    : '',
+          job.posted_date ? `📅 ${job.posted_date}` : '',
+        ].filter(Boolean).join('  ');
+        return `
+          <div class="role-row">
+            <div class="role-info">
+              <div class="role-title">${roleBadge}${escHtml(job.title)}</div>
+              <div class="role-meta">
+                ${meta ? meta + (trackerDL ? '  ' : '') : ''}${deadlineTag(trackerDL)}
+              </div>
+              ${salaryRow(job)}
+            </div>
+            <div class="role-actions">
+              <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
+              <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss — won't show again">✕</button>
+            </div>
+          </div>`;
+      }).join('');
+
+      return `
+      <div class="job-card tier-accent-${group.tier}">
+        <div class="card-top">
+          <span class="tier-badge tier-${group.tier}">${TIER_LABELS[group.tier]||group.tier}</span>
+          ${newBadge}
+        </div>
+        <div class="card-firm">${escHtml(firmName)}</div>
+        <div class="role-list">${roleRows}</div>
+      </div>`;
+    }).join('');
+  }
+
+  renderWatchlist(closedFirms);
+}
+
+function renderWatchlist(closedFirms) {
+  const section = document.getElementById('watchlist-section');
+  const countEl = document.getElementById('wl-count');
+  const gridEl  = document.getElementById('watchlist-grid');
+  if (!closedFirms.length) { section.style.display = 'none'; return; }
+
+  countEl.textContent = closedFirms.length;
+  section.style.display = 'block';
+  gridEl.innerHTML = closedFirms.map(f => `
+    <div class="watchlist-item wl-${f.tier}">
+      <span class="watchlist-name">${escHtml(f.name)}</span>
+      <a class="check-btn" href="${escHtml(f.careers_url)}" target="_blank" rel="noopener">Check →</a>
+    </div>`).join('');
+}
+
+function toggleWatchlist() {
+  const toggle = document.getElementById('watchlist-toggle');
+  const gridEl = document.getElementById('watchlist-grid');
+  const open   = toggle.classList.toggle('open');
+  gridEl.style.display = open ? 'grid' : 'none';
+}
+
+function toggleGuide() {
+  const toggle = document.getElementById('guide-toggle');
+  const body   = document.getElementById('guide-body');
+  const open   = toggle.classList.toggle('open');
+  body.classList.toggle('open', open);
+}
+
+// ── Status tracker ───────────────────────────────────────────────────────────
+function loadTrackerState() {
+  try { return JSON.parse(localStorage.getItem('tracker') || '{}'); }
+  catch { return {}; }
+}
+function saveTrackerState(state) {
+  localStorage.setItem('tracker', JSON.stringify(state));
+}
+
+function renderTracker() {
+  const state = loadTrackerState();
+  const body = document.getElementById('tracker-body');
+  if (!ALL_JOBS.length) return;
+
+  body.innerHTML = ALL_JOBS.map(job => {
+    const saved      = state[job.id] || {};
+    const statusVal  = saved.status   || '—';
+    const notesVal   = saved.notes    || '';
+    const deadlineVal = saved.deadline || '';
+    const statusOpts = STATUS_OPTS.map(s =>
+      `<option value="${s}" ${s===statusVal?'selected':''}>${s}</option>`
+    ).join('');
+    const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
+                 'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
+    return `<tr>
+      <td style="font-weight:600">${escHtml(job.firm)}</td>
+      <td>${escHtml(job.title)}</td>
+      <td><span class="tier-badge tier-${job.tier}" style="font-size:.65rem">${TIER_LABELS[job.tier]}</span></td>
+      <td>
+        <select class="status-select ${sc[statusVal]||''}" data-id="${job.id}" onchange="onStatusChange(this)">
+          ${statusOpts}
+        </select>
+      </td>
+      <td>
+        <input class="deadline-input" type="date" data-id="${job.id}"
+          value="${escHtml(deadlineVal)}" onchange="onDeadlineChange(this)" />
+      </td>
+      <td>
+        <input class="notes-input" type="text" placeholder="Add note…"
+          value="${escHtml(notesVal)}" data-id="${job.id}"
+          onchange="onNotesChange(this)" />
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function onStatusChange(el) {
+  const state = loadTrackerState();
+  if (!state[el.dataset.id]) state[el.dataset.id] = {};
+  state[el.dataset.id].status = el.value;
+  saveTrackerState(state);
+  // Update select color class
+  const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
+               'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
+  el.className = `status-select ${sc[el.value]||''}`;
+  renderCharts();
+}
+
+function onNotesChange(el) {
+  const state = loadTrackerState();
+  if (!state[el.dataset.id]) state[el.dataset.id] = {};
+  state[el.dataset.id].notes = el.value;
+  saveTrackerState(state);
+}
+
+function onDeadlineChange(el) {
+  const state = loadTrackerState();
+  if (!state[el.dataset.id]) state[el.dataset.id] = {};
+  state[el.dataset.id].deadline = el.value;
+  saveTrackerState(state);
+  renderExpiringSoon();
+  renderGrid();           // refresh deadline tags in role rows
+}
+
+// ── Charts ────────────────────────────────────────────────────────────────────
+function renderCharts() {
+  const state = loadTrackerState();
+  const statusCounts = { Applied:0, 'Phone Screen':0, Superday:0, Offer:0, Rejected:0, Tracking:0 };
+  ALL_JOBS.forEach(j => {
+    const s = state[j.id]?.status || '—';
+    if (s === '—') statusCounts['Tracking']++;
+    else if (statusCounts[s] !== undefined) statusCounts[s]++;
+  });
+
+  const tierCounts = { homerun:0, reach:0, target:0, safety:0 };
+  ALL_JOBS.forEach(j => { if (tierCounts[j.tier]!==undefined) tierCounts[j.tier]++; });
+
+  // Pipeline doughnut
+  if (pipelineChart) pipelineChart.destroy();
+  pipelineChart = new Chart(document.getElementById('chart-pipeline'), {
+    type: 'doughnut',
+    data: {
+      labels: Object.keys(statusCounts),
+      datasets: [{
+        data: Object.values(statusCounts),
+        backgroundColor: ['#3b82f6','#8b5cf6','#f59e0b','#10b981','#ef4444','#e2e8f0'],
+        borderWidth: 2, borderColor: '#fff',
+      }]
+    },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ font:{ size:11 }, boxWidth:12 } } } }
+  });
+
+  // Tier bar
+  if (tierChart) tierChart.destroy();
+  tierChart = new Chart(document.getElementById('chart-tiers'), {
+    type: 'bar',
+    data: {
+      labels: ['Homerun','Reach','Target','Safety'],
+      datasets: [{
+        label: 'Open Roles',
+        data: [tierCounts.homerun, tierCounts.reach, tierCounts.target, tierCounts.safety],
+        backgroundColor: [TIER_COLORS.homerun, TIER_COLORS.reach, TIER_COLORS.target, TIER_COLORS.safety],
+        borderRadius: 5,
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1 }, grid:{ color:'#f1f5f9' } }, x:{ grid:{ display:false } } }
+    }
+  });
+}
+
+// ── Filter & search events ────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTier = btn.dataset.tier;
+    renderGrid();
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  renderGrid();
+});
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+loadJobs();
+</script>
+</body>
+</html>

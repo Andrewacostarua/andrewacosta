@@ -1,0 +1,38 @@
+name: Daily Job Scraper
+
+on:
+  schedule:
+    - cron: '0 12 * * 1-5'   # 8am ET (noon UTC), Monday–Friday
+  workflow_dispatch:           # Manual trigger from GitHub UI
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Run scraper
+        run: python scraper.py
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+      - name: Commit results
+        run: |
+          git config --global user.email "scraper-bot@github.com"
+          git config --global user.name "Scraper Bot"
+          git add jobs.json known_ids.json scrape_log.txt
+          git diff --staged --quiet || (git commit -m "Update job listings — $(date -u '+%Y-%m-%d %H:%M UTC')" && git push)
