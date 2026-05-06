@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Analyst Job Tracker</title>
+  <title>Analyst Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -12,590 +12,685 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:    #0f2342;
-      --navy2:   #1a3560;
-      --white:   #ffffff;
-      --gray50:  #f8fafc;
-      --gray100: #f1f5f9;
-      --gray200: #e2e8f0;
-      --gray400: #94a3b8;
-      --gray600: #475569;
-      --gray800: #1e293b;
-      --gold:    #f59e0b;
-      --gold-bg: #fffbeb;
-      --purple:  #8b5cf6;
-      --purple-bg: #f5f3ff;
-      --blue:    #3b82f6;
-      --blue-bg: #eff6ff;
-      --green:   #10b981;
-      --green-bg:#ecfdf5;
-      --red:     #ef4444;
-      --amber:   #f59e0b;
-      --new-green:#16a34a;
+      --bg:            #faf8f5;
+      --surface:       #fefefe;
+      --surface-hover: #f5f3ef;
+      --ink:           #151b27;
+      --ink-2:         #4a5568;
+      --ink-3:         #7c8ea8;
+      --border:        #e4e0d8;
+      --border-strong: #c8c3ba;
+      --accent:        #3d52a0;
+      --accent-hover:  #2e3e7a;
+      --accent-glow:   rgba(61,82,160,0.14);
+
+      --homerun:        #d97706;
+      --homerun-bg:     #fef3c7;
+      --homerun-tint:   rgba(217,119,6,0.06);
+      --homerun-text:   #92400e;
+      --homerun-ring:   rgba(217,119,6,0.3);
+      --reach:          #7c3aed;
+      --reach-bg:       #ede9fe;
+      --reach-tint:     rgba(124,58,237,0.05);
+      --reach-text:     #5b21b6;
+      --reach-ring:     rgba(124,58,237,0.28);
+      --target:         #2563eb;
+      --target-bg:      #dbeafe;
+      --target-tint:    rgba(37,99,235,0.05);
+      --target-text:    #1d4ed8;
+      --target-ring:    rgba(37,99,235,0.28);
+      --safety:         #059669;
+      --safety-bg:      #d1fae5;
+      --safety-tint:    rgba(5,150,105,0.05);
+      --safety-text:    #065f46;
+      --safety-ring:    rgba(5,150,105,0.28);
+
+      --new-green:  #16a34a;
+      --urgent:     #dc2626;
+      --urgent-bg:  #fee2e2;
+      --warn-bg:    #fef3c7;
+
+      --ease: cubic-bezier(0.23,1,0.32,1);
+      --sh-hover: 0 4px 16px rgba(21,27,39,0.08),0 1px 4px rgba(21,27,39,0.04);
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--gray100);
-      color: var(--gray800);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ── Header ── */
     header {
-      background: linear-gradient(135deg, #0a1628 0%, #0f2342 60%, #1a3560 100%);
-      color: var(--white);
-      padding: 22px 36px;
+      background: #0d1117;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 14px 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: 0 2px 16px rgba(0,0,0,.4);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
-    .header-left { display: flex; align-items: center; gap: 14px; }
-    .header-icon {
-      width: 38px; height: 38px;
-      background: var(--gold);
-      border-radius: 9px;
+    .header-left { display: flex; align-items: center; gap: 11px; }
+    .header-mark {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
       flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(245,158,11,.35);
+      font-size: .6rem; font-weight: 800; color: #fff;
+      letter-spacing: .03em;
     }
-    header h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.4px; }
-    header h1 span { color: var(--gold); }
-    .header-sub { font-size: .72rem; color: #93c5fd; margin-top: 1px; font-weight: 400; }
-    .header-meta { font-size: .78rem; color: #93c5fd; text-align: right; line-height: 1.7; }
-    .header-meta strong { color: var(--white); font-weight: 600; }
+    header h1 { font-size: 1.05rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; color: #f1f5f9; }
+    header h1 span { color: #8ba4e8; }
+    .header-sub { font-size: .65rem; color: rgba(255,255,255,0.35); margin-top: 2px; font-weight: 500; }
+    .header-meta { font-size: .72rem; color: rgba(255,255,255,0.35); text-align: right; line-height: 1.9; }
+    .header-meta strong { color: rgba(255,255,255,0.7); font-weight: 600; }
+    #header-count { color: #8ba4e8; font-weight: 600; }
 
-    /* ── Stats bar ── */
-    .stats-bar {
-      background: var(--navy2);
-      padding: 10px 32px;
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
+    /* ── Stats row ── */
+    .stats-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      padding: 20px 36px 4px;
     }
-    .stat { font-size: .78rem; color: #93c5fd; }
-    .stat strong { color: var(--white); font-size: 1.1rem; margin-right: 4px; }
+    .stat-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 18px;
+      display: flex; flex-direction: column; gap: 3px;
+      min-width: 88px;
+      transition: box-shadow 200ms var(--ease), transform 200ms var(--ease);
+      cursor: default;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .stat-pill:hover { box-shadow: var(--sh-hover); transform: translateY(-1px); }
+    }
+    .stat-num {
+      font-size: 1.65rem; font-weight: 700;
+      letter-spacing: -.03em; line-height: 1; color: var(--ink);
+    }
+    .stat-label {
+      font-size: .62rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3);
+    }
+    .sp-homerun { border-top: 2px solid var(--homerun); }
+    .sp-reach   { border-top: 2px solid var(--reach); }
+    .sp-target  { border-top: 2px solid var(--target); }
+    .sp-safety  { border-top: 2px solid var(--safety); }
+    .sp-homerun .stat-num { color: var(--homerun); }
+    .sp-reach   .stat-num { color: var(--reach); }
+    .sp-target  .stat-num { color: var(--target); }
+    .sp-safety  .stat-num { color: var(--safety); }
 
     /* ── Filter row ── */
     .filter-row {
-      padding: 16px 32px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray200);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      padding: 16px 36px 16px;
+      display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
     }
-    .filter-label { font-size: .75rem; font-weight: 600; color: var(--gray600); text-transform: uppercase; letter-spacing: .5px; margin-right: 4px; }
+    .filter-label {
+      font-size: .65rem; font-weight: 600; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: .05em; margin-right: 2px;
+    }
     .filter-btn {
-      padding: 5px 14px;
-      border-radius: 20px;
-      border: 1.5px solid var(--gray200);
-      background: var(--white);
-      color: var(--gray600);
-      font-size: .8rem;
-      font-weight: 500;
+      padding: 5px 15px; border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: transparent; color: var(--ink-3);
+      font-size: .77rem; font-weight: 600; font-family: inherit;
       cursor: pointer;
-      transition: all .15s;
+      transition:
+        background-color 180ms var(--ease),
+        border-color     180ms var(--ease),
+        color            180ms var(--ease),
+        transform        100ms var(--ease);
     }
-    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
-    .filter-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
-    .filter-btn.tier-homerun.active  { background: var(--gold);   border-color: var(--gold);   color: #fff; }
-    .filter-btn.tier-reach.active    { background: var(--purple); border-color: var(--purple); color: #fff; }
-    .filter-btn.tier-target.active   { background: var(--blue);   border-color: var(--blue);   color: #fff; }
-    .filter-btn.tier-safety.active   { background: var(--green);  border-color: var(--green);  color: #fff; }
+    .filter-btn:active { transform: scale(0.96); }
+    @media (hover: hover) and (pointer: fine) {
+      .filter-btn:not(.active):hover { border-color: var(--accent); color: var(--accent); }
+    }
+    .filter-btn.active                  { background: var(--ink);     border-color: var(--ink);     color: #fff; }
+    .filter-btn.tier-homerun.active     { background: var(--homerun); border-color: var(--homerun); }
+    .filter-btn.tier-reach.active       { background: var(--reach);   border-color: var(--reach); }
+    .filter-btn.tier-target.active      { background: var(--target);  border-color: var(--target); }
+    .filter-btn.tier-safety.active      { background: var(--safety);  border-color: var(--safety); }
 
     .search-input {
       margin-left: auto;
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1.5px solid var(--gray200);
-      font-size: .8rem;
-      width: 200px;
-      outline: none;
-      transition: border-color .15s;
+      padding: 5px 13px; border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--ink);
+      font-size: .77rem; font-family: inherit;
+      width: 195px; outline: none;
+      transition:
+        border-color 180ms var(--ease),
+        box-shadow   180ms var(--ease),
+        width        280ms var(--ease);
     }
-    .search-input:focus { border-color: var(--blue); }
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      width: 255px;
+    }
+
+    /* ── Expiring ── */
+    .expiring-section {
+      background: var(--urgent-bg);
+      border: 1px solid rgba(220,38,38,.18);
+      border-radius: 10px;
+      padding: 13px 20px;
+      margin: 0 36px 20px;
+    }
+    .expiring-header {
+      font-size: .65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: var(--urgent); margin-bottom: 8px;
+    }
+    .expiring-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 7px 0; border-top: 1px solid rgba(220,38,38,.1); flex-wrap: wrap;
+    }
+    .expiring-firm  { font-size: .65rem; font-weight: 700; color: var(--urgent); text-transform: uppercase; letter-spacing: .04em; flex-shrink: 0; width: 110px; }
+    .expiring-title { flex: 1; font-size: .82rem; font-weight: 600; color: var(--ink); min-width: 120px; }
 
     /* ── Job grid ── */
     .jobs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 16px;
-      padding: 24px 32px;
+      gap: 13px;
+      padding: 0 36px 28px;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .job-card {
-      background: var(--white);
+      background: var(--surface);
       border-radius: 10px;
-      border: 1px solid var(--gray200);
-      border-left: 4px solid var(--gray200);
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: box-shadow .2s, transform .2s;
-      position: relative;
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      animation: cardIn 280ms var(--ease) both;
+      transition:
+        box-shadow   200ms var(--ease),
+        transform    200ms var(--ease),
+        border-color 200ms var(--ease);
     }
-    .job-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.09); transform: translateY(-2px); }
-    .job-card.tier-accent-homerun { border-left-color: var(--gold); }
-    .job-card.tier-accent-reach   { border-left-color: var(--purple); }
-    .job-card.tier-accent-target  { border-left-color: var(--blue); }
-    .job-card.tier-accent-safety  { border-left-color: var(--green); }
+    @media (hover: hover) and (pointer: fine) {
+      .job-card:hover {
+        box-shadow: var(--sh-hover);
+        transform: translateY(-2px);
+        border-color: var(--border-strong);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .job-card { animation: none; opacity: 1; transform: none; }
+      .new-badge { animation: none; }
+      * { transition-duration: 0ms !important; }
+    }
 
-    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .tc-homerun { border-top: 3px solid var(--homerun); }
+    .tc-reach   { border-top: 3px solid var(--reach); }
+    .tc-target  { border-top: 3px solid var(--target); }
+    .tc-safety  { border-top: 3px solid var(--safety); }
+
+    .card-header {
+      padding: 15px 18px 11px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tint-homerun { background: var(--homerun-tint); }
+    .tint-reach   { background: var(--reach-tint); }
+    .tint-target  { background: var(--target-tint); }
+    .tint-safety  { background: var(--safety-tint); }
+
+    .card-firm { font-size: .96rem; font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.2; }
+    .card-badges { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
 
     .tier-badge {
-      padding: 3px 9px;
-      border-radius: 20px;
-      font-size: .68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .4px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      padding: 2px 8px; border-radius: 999px;
+      font-size: .6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      border: 1px solid; white-space: nowrap;
     }
-    .tier-homerun  { background: var(--gold-bg);   color: #92400e; border: 1px solid #fde68a; }
-    .tier-reach    { background: var(--purple-bg);  color: #5b21b6; border: 1px solid #ddd6fe; }
-    .tier-target   { background: var(--blue-bg);    color: #1d4ed8; border: 1px solid #bfdbfe; }
-    .tier-safety   { background: var(--green-bg);   color: #065f46; border: 1px solid #a7f3d0; }
+    .tier-homerun { background: var(--homerun-bg); color: var(--homerun-text); border-color: var(--homerun-ring); }
+    .tier-reach   { background: var(--reach-bg);   color: var(--reach-text);   border-color: var(--reach-ring); }
+    .tier-target  { background: var(--target-bg);  color: var(--target-text);  border-color: var(--target-ring); }
+    .tier-safety  { background: var(--safety-bg);  color: var(--safety-text);  border-color: var(--safety-ring); }
 
+    @keyframes pulse {
+      0%  { box-shadow: 0 0 0 0 rgba(22,163,74,.7); }
+      50% { box-shadow: 0 0 0 9px rgba(22,163,74,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+    }
     .new-badge {
-      background: var(--new-green);
-      color: var(--white);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      flex-shrink: 0;
+      background: var(--new-green); color: #fff;
+      padding: 3px 8px; border-radius: 999px;
+      font-size: .6rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .06em;
+      animation: pulse 2s var(--ease) .3s 2 forwards;
     }
 
-    .card-firm { font-size: .95rem; font-weight: 700; color: var(--gray800); letter-spacing: -.2px; }
-    .card-title { font-size: .95rem; font-weight: 600; color: var(--gray800); line-height: 1.35; }
-    .card-meta { font-size: .76rem; color: var(--gray600); display: flex; gap: 12px; flex-wrap: wrap; }
-    .card-meta span::before { margin-right: 3px; }
-
-    .chance-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: .7rem;
-      font-weight: 700;
-    }
-    .chance-low    { background: #fee2e2; color: #991b1b; }
-    .chance-mid    { background: #fef3c7; color: #92400e; }
-    .chance-good   { background: #dbeafe; color: #1e40af; }
-    .chance-high   { background: #dcfce7; color: #14532d; }
-
-    .card-actions { margin-top: 4px; }
-
-    .role-list { display: flex; flex-direction: column; }
+    .role-list { padding: 0 18px 14px; display: flex; flex-direction: column; }
     .role-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px solid var(--gray100, #f3f4f6);
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 0; border-top: 1px solid var(--border);
     }
-    .role-info { flex: 1; min-width: 0; }
-    .role-title { font-size: .88rem; font-weight: 600; color: var(--gray800); line-height: 1.35; }
-    .role-meta  { font-size: .73rem; color: var(--gray500, #6b7280); margin-top: 3px; }
-    .role-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; padding-top: 1px; }
-
-    .dismiss-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--gray400, #9ca3af);
-      font-size: .78rem;
-      padding: 3px 5px;
-      border-radius: 4px;
-      transition: color .15s, background .15s;
-      flex-shrink: 0;
-    }
-    .dismiss-btn:hover { color: #991b1b; background: #fee2e2; }
-
-    /* ── Watchlist (firms not open yet) ── */
-    .watchlist-section {
-      margin: 0 36px 28px;
-    }
-    .watchlist-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 18px;
-      background: var(--white);
-      border: 1px solid var(--gray200);
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: .8rem;
-      font-weight: 600;
-      color: var(--gray600);
-      width: 100%;
-      text-align: left;
-      transition: background .15s;
-      user-select: none;
-    }
-    .watchlist-toggle:hover { background: var(--gray50); }
-    .watchlist-toggle .wl-count {
-      background: var(--gray100);
-      color: var(--gray600);
-      border-radius: 20px;
-      padding: 1px 8px;
-      font-size: .72rem;
-      font-weight: 700;
-    }
-    .watchlist-toggle .wl-chevron { margin-left: auto; transition: transform .2s; font-style: normal; }
-    .watchlist-toggle.open .wl-chevron { transform: rotate(180deg); }
-
-    .watchlist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .watchlist-item {
-      background: var(--white);
-      border: 1px solid var(--gray200);
-      border-left: 3px solid var(--gray200);
-      border-radius: 8px;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .watchlist-item.wl-homerun { border-left-color: var(--gold); }
-    .watchlist-item.wl-reach   { border-left-color: var(--purple); }
-    .watchlist-item.wl-target  { border-left-color: var(--blue); }
-    .watchlist-item.wl-safety  { border-left-color: var(--green); }
-    .watchlist-name { font-size: .8rem; font-weight: 600; color: var(--gray700, #374151); }
-    .check-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      padding: 3px 10px;
-      background: transparent;
-      color: var(--gray500, #6b7280);
-      border: 1px solid var(--gray200);
-      border-radius: 6px;
-      font-size: .72rem;
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: border-color .15s, color .15s;
-      flex-shrink: 0;
-    }
-    .check-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .role-row:first-child { border-top: none; padding-top: 11px; }
+    .role-info  { flex: 1; min-width: 0; }
+    .role-title { font-size: .86rem; font-weight: 600; color: var(--ink); line-height: 1.35; letter-spacing: -.01em; }
+    .role-meta  { font-size: .7rem; color: var(--ink-3); margin-top: 3px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .role-actions { display: flex; align-items: center; gap: 5px; flex-shrink: 0; padding-top: 1px; }
 
     .apply-btn {
-      display: inline-block;
-      padding: 6px 16px;
-      background: var(--navy);
-      color: var(--white);
-      border-radius: 6px;
-      font-size: .78rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background .15s;
+      display: inline-flex; align-items: center;
+      padding: 5px 13px; border-radius: 6px;
+      background: var(--accent); color: #fff;
+      font-size: .74rem; font-weight: 600; font-family: inherit;
+      text-decoration: none; white-space: nowrap;
+      transition: background-color 140ms var(--ease), transform 100ms var(--ease);
     }
-    .apply-btn:hover { background: var(--navy2); }
-
-    .empty-state {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--gray400);
+    @media (hover: hover) and (pointer: fine) {
+      .apply-btn:hover {
+        background: var(--accent-hover);
+        box-shadow: 0 4px 14px rgba(61,82,160,0.38);
+      }
     }
-    .empty-state h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--gray600); }
+    .apply-btn:active { transform: scale(0.96); }
 
-    /* ── Salary row ── */
+    .dismiss-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--ink-3); font-size: .72rem; font-family: inherit;
+      padding: 4px 5px; border-radius: 5px; line-height: 1;
+      transition: color 140ms var(--ease), background-color 140ms var(--ease), transform 100ms var(--ease);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .dismiss-btn:hover { color: var(--urgent); background: var(--urgent-bg); }
+    }
+    .dismiss-btn:active { transform: scale(0.9); }
+
     .salary-row {
-      font-size: .73rem;
-      color: var(--gray600);
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding-top: 2px;
-      border-top: 1px solid var(--gray100);
+      font-size: .68rem; color: var(--ink-3);
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-top: 4px; align-items: center;
     }
+    .salary-sep { color: var(--border-strong); }
 
-    /* ── Status tracker ── */
-    .section {
-      margin: 0 32px 32px;
-      background: var(--white);
-      border-radius: 10px;
-      border: 1px solid var(--gray200);
+    /* ── Firm name toggle ── */
+    .firm-name-btn {
+      background: none; border: none; padding: 0;
+      font: inherit; font-size: .96rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -.02em; line-height: 1.2;
+      display: flex; align-items: center; gap: 5px;
+      cursor: pointer; text-align: left;
+    }
+    .firm-chevron {
+      font-size: .62rem; color: var(--ink-3);
+      transition: transform 220ms var(--ease);
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .firm-name-btn.open .firm-chevron { transform: rotate(180deg); }
+
+    /* ── Expand panel ── */
+    .card-expand {
       overflow: hidden;
+      max-height: 0;
+      transition: max-height 280ms var(--ease), border-color 280ms var(--ease);
+      border-top: 0px solid var(--border);
     }
-    .section-header {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--gray200);
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--navy);
-      background: var(--gray50);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .card-expand.open {
+      max-height: 500px;
+      border-top: 1px solid var(--border);
     }
-    .section-header .hint { font-size: .72rem; font-weight: 400; color: var(--gray400); }
+    .expand-inner { padding: 14px 18px 16px; background: var(--bg); }
+    .ideal-role {
+      display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 8px 12px; margin-bottom: 11px;
+      font-size: .8rem; font-weight: 700; color: var(--ink);
+    }
+    .ideal-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--accent); white-space: nowrap;
+    }
+    .expand-desc {
+      font-size: .77rem; color: var(--ink-2); line-height: 1.55;
+      margin-bottom: 13px;
+    }
+    .breakdown-label {
+      font-size: .6rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--ink-3); margin-bottom: 7px;
+    }
+    .breakdown-table { width: 100%; border-collapse: collapse; }
+    .breakdown-table td {
+      font-size: .73rem; color: var(--ink-2); padding: 3px 0;
+    }
+    .breakdown-table td:last-child {
+      text-align: right; font-weight: 600; color: var(--ink);
+    }
+    .breakdown-table tr.bd-total td {
+      border-top: 1px solid var(--border); padding-top: 7px; margin-top: 3px;
+      font-weight: 700; color: var(--ink);
+    }
+    .breakdown-table tr.bd-note td {
+      color: var(--ink-3); font-size: .68rem; padding-top: 6px;
+    }
+    .breakdown-table tr.bd-note td:last-child { font-weight: 400; }
 
-    table { width: 100%; border-collapse: collapse; font-size: .8rem; }
-    th {
-      text-align: left;
-      padding: 10px 14px;
-      font-size: .7rem;
-      font-weight: 600;
-      color: var(--gray400);
-      text-transform: uppercase;
-      letter-spacing: .4px;
-      border-bottom: 1px solid var(--gray200);
-      background: var(--gray50);
+    /* ── Role enrichment ── */
+    .role-desc {
+      font-size: .74rem; color: var(--ink-2); line-height: 1.5;
+      margin-top: 5px;
     }
-    td { padding: 10px 14px; border-bottom: 1px solid var(--gray100); vertical-align: middle; }
+    .role-stats {
+      display: flex; align-items: center; gap: 6px;
+      flex-wrap: wrap; margin-top: 8px;
+    }
+    .salary-chip {
+      display: inline-flex; align-items: center;
+      padding: 2px 9px; border-radius: 999px;
+      font-size: .66rem; font-weight: 600;
+      background: var(--surface-hover); color: var(--ink-2);
+      border: 1px solid var(--border); white-space: nowrap;
+    }
+    .salary-chip-bonus { color: var(--ink-3); background: transparent; }
+    .match-stat {
+      display: inline-flex; align-items: baseline; gap: 3px;
+      padding: 2px 9px; border-radius: 999px; border: 1px solid;
+      white-space: nowrap; margin-left: auto;
+    }
+    .match-pct   { font-size: .82rem; font-weight: 700; line-height: 1; }
+    .match-label { font-size: .57rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; opacity: .7; }
+    .match-high  { background: #dcfce7; border-color: rgba(22,163,74,.25);   color: #14532d; }
+    .match-good  { background: #fef9c3; border-color: rgba(202,138,4,.25);  color: #713f12; }
+    .match-mid   { background: #ffedd5; border-color: rgba(234,88,12,.25);  color: #9a3412; }
+    .match-low   { background: #fee2e2; border-color: rgba(220,38,38,.25);  color: #991b1b; }
+
+    .chance-badge {
+      display: inline-block; padding: 1px 6px; border-radius: 999px;
+      font-size: .62rem; font-weight: 700;
+    }
+    .chance-low  { background: #fee2e2; color: #991b1b; }
+    .chance-mid  { background: #fef3c7; color: #92400e; }
+    .chance-good { background: #dbeafe; color: #1e40af; }
+    .chance-high { background: #dcfce7; color: #14532d; }
+
+    .dl-urgent { background: var(--urgent-bg); color: var(--urgent); border-radius: 999px; padding: 1px 7px; font-size: .62rem; font-weight: 700; white-space: nowrap; }
+    .dl-warn   { background: var(--warn-bg); color: #92400e; border-radius: 999px; padding: 1px 7px; font-size: .62rem; font-weight: 700; white-space: nowrap; }
+    .dl-ok     { background: var(--surface-hover); color: var(--ink-3); border-radius: 999px; padding: 1px 7px; font-size: .62rem; font-weight: 600; white-space: nowrap; }
+    .verify-cycle { font-size: .62rem; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; opacity: .75; transition: opacity 150ms; }
+    .verify-cycle:hover { opacity: 1; text-decoration: underline; }
+
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--ink-3); }
+    .empty-state h3 { font-size: .96rem; font-weight: 600; color: var(--ink-2); margin-bottom: 6px; }
+    .empty-state p  { font-size: .78rem; }
+    .empty-state code { background: var(--surface); border: 1px solid var(--border); padding: 1px 5px; border-radius: 4px; font-size: .72rem; }
+
+    /* ── Watchlist ── */
+    .watchlist-section { margin: 0 36px 26px; }
+    .watchlist-toggle {
+      display: flex; align-items: center; gap: 9px;
+      padding: 10px 15px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      cursor: pointer; font-size: .76rem; font-weight: 600; color: var(--ink-2);
+      width: 100%; text-align: left; font-family: inherit;
+      transition: background-color 140ms var(--ease);
+      user-select: none;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .watchlist-toggle:hover { background: var(--surface-hover); }
+    }
+    .wl-count { background: var(--surface-hover); color: var(--ink-3); border-radius: 999px; padding: 1px 8px; font-size: .65rem; font-weight: 700; }
+    .wl-chevron { margin-left: auto; transition: transform 200ms var(--ease); font-style: normal; }
+    .watchlist-toggle.open .wl-chevron { transform: rotate(180deg); }
+
+    .watchlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 7px; margin-top: 9px; }
+    .watchlist-item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 13px; display: flex; align-items: center; gap: 8px;
+      transition: box-shadow 150ms var(--ease);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .watchlist-item:hover { box-shadow: var(--sh-hover); }
+    }
+    .wl-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .wl-homerun .wl-dot { background: var(--homerun); }
+    .wl-reach   .wl-dot { background: var(--reach); }
+    .wl-target  .wl-dot { background: var(--target); }
+    .wl-safety  .wl-dot { background: var(--safety); }
+    .watchlist-name { font-size: .76rem; font-weight: 600; color: var(--ink); flex: 1; }
+    .check-btn {
+      display: inline-flex; align-items: center;
+      padding: 3px 9px; background: transparent; color: var(--ink-3);
+      border: 1px solid var(--border); border-radius: 5px;
+      font-size: .66rem; font-weight: 600; font-family: inherit; text-decoration: none; white-space: nowrap;
+      transition: border-color 140ms var(--ease), color 140ms var(--ease);
+      flex-shrink: 0;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .check-btn:hover { border-color: var(--accent); color: var(--accent); }
+    }
+
+    /* ── Section wrapper ── */
+    .section { margin: 0 36px 26px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+    .section-header {
+      padding: 13px 18px; border-bottom: 1px solid var(--border);
+      font-size: .8rem; font-weight: 700; color: var(--ink); letter-spacing: -.01em;
+      background: var(--bg); display: flex; align-items: center; justify-content: space-between;
+    }
+    .section-header .hint { font-size: .65rem; font-weight: 500; color: var(--ink-3); }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: .76rem; }
+    th {
+      text-align: left; padding: 8px 13px;
+      font-size: .62rem; font-weight: 600; color: var(--ink-3);
+      text-transform: uppercase; letter-spacing: .05em;
+      border-bottom: 1px solid var(--border); background: var(--bg);
+    }
+    td { padding: 8px 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: var(--gray50); }
+    @media (hover: hover) and (pointer: fine) {
+      tr:hover td { background: var(--surface-hover); }
+    }
 
     .status-select {
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--gray200);
-      font-size: .75rem;
-      background: var(--white);
-      cursor: pointer;
+      padding: 3px 7px; border-radius: 6px;
+      border: 1px solid var(--border); font-size: .72rem; font-family: inherit;
+      background: var(--surface); cursor: pointer; color: var(--ink-2); outline: none;
+      transition: color 150ms var(--ease), border-color 150ms var(--ease);
     }
-    .notes-input {
-      width: 100%;
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--gray200);
-      font-size: .75rem;
-    }
-    .notes-input:focus { outline: none; border-color: var(--blue); }
-    .deadline-input {
-      width: 130px;
-      padding: 4px 8px;
-      border-radius: 6px;
-      border: 1px solid var(--gray200);
-      font-size: .75rem;
-    }
-    .deadline-input:focus { outline: none; border-color: var(--blue); }
+    .status-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .status-applied  { color: var(--target); font-weight: 600; }
+    .status-phone    { color: var(--reach);  font-weight: 600; }
+    .status-superday { color: var(--homerun); font-weight: 600; }
+    .status-offer    { color: var(--safety); font-weight: 700; }
+    .status-rejected { color: var(--ink-3); text-decoration: line-through; }
 
-    /* Deadline urgency tags (role rows + expiring section) */
-    .dl-urgent { background: #fee2e2; color: #991b1b; border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 700; white-space: nowrap; }
-    .dl-warn   { background: #fef3c7; color: #92400e; border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 700; white-space: nowrap; }
-    .dl-ok     { background: var(--gray100); color: var(--gray600); border-radius: 10px; padding: 1px 7px; font-size: .7rem; font-weight: 600; white-space: nowrap; }
-
-    /* Expiring Soon section */
-    .expiring-section {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 10px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
+    .notes-input, .deadline-input {
+      padding: 3px 7px; border-radius: 6px;
+      border: 1px solid var(--border); font-size: .72rem; font-family: inherit;
+      background: var(--surface); color: var(--ink); outline: none;
+      transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
     }
-    .expiring-header {
-      font-size: .78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      color: #92400e;
-      margin-bottom: 10px;
+    .notes-input { width: 100%; }
+    .deadline-input { width: 128px; }
+    .notes-input:focus, .deadline-input:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow);
     }
-    .expiring-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      border-top: 1px solid #fde68a;
-      flex-wrap: wrap;
-    }
-    .expiring-firm  { font-size: .72rem; font-weight: 700; color: #92400e; text-transform: uppercase; flex-shrink: 0; width: 130px; }
-    .expiring-title { flex: 1; font-size: .86rem; font-weight: 600; color: #78350f; min-width: 160px; }
-
-    .status-applied      { color: #1d4ed8; }
-    .status-phone        { color: #7c3aed; }
-    .status-superday     { color: #d97706; }
-    .status-offer        { color: #059669; }
-    .status-rejected     { color: #dc2626; }
 
     /* ── Charts ── */
-    .charts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 0 32px 32px;
-    }
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin: 0 36px 26px; }
     @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
-    .chart-card {
-      background: var(--white);
-      border-radius: 10px;
-      border: 1px solid var(--gray200);
-      padding: 20px;
-    }
-    .chart-title { font-size: .82rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-    .chart-wrap { height: 200px; position: relative; }
+    .chart-card { background: var(--surface); border-radius: 10px; border: 1px solid var(--border); padding: 18px; }
+    .chart-title { font-size: .76rem; font-weight: 700; color: var(--ink); margin-bottom: 12px; letter-spacing: -.01em; }
+    .chart-wrap { height: 190px; position: relative; }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: .73rem;
-      color: var(--gray400);
-      border-top: 1px solid var(--gray200);
+    /* ── Connection badges (card) ── */
+    .conn-badge {
+      padding: 2px 7px; border-radius: 999px;
+      font-size: .58rem; font-weight: 700; border: 1px solid; white-space: nowrap;
     }
+    .conn-sent  { background: #dcfce7; color: #14532d; border-color: rgba(22,163,74,.3); }
+    .conn-draft { background: #fef9c3; color: #713f12; border-color: rgba(202,138,4,.3); }
 
-    /* ── Add Firm Guide ── */
-    .guide-section {
-      margin: 0 36px 36px;
-      background: var(--white);
-      border-radius: 10px;
-      border: 1px solid var(--gray200);
-      overflow: hidden;
+    /* ── Sent toggle button ── */
+    .sent-btn {
+      padding: 3px 10px; border-radius: 6px;
+      border: 1.5px solid var(--border); font-size: .71rem;
+      font-weight: 600; font-family: inherit; cursor: pointer;
+      background: var(--surface); color: var(--ink-3);
+      transition: border-color 140ms var(--ease), color 140ms var(--ease),
+                  background-color 140ms var(--ease), transform 100ms var(--ease);
+      white-space: nowrap;
     }
+    @media (hover: hover) and (pointer: fine) {
+      .sent-btn:not(.sent):hover { border-color: #16a34a; color: #16a34a; }
+    }
+    .sent-btn:active { transform: scale(0.96); }
+    .sent-btn.sent { background: #dcfce7; border-color: rgba(22,163,74,.35); color: #14532d; }
+
+    /* ── Footer ── */
+    footer { text-align: center; padding: 18px; font-size: .68rem; color: var(--ink-3); border-top: 1px solid var(--border); }
+    footer a { color: var(--ink-3); text-decoration: none; }
+    @media (hover: hover) and (pointer: fine) { footer a:hover { color: var(--accent); } }
+
+    /* ── Guide ── */
+    .guide-section { margin: 0 36px 36px; background: var(--surface); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
     .guide-toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 20px;
-      background: var(--gray50);
-      border: none;
-      border-bottom: 1px solid var(--gray200);
-      cursor: pointer;
-      font-size: .82rem;
-      font-weight: 700;
-      color: var(--navy);
-      width: 100%;
-      text-align: left;
-      transition: background .15s;
-      font-family: inherit;
+      display: flex; align-items: center; gap: 9px;
+      padding: 13px 18px; background: var(--bg); border: none;
+      border-bottom: 1px solid transparent; cursor: pointer;
+      font-size: .78rem; font-weight: 700; color: var(--ink); letter-spacing: -.01em;
+      width: 100%; text-align: left; font-family: inherit;
+      transition: background-color 140ms var(--ease);
     }
-    .guide-toggle:hover { background: var(--gray100); }
-    .guide-toggle .g-chevron { margin-left: auto; transition: transform .2s; font-style: normal; font-size: .7rem; }
+    .guide-toggle:hover { background: var(--surface-hover); }
+    .guide-toggle.open  { border-bottom-color: var(--border); }
+    .g-chevron { margin-left: auto; transition: transform 200ms var(--ease); font-style: normal; font-size: .65rem; }
     .guide-toggle.open .g-chevron { transform: rotate(180deg); }
-    .guide-body { padding: 24px 28px; display: none; }
+    .guide-body { padding: 22px 26px; display: none; }
     .guide-body.open { display: block; }
 
-    .guide-steps { display: flex; flex-direction: column; gap: 28px; }
-    .guide-step { display: flex; gap: 18px; }
+    .guide-steps { display: flex; flex-direction: column; gap: 26px; }
+    .guide-step { display: flex; gap: 16px; }
     .step-num {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: var(--navy); color: var(--white);
-      font-size: .75rem; font-weight: 800;
+      width: 25px; height: 25px; border-radius: 50%;
+      background: var(--ink); color: #fff;
+      font-size: .68rem; font-weight: 800;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-top: 1px;
     }
     .step-content { flex: 1; }
-    .step-title { font-size: .88rem; font-weight: 700; color: var(--gray800); margin-bottom: 8px; }
-    .step-body { font-size: .8rem; color: var(--gray600); line-height: 1.65; }
+    .step-title { font-size: .84rem; font-weight: 700; color: var(--ink); margin-bottom: 7px; letter-spacing: -.01em; }
+    .step-body { font-size: .76rem; color: var(--ink-2); line-height: 1.65; }
     .step-body p { margin-bottom: 6px; }
+    .step-body code { background: var(--surface-hover); padding: 1px 4px; border-radius: 3px; font-size: .72rem; color: var(--accent); }
 
-    .ats-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: .78rem; }
-    .ats-table th { text-align: left; padding: 6px 10px; background: var(--gray50); color: var(--gray600); font-weight: 600; font-size: .7rem; text-transform: uppercase; letter-spacing: .3px; border-bottom: 1px solid var(--gray200); }
-    .ats-table td { padding: 7px 10px; border-bottom: 1px solid var(--gray100); vertical-align: top; }
+    .ats-table { width: 100%; border-collapse: collapse; margin-top: 9px; font-size: .73rem; }
+    .ats-table th { text-align: left; padding: 5px 9px; background: var(--bg); color: var(--ink-3); font-weight: 600; font-size: .63rem; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid var(--border); }
+    .ats-table td { padding: 6px 9px; border-bottom: 1px solid var(--border); vertical-align: top; }
     .ats-table tr:last-child td { border-bottom: none; }
-    .ats-table code { background: var(--gray100); padding: 1px 5px; border-radius: 4px; font-size: .75rem; font-family: 'SF Mono', 'Fira Code', monospace; color: var(--navy); }
+    .ats-table code { background: var(--surface-hover); padding: 1px 4px; border-radius: 3px; font-size: .7rem; color: var(--accent); }
 
-    .code-block {
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: .76rem;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      line-height: 1.7;
-      margin-top: 10px;
-      overflow-x: auto;
-    }
-    .code-block .cm  { color: #64748b; }
-    .code-block .ky  { color: #93c5fd; }
-    .code-block .st  { color: #86efac; }
-    .code-block .nm  { color: #fde68a; }
+    .code-block { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 13px 15px; font-size: .72rem; font-family: 'SF Mono','Fira Code',monospace; line-height: 1.7; margin-top: 9px; overflow-x: auto; }
+    .code-block .cm { color: #64748b; } .code-block .ky { color: #93c5fd; } .code-block .st { color: #86efac; } .code-block .nm { color: #fde68a; }
 
-    .tag-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .tag-include { background: #dcfce7; color: #14532d; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
-    .tag-exclude { background: #fee2e2; color: #991b1b; padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
-    .tag-neutral { background: var(--gray100); color: var(--gray600); padding: 2px 9px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .tag-group { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+    .tag-include { background: #dcfce7; color: #14532d; padding: 2px 8px; border-radius: 999px; font-size: .68rem; font-weight: 600; }
+    .tag-exclude { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 999px; font-size: .68rem; font-weight: 600; }
+    .tag-neutral { background: var(--surface-hover); color: var(--ink-2); padding: 2px 8px; border-radius: 999px; font-size: .68rem; font-weight: 600; }
 
-    .tier-guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
-    .tier-guide-card { border-radius: 8px; padding: 12px 14px; border: 1px solid; }
-    .tgc-homerun { background: var(--gold-bg);   border-color: #fde68a; }
-    .tgc-reach   { background: var(--purple-bg); border-color: #ddd6fe; }
-    .tgc-target  { background: var(--blue-bg);   border-color: #bfdbfe; }
-    .tgc-safety  { background: var(--green-bg);  border-color: #a7f3d0; }
-    .tgc-label   { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 5px; }
-    .tgc-homerun .tgc-label { color: #92400e; }
-    .tgc-reach   .tgc-label { color: #5b21b6; }
-    .tgc-target  .tgc-label { color: #1d4ed8; }
-    .tgc-safety  .tgc-label { color: #065f46; }
-    .tgc-desc { font-size: .75rem; color: var(--gray600); line-height: 1.5; }
+    .tier-guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 9px; margin-top: 9px; }
+    .tier-guide-card { border-radius: 8px; padding: 11px 13px; border: 1px solid; }
+    .tgc-homerun { background: var(--homerun-bg); border-color: var(--homerun-ring); }
+    .tgc-reach   { background: var(--reach-bg);   border-color: var(--reach-ring); }
+    .tgc-target  { background: var(--target-bg);  border-color: var(--target-ring); }
+    .tgc-safety  { background: var(--safety-bg);  border-color: var(--safety-ring); }
+    .tgc-label   { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+    .tgc-homerun .tgc-label { color: var(--homerun-text); }
+    .tgc-reach   .tgc-label { color: var(--reach-text); }
+    .tgc-target  .tgc-label { color: var(--target-text); }
+    .tgc-safety  .tgc-label { color: var(--safety-text); }
+    .tgc-desc { font-size: .71rem; color: var(--ink-2); line-height: 1.5; }
 
-    /* Add Firm form */
-    .addfirm-form { background: var(--gray50); border: 1px solid var(--gray200); border-radius: 8px; padding: 16px; margin-top: 12px; }
-    .af-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .addfirm-form { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-top: 11px; }
+    .af-row { display: flex; flex-wrap: wrap; gap: 11px; margin-bottom: 9px; }
     .af-row:last-child { margin-bottom: 0; }
-    .af-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 140px; }
-    .af-wide { flex: 2; min-width: 260px; }
-    .af-field label { font-size: .72rem; font-weight: 600; color: var(--gray600); text-transform: uppercase; letter-spacing: .3px; }
+    .af-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 130px; }
+    .af-wide  { flex: 2; min-width: 240px; }
+    .af-field label { font-size: .63rem; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
     .af-field input, .af-field select {
-      border: 1px solid var(--gray200); border-radius: 6px; padding: 7px 10px;
-      font-size: .82rem; font-family: inherit; background: #fff; color: var(--navy);
-      outline: none; transition: border-color .15s;
+      border: 1px solid var(--border); border-radius: 6px; padding: 6px 9px;
+      font-size: .78rem; font-family: inherit; background: var(--surface); color: var(--ink);
+      outline: none; transition: border-color 140ms var(--ease), box-shadow 140ms var(--ease);
     }
-    .af-field input:focus, .af-field select:focus { border-color: var(--gold); }
+    .af-field input:focus, .af-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
     .code-output-wrap { position: relative; }
-    .code-output {
-      background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 8px;
-      font-size: .78rem; font-family: 'SF Mono', 'Fira Code', monospace;
-      white-space: pre; overflow-x: auto; margin: 0; line-height: 1.6;
+    .code-output { background: #0f172a; color: #e2e8f0; padding: 13px 15px; border-radius: 8px; font-size: .74rem; font-family: 'SF Mono','Fira Code',monospace; white-space: pre; overflow-x: auto; margin: 0; line-height: 1.6; }
+    .copy-btn { position: absolute; top: 7px; right: 7px; background: rgba(255,255,255,.1); color: #e2e8f0; border: none; border-radius: 5px; padding: 3px 9px; font-size: .65rem; font-family: inherit; cursor: pointer; transition: background-color 140ms var(--ease); }
+    .copy-btn:hover { background: rgba(255,255,255,.2); }
+    .copy-btn.copied { background: var(--new-green); color: #fff; }
+
+    @media (max-width: 640px) {
+      header, .stats-row, .filter-row, .jobs-grid,
+      .watchlist-section, .section, .charts-grid, .guide-section, .expiring-section { padding-left: 16px; padding-right: 16px; }
+      .watchlist-section, .section, .charts-grid, .guide-section { margin-left: 0; margin-right: 0; }
     }
-    .copy-btn {
-      position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,.12);
-      color: #e2e8f0; border: none; border-radius: 5px; padding: 4px 10px;
-      font-size: .72rem; cursor: pointer; transition: background .15s;
-    }
-    .copy-btn:hover { background: rgba(255,255,255,.22); }
-    .copy-btn.copied { background: #10b981; color: #fff; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="header-left">
-    <div class="header-icon">📊</div>
+    <div class="header-mark">AT</div>
     <div>
-      <h1>Analyst Job <span>Tracker</span></h1>
-      <div class="header-sub">2027 Full-Time Recruiting · REPE &nbsp;·&nbsp; IB &nbsp;·&nbsp; Infra PE &nbsp;·&nbsp; Capital Markets</div>
+      <h1>Analyst <span>Tracker</span></h1>
+      <div class="header-sub">2027 Full-Time Recruiting · REPE · IB · Infra PE · Capital Markets</div>
     </div>
   </div>
   <div class="header-meta">
     <div>Last scraped: <strong id="last-checked">—</strong></div>
-    <div id="header-count" style="color:var(--gold);font-weight:600;">Loading…</div>
+    <div id="header-count">Loading…</div>
   </div>
 </header>
 
-<div class="stats-bar" id="stats-bar">
-  <div class="stat"><strong id="s-total">—</strong> open roles</div>
-  <div class="stat"><strong id="s-new">—</strong> new this week</div>
-  <div class="stat"><strong id="s-homerun">—</strong> homerun firms</div>
-  <div class="stat"><strong id="s-reach">—</strong> reach firms</div>
-  <div class="stat"><strong id="s-target">—</strong> target firms</div>
-  <div class="stat"><strong id="s-safety">—</strong> safety firms</div>
+<div class="stats-row">
+  <div class="stat-pill">
+    <span class="stat-num" id="s-total">0</span>
+    <span class="stat-label">open roles</span>
+  </div>
+  <div class="stat-pill">
+    <span class="stat-num" id="s-new">0</span>
+    <span class="stat-label">new this week</span>
+  </div>
+  <div class="stat-pill sp-homerun">
+    <span class="stat-num" id="s-homerun">0</span>
+    <span class="stat-label">homerun</span>
+  </div>
+  <div class="stat-pill sp-reach">
+    <span class="stat-num" id="s-reach">0</span>
+    <span class="stat-label">reach</span>
+  </div>
+  <div class="stat-pill sp-target">
+    <span class="stat-num" id="s-target">0</span>
+    <span class="stat-label">target</span>
+  </div>
+  <div class="stat-pill sp-safety">
+    <span class="stat-num" id="s-safety">0</span>
+    <span class="stat-label">safety</span>
+  </div>
 </div>
 
 <div class="filter-row">
-  <span class="filter-label">Filter:</span>
+  <span class="filter-label">Filter</span>
   <button class="filter-btn active" data-tier="all">All</button>
   <button class="filter-btn tier-homerun" data-tier="homerun">Homerun</button>
   <button class="filter-btn tier-reach"   data-tier="reach">Reach</button>
@@ -612,14 +707,13 @@
 
 <div class="watchlist-section" id="watchlist-section" style="display:none">
   <button class="watchlist-toggle" id="watchlist-toggle" onclick="toggleWatchlist()">
-    <span>📋 Firms Not Open Yet</span>
+    <span>Firms Not Open Yet</span>
     <span class="wl-count" id="wl-count">0</span>
-    <em class="wl-chevron">▼</em>
+    <em class="wl-chevron">▾</em>
   </button>
   <div class="watchlist-grid" id="watchlist-grid" style="display:none"></div>
 </div>
 
-<!-- Status tracker -->
 <div class="section">
   <div class="section-header">
     Application Tracker
@@ -628,20 +722,32 @@
   <table id="tracker-table">
     <thead>
       <tr>
-        <th>Firm</th>
-        <th>Tier</th>
-        <th>Status</th>
-        <th>Deadline</th>
-        <th>Notes</th>
+        <th>Firm</th><th>Tier</th><th>Est. Offer</th><th>Status</th><th>Deadline</th><th>Notes</th>
       </tr>
     </thead>
     <tbody id="tracker-body">
-      <tr><td colspan="5" style="text-align:center;color:var(--gray400);padding:20px;">Loading firms…</td></tr>
+      <tr><td colspan="5" style="text-align:center;color:var(--ink-3);padding:22px;">Loading firms…</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- Charts -->
+<div class="section">
+  <div class="section-header">
+    Networking Outreach
+    <span class="hint">Connection emails · auto-saved to your browser</span>
+  </div>
+  <table id="connections-table">
+    <thead>
+      <tr>
+        <th>Firm</th><th>Tier</th><th>Contact Name</th><th>Email</th><th>Notes</th><th>Sent</th><th>Date Sent</th>
+      </tr>
+    </thead>
+    <tbody id="connections-body">
+      <tr><td colspan="7" style="text-align:center;color:var(--ink-3);padding:22px;">Loading…</td></tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="charts-grid">
   <div class="chart-card">
     <div class="chart-title">Pipeline Status</div>
@@ -653,345 +759,418 @@
   </div>
 </div>
 
-<!-- ── Add Firm / Role Guide ─────────────────────────────────────────────── -->
 <div class="guide-section">
   <button class="guide-toggle" id="guide-toggle" onclick="toggleGuide()">
-    ➕ How to Add a New Firm or Role
-    <em class="g-chevron">▼</em>
+    + How to Add a New Firm or Role
+    <em class="g-chevron">▾</em>
   </button>
   <div class="guide-body" id="guide-body">
     <div class="guide-steps">
 
-      <!-- Step 1 -->
       <div class="guide-step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <div class="step-title">Identify the firm's ATS (Applicant Tracking System)</div>
+          <div class="step-title">Identify the firm's ATS</div>
           <div class="step-body">
-            <p>Visit the firm's careers page and look at the URL. Each ATS has a recognizable pattern:</p>
+            <p>Visit the firm's careers page and look at the URL.</p>
             <table class="ats-table">
               <thead><tr><th>URL pattern</th><th>ATS</th><th>Scraper file</th></tr></thead>
               <tbody>
-                <tr><td><code>boards.greenhouse.io/…</code> or <code>boards-api.greenhouse.io</code></td><td>Greenhouse</td><td><code>scrapers/greenhouse.py</code></td></tr>
+                <tr><td><code>boards.greenhouse.io/…</code></td><td>Greenhouse</td><td><code>scrapers/greenhouse.py</code></td></tr>
                 <tr><td><code>*.myworkdayjobs.com</code></td><td>Workday</td><td><code>scrapers/workday.py</code></td></tr>
                 <tr><td><code>jobs.lever.co/…</code></td><td>Lever</td><td><code>scrapers/lever.py</code></td></tr>
-                <tr><td><code>*.smartrecruiters.com</code> or <code>api.smartrecruiters.com</code></td><td>SmartRecruiters</td><td><code>scrapers/smartrecruiters.py</code></td></tr>
+                <tr><td><code>*.smartrecruiters.com</code></td><td>SmartRecruiters</td><td><code>scrapers/smartrecruiters.py</code></td></tr>
                 <tr><td><code>*.icims.com</code></td><td>iCIMS</td><td><code>scrapers/icims.py</code></td></tr>
-                <tr><td><code>jobs.jobvite.com/…</code></td><td>Jobvite</td><td><code>scrapers/jobvite.py</code></td></tr>
-                <tr><td><code>jobs.ashbyhq.com/…</code> or any JS-rendered page</td><td>Ashby / Custom</td><td><code>scrapers/playwright_scraper.py</code></td></tr>
+                <tr><td><code>jobs.ashbyhq.com/…</code> or JS-rendered</td><td>Ashby / Custom</td><td><code>scrapers/playwright_scraper.py</code></td></tr>
               </tbody>
             </table>
-            <p style="margin-top:10px;">If the careers page renders job listings in JavaScript with no clear ATS URL, use Playwright.</p>
           </div>
         </div>
       </div>
 
-      <!-- Step 2 -->
       <div class="guide-step">
         <div class="step-num">2</div>
         <div class="step-content">
           <div class="step-title">Add the firm to the right scraper file</div>
           <div class="step-body">
-            <p>Open the appropriate file and add one entry to the <code>FIRMS</code> list. The format depends on the ATS:</p>
             <div class="code-block">
-<span class="cm"># scrapers/greenhouse.py — need the board slug (part after /boards/)</span>
+<span class="cm"># scrapers/greenhouse.py</span>
 { <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"slug"</span>: <span class="st">"firmslug"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span> }
 
-<span class="cm"># scrapers/workday.py — need subdomain + jobsite slug from the Workday URL</span>
+<span class="cm"># scrapers/workday.py</span>
 { <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"subdomain"</span>: <span class="st">"firmname"</span>, <span class="ky">"jobsite"</span>: <span class="st">"FirmCareers"</span>, <span class="ky">"wdver"</span>: <span class="st">"wd1"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span> }
 
-<span class="cm"># scrapers/playwright_scraper.py — just need the careers page URL</span>
+<span class="cm"># scrapers/playwright_scraper.py</span>
 { <span class="ky">"firm"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"url"</span>: <span class="st">"https://firmname.com/careers"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span>, <span class="ky">"bot_protected"</span>: <span class="nm">False</span> }
             </div>
-            <p style="margin-top:10px;"><strong>Finding Workday slugs:</strong> the Workday URL looks like <code>firmname.wd1.myworkdayjobs.com/en-US/FirmCareers</code> — subdomain is <code>firmname</code>, jobsite is <code>FirmCareers</code>.</p>
-            <p><strong>Finding Greenhouse slugs:</strong> visit <code>boards.greenhouse.io/SLUG</code> and try the firm's name, hyphenated name, or ticker until one works.</p>
           </div>
         </div>
       </div>
 
-      <!-- Step 3 -->
       <div class="guide-step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">Add the firm to <code>MASTER_FIRMS</code> in <code>scraper.py</code></div>
+          <div class="step-title">Add to <code>MASTER_FIRMS</code> in <code>scraper.py</code></div>
           <div class="step-body">
-            <p>This is what makes the firm appear as "Not Open Yet" on the dashboard when no roles are found. Without this step, the firm is invisible.</p>
+            <p>Makes the firm appear as "Not Open Yet" on the dashboard.</p>
             <div class="code-block">
 <span class="cm"># scraper.py → MASTER_FIRMS list</span>
 { <span class="ky">"name"</span>: <span class="st">"Firm Name"</span>, <span class="ky">"tier"</span>: <span class="st">"target"</span>, <span class="ky">"track"</span>: <span class="st">"repe"</span>, <span class="ky">"careers_url"</span>: <span class="st">"https://firmname.com/careers"</span> }
             </div>
-            <p style="margin-top:10px;">The <code>name</code> must exactly match the <code>"firm"</code> field in the scraper entry — this is how open roles get linked to their firm.</p>
           </div>
         </div>
       </div>
 
-      <!-- Step 4 — Role match criteria -->
       <div class="guide-step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <div class="step-title">Understand which roles get included automatically</div>
+          <div class="step-title">Which roles get included automatically</div>
           <div class="step-body">
-            <p>The scraper filters every posting against these rules. No manual curation needed — if the title passes, it appears on the dashboard.</p>
-            <p style="margin-top:10px;font-weight:600;font-size:.78rem;color:var(--gray800);">Title must contain <code>analyst</code> or <code>associate</code> AND at least one of:</p>
+            <p>Title must include <code>analyst</code> or <code>associate</code> AND at least one of:</p>
             <div class="tag-group">
-              <span class="tag-include">real estate</span><span class="tag-include">investment banking</span><span class="tag-include">capital markets</span><span class="tag-include">acquisitions</span><span class="tag-include">private equity</span><span class="tag-include">infrastructure</span><span class="tag-include">asset management</span><span class="tag-include">portfolio</span><span class="tag-include">credit</span><span class="tag-include">underwriting</span><span class="tag-include">transaction</span><span class="tag-include">equity</span><span class="tag-include">debt</span><span class="tag-include">fund</span><span class="tag-include">securities</span><span class="tag-include">multifamily</span><span class="tag-include">financial</span><span class="tag-include">structured</span><span class="tag-include">origination</span><span class="tag-include">valuation</span><span class="tag-include">net lease</span><span class="tag-include">investor relations</span>
+              <span class="tag-include">real estate</span><span class="tag-include">investment banking</span><span class="tag-include">capital markets</span><span class="tag-include">acquisitions</span><span class="tag-include">private equity</span><span class="tag-include">infrastructure</span><span class="tag-include">asset management</span><span class="tag-include">portfolio</span><span class="tag-include">credit</span><span class="tag-include">underwriting</span><span class="tag-include">equity</span><span class="tag-include">debt</span><span class="tag-include">fund</span><span class="tag-include">securities</span><span class="tag-include">multifamily</span><span class="tag-include">valuation</span><span class="tag-include">net lease</span><span class="tag-include">investor relations</span>
             </div>
-            <p style="margin-top:12px;font-weight:600;font-size:.78rem;color:var(--gray800);">Title must NOT contain any of:</p>
+            <p style="margin-top:9px;">Must NOT include:</p>
             <div class="tag-group">
-              <span class="tag-exclude">senior</span><span class="tag-exclude">vice president</span><span class="tag-exclude">director</span><span class="tag-exclude">managing director</span><span class="tag-exclude">principal</span><span class="tag-exclude">technology analyst</span><span class="tag-exclude">data analyst</span><span class="tag-exclude">systems analyst</span><span class="tag-exclude">compliance analyst</span><span class="tag-exclude">legal analyst</span><span class="tag-exclude">marketing analyst</span><span class="tag-exclude">business analyst</span><span class="tag-exclude">governance analyst</span><span class="tag-exclude">workforce</span><span class="tag-exclude">payoff</span><span class="tag-exclude">procurement</span>
+              <span class="tag-exclude">senior</span><span class="tag-exclude">vice president</span><span class="tag-exclude">director</span><span class="tag-exclude">managing director</span><span class="tag-exclude">principal</span><span class="tag-exclude">technology analyst</span><span class="tag-exclude">data analyst</span><span class="tag-exclude">compliance analyst</span><span class="tag-exclude">marketing analyst</span><span class="tag-exclude">business analyst</span>
             </div>
-            <p style="margin-top:10px;">To change these rules, edit <code>EXCLUDE_TERMS</code> and <code>RELEVANT_TERMS</code> in <code>scrapers/utils.py</code> — one file, applies to all scrapers.</p>
           </div>
         </div>
       </div>
 
-      <!-- Step 5 — Tier & Track -->
       <div class="guide-step">
         <div class="step-num">5</div>
         <div class="step-content">
-          <div class="step-title">Choose the right tier and track</div>
+          <div class="step-title">Choose tier and track</div>
           <div class="step-body">
             <div class="tier-guide-grid">
-              <div class="tier-guide-card tgc-homerun">
-                <div class="tgc-label">Homerun</div>
-                <div class="tgc-desc">Dream firms — Blackstone, KKR, Goldman, etc. Very selective, high upside.</div>
-              </div>
-              <div class="tier-guide-card tgc-reach">
-                <div class="tgc-label">Reach</div>
-                <div class="tgc-desc">Strong targets — realistic with a great application, but competitive.</div>
-              </div>
-              <div class="tier-guide-card tgc-target">
-                <div class="tgc-label">Target</div>
-                <div class="tgc-desc">Core targets — good fit for your profile, high application-to-interview rate.</div>
-              </div>
-              <div class="tier-guide-card tgc-safety">
-                <div class="tgc-label">Safety</div>
-                <div class="tgc-desc">Backup firms — strong probability of offer, still great outcomes.</div>
-              </div>
+              <div class="tier-guide-card tgc-homerun"><div class="tgc-label">Homerun</div><div class="tgc-desc">Dream firms — Blackstone, KKR, Goldman. Very selective, high upside.</div></div>
+              <div class="tier-guide-card tgc-reach"><div class="tgc-label">Reach</div><div class="tgc-desc">Realistic with a great application, but competitive.</div></div>
+              <div class="tier-guide-card tgc-target"><div class="tgc-label">Target</div><div class="tgc-desc">Core targets — good fit, high application-to-interview rate.</div></div>
+              <div class="tier-guide-card tgc-safety"><div class="tgc-label">Safety</div><div class="tgc-desc">Strong probability of offer, still great outcomes.</div></div>
             </div>
-            <p style="margin-top:12px;font-weight:600;font-size:.78rem;color:var(--gray800);">Tracks:</p>
-            <div class="tag-group">
-              <span class="tag-neutral">repe — Real Estate Private Equity</span>
+            <div class="tag-group" style="margin-top:10px;">
+              <span class="tag-neutral">repe — Real Estate PE</span>
               <span class="tag-neutral">ib — Investment Banking</span>
               <span class="tag-neutral">infra — Infrastructure PE</span>
-              <span class="tag-neutral">cm — Capital Markets / Brokerage</span>
+              <span class="tag-neutral">cm — Capital Markets</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 6 — Add Firm Generator -->
       <div class="guide-step">
         <div class="step-num">6</div>
         <div class="step-content">
-          <div class="step-title">Generate the code — fill in the form, copy the snippets</div>
+          <div class="step-title">Generate the code snippets</div>
           <div class="step-body">
-            <p>Fill out the fields below and the exact lines you need to paste into Python are generated automatically.</p>
-
+            <p>Fill in the form — the exact lines to paste into Python are generated automatically.</p>
             <div class="addfirm-form">
               <div class="af-row">
-                <div class="af-field">
-                  <label>Firm Name</label>
-                  <input id="af-name" type="text" placeholder="e.g. Rockwood Capital" oninput="generateFirmCode()" />
-                </div>
-                <div class="af-field">
-                  <label>Tier</label>
-                  <select id="af-tier" onchange="generateFirmCode()">
-                    <option value="homerun">Homerun</option>
-                    <option value="reach">Reach</option>
-                    <option value="target" selected>Target</option>
-                    <option value="safety">Safety</option>
-                  </select>
-                </div>
-                <div class="af-field">
-                  <label>Track</label>
-                  <select id="af-track" onchange="generateFirmCode()">
-                    <option value="repe" selected>repe — Real Estate PE</option>
-                    <option value="ib">ib — Investment Banking</option>
-                    <option value="infra">infra — Infrastructure PE</option>
-                    <option value="cm">cm — Capital Markets</option>
-                  </select>
-                </div>
-                <div class="af-field">
-                  <label>ATS Type</label>
-                  <select id="af-ats" onchange="generateFirmCode()">
-                    <option value="greenhouse">Greenhouse</option>
-                    <option value="workday">Workday</option>
-                    <option value="lever">Lever</option>
-                    <option value="smartrecruiters">SmartRecruiters</option>
-                    <option value="icims">iCIMS</option>
-                    <option value="jobvite">Jobvite</option>
-                    <option value="playwright" selected>Playwright / Custom</option>
-                  </select>
-                </div>
+                <div class="af-field"><label>Firm Name</label><input id="af-name" type="text" placeholder="e.g. Rockwood Capital" oninput="generateFirmCode()" /></div>
+                <div class="af-field"><label>Tier</label><select id="af-tier" onchange="generateFirmCode()"><option value="homerun">Homerun</option><option value="reach">Reach</option><option value="target" selected>Target</option><option value="safety">Safety</option></select></div>
+                <div class="af-field"><label>Track</label><select id="af-track" onchange="generateFirmCode()"><option value="repe" selected>repe — Real Estate PE</option><option value="ib">ib — Investment Banking</option><option value="infra">infra — Infrastructure PE</option><option value="cm">cm — Capital Markets</option></select></div>
+                <div class="af-field"><label>ATS Type</label><select id="af-ats" onchange="generateFirmCode()"><option value="greenhouse">Greenhouse</option><option value="workday">Workday</option><option value="lever">Lever</option><option value="smartrecruiters">SmartRecruiters</option><option value="icims">iCIMS</option><option value="jobvite">Jobvite</option><option value="playwright" selected>Playwright / Custom</option></select></div>
               </div>
-              <div class="af-row" id="af-extra-row">
-                <!-- Extra fields populated by JS based on ATS type -->
-              </div>
-              <div class="af-row">
-                <div class="af-field af-wide">
-                  <label>Careers Page URL</label>
-                  <input id="af-url" type="text" placeholder="https://firmname.com/careers" oninput="generateFirmCode()" />
-                </div>
-              </div>
+              <div class="af-row" id="af-extra-row"></div>
+              <div class="af-row"><div class="af-field af-wide"><label>Careers Page URL</label><input id="af-url" type="text" placeholder="https://firmname.com/careers" oninput="generateFirmCode()" /></div></div>
             </div>
-
             <div id="af-output" style="display:none">
-              <p style="margin:16px 0 6px;font-weight:600;font-size:.8rem;color:var(--gray600);">Paste into the <code>FIRMS</code> list in your scraper file:</p>
-              <div class="code-output-wrap">
-                <pre id="af-scraper-code" class="code-output"></pre>
-                <button class="copy-btn" onclick="copyCode('af-scraper-code', this)">Copy</button>
-              </div>
-              <p style="margin:12px 0 6px;font-weight:600;font-size:.8rem;color:var(--gray600);">Paste into <code>MASTER_FIRMS</code> in <code>scraper.py</code>:</p>
-              <div class="code-output-wrap">
-                <pre id="af-master-code" class="code-output"></pre>
-                <button class="copy-btn" onclick="copyCode('af-master-code', this)">Copy</button>
-              </div>
+              <p style="margin:14px 0 5px;font-weight:600;font-size:.74rem;color:var(--ink-2);">Paste into the <code>FIRMS</code> list in your scraper file:</p>
+              <div class="code-output-wrap"><pre id="af-scraper-code" class="code-output"></pre><button class="copy-btn" onclick="copyCode('af-scraper-code',this)">Copy</button></div>
+              <p style="margin:11px 0 5px;font-weight:600;font-size:.74rem;color:var(--ink-2);">Paste into <code>MASTER_FIRMS</code> in <code>scraper.py</code>:</p>
+              <div class="code-output-wrap"><pre id="af-master-code" class="code-output"></pre><button class="copy-btn" onclick="copyCode('af-master-code',this)">Copy</button></div>
             </div>
           </div>
         </div>
       </div>
 
-    </div><!-- /guide-steps -->
-  </div><!-- /guide-body -->
+    </div>
+  </div>
 </div>
 
-<footer>Analyst Job Tracker · Pulls live from jobs.json · <a href="https://github.com" style="color:var(--gray400)">GitHub</a></footer>
+<footer>Analyst Tracker · Pulls live from jobs.json · <a href="https://github.com">GitHub</a></footer>
 
 <script>
-// ── Config ──────────────────────────────────────────────────────────────────
-const TIER_COLORS = {
-  homerun: '#f59e0b',
-  reach:   '#8b5cf6',
-  target:  '#3b82f6',
-  safety:  '#10b981',
-};
-const TIER_LABELS = { homerun:'Homerun', reach:'Reach', target:'Target', safety:'Safety' };
-const STATUS_OPTS = ['—', 'Applied', 'Phone Screen', 'Superday', 'Offer', 'Rejected'];
-const NEW_WINDOW_DAYS = 7;
+const TIER_COLORS  = { homerun:'#d97706', reach:'#7c3aed', target:'#2563eb', safety:'#059669' };
+const TIER_LABELS  = { homerun:'Homerun', reach:'Reach', target:'Target', safety:'Safety' };
+const STATUS_OPTS  = ['—','Applied','Phone Screen','Superday','Offer','Rejected'];
 
-let ALL_JOBS   = [];
-let ALL_FIRMS  = [];   // firms status array from jobs.json (includes open_count=0 entries)
-let activeTier = 'all';
-let searchQuery = '';
+// Client-side equivalents of scrapers/utils.py filters
+const EXCLUDE_TERMS = [
+  'senior','vice president','vp ','director','managing director','md ','principal','sr. ',
+  'technology analyst','data analyst','systems analyst','it analyst',
+  'compliance analyst','legal analyst','marketing analyst','business analyst',
+  'pmo analyst','governance analyst','lease abstraction','lease analyst',
+  'research analyst','quality analyst','data quality',
+  'workforce','procurement','payoff','boarding analyst','information technology',
+  'rotational','trainee','programme','internship','intern',
+  '2025 ','2026 ','summer 2025','summer 2026','summer analyst','class of 2025','class of 2026',
+  'product marketing','hud','affordable housing','special servicing',
+  'loan servicing','loan administration','asset servicing',
+  'fund accounting','fund operations','fund admin',
+  'loan origination specialist','asset administration',
+];
+const RELEVANT_TERMS = [
+  'real estate','infrastructure','investment banking','capital markets',
+  'acquisitions','acquisition','private equity','asset management','portfolio',
+  'credit','underwriting','transaction','valuation','origination',
+  'structured finance','net lease','debt','equity',
+  'investment','fund','securities','multifamily','commercial real estate',
+  'financial analyst','investor relations',
+  'wealth management','private wealth','private banking','private client',
+];
+const TARGET_LOCATIONS = [
+  'new york', 'new york city', 'nyc', 'manhattan', 'brooklyn',
+  'chicago',
+  'san francisco', ' sf,', 'palo alto', 'menlo park',
+  'los angeles',
+  'boston',
+  'dallas', 'houston',
+  'washington', ' dc,', 'district of columbia',
+  'charlotte',
+  'miami',
+  'denver',
+  'atlanta',
+  'seattle',
+  'philadelphia',
+  'greenwich', 'stamford', 'westport', 'darien', 'new canaan', 'norwalk', 'fairfield',
+  'westchester', 'white plains', 'purchase', 'harrison', 'rye',
+  'newport beach',
+];
+
+// "associate" alone is a post-MBA signal at most firms — only pass if title explicitly
+// says real estate or infrastructure (original spec). Analyst can pair with any RELEVANT_TERMS.
+function isRelevantTitle(title) {
+  const t = title.toLowerCase();
+  if (EXCLUDE_TERMS.some(ex => t.includes(ex))) return false;
+  const hasAnalyst   = t.includes('analyst');
+  const hasAssociate = t.includes('associate');
+  if (!hasAnalyst && !hasAssociate) return false;
+  if (hasAssociate && !hasAnalyst) {
+    // Associate without "analyst" — require explicit RE or infra in the title
+    return t.includes('real estate') || t.includes('infrastructure');
+  }
+  return RELEVANT_TERMS.some(rel => t.includes(rel));
+}
+function isTargetLocation(loc) {
+  if (!loc || !loc.trim()) return true;
+  const l = loc.toLowerCase();
+  if (TARGET_LOCATIONS.some(city => l.includes(city))) return true;
+  return false;
+}
+function isRelevantJob(job) {
+  return isRelevantTitle(job.title) && isTargetLocation(job.location || '');
+}
+
+// ── Per-firm intelligence ──────────────────────────────────────────────────
+// chance = estimated % offer probability for Andrew (SMU '27, Blue Owl intern)
+// Blue Owl gets a bump from the existing internship relationship.
+const FIRM_INFO = {
+  // Homerun
+  "blackstone":      { chance:3,  salary:"$100–115k", bonus:"+$80–100k", ideal:"Real Estate Analyst – Blackstone Real Estate Partners (BREP)",                  desc:"Source and underwrite opportunistic real estate investments for the world's largest real estate private equity platform ($325B+ RE AUM).",        factors:[["Homerun tier baseline","5%"],["5,000+ applicants for ~10 RE analyst spots — hardest seat in REPE","-3%"],["Blue Owl PE internship signals genuine deal exposure vs. campus-only candidates","+1%"]] },
+  "kkr":             { chance:3,  salary:"$100–115k", bonus:"+$80–100k", ideal:"Real Estate Analyst – KKR Real Estate",                                          desc:"Execute real estate equity acquisitions and asset management across KKR's value-add and opportunistic fund series ($65B+ RE AUM).",              factors:[["Homerun tier baseline","5%"],["Fewer than 10 analyst hires/year across all RE strategies — ultra-selective","-3%"],["Blue Owl internship demonstrates PE-adjacent deal experience","+1%"]] },
+  "apollo":          { chance:4,  salary:"$100–115k", bonus:"+$75–100k", ideal:"Real Estate Analyst – Apollo Real Estate (Equity or Debt)",                      desc:"Underwrite commercial real estate debt and equity across Apollo's $50B+ integrated real estate investment platform.",                            factors:[["Homerun tier baseline","5%"],["Selective but more structured recruiting than Blackstone/KKR — slightly broader intake","-2%"],["Blue Owl internship signals PE aptitude across integrated credit/equity platform","+1%"]] },
+  "carlyle":         { chance:4,  salary:"$100–115k", bonus:"+$75–95k",  ideal:"Real Estate Analyst – Carlyle Realty Partners",                                  desc:"Analyze opportunistic and core-plus real estate acquisitions across office, multifamily, and industrial in Carlyle's global fund series.",       factors:[["Homerun tier baseline","5%"],["Global platform, highly selective — broader intake than pure-play REPE but still elite","-2%"],["Blue Owl internship signals PE aptitude","+1%"]] },
+  "brookfield":      { chance:7,  salary:"$95–115k",  bonus:"+$60–80k",  ideal:"Analyst, Real Estate or Infrastructure – Brookfield Asset Management",           desc:"Underwrite large-scale real estate and infrastructure investments across Brookfield's $900B+ global alternatives platform.",                    factors:[["Homerun tier baseline","5%"],["Multiple funds and strategies — more analyst slots than pure-play REPE peers","+2%"]] },
+  "goldman":         { chance:3,  salary:"$110–120k", bonus:"+$80–110k", ideal:"Investment Banking Analyst – Real Estate, Gaming & Lodging (GS IBD)",            desc:"Support real estate M&A, equity raises, and debt financings for institutional clients within Goldman's top-ranked REIB division.",              factors:[["Homerun tier baseline","5%"],["IB analyst recruiting at GS — most competitive tier; REGL group draws top targets from every school","-3%"],["Blue Owl internship demonstrates PE-level underwriting exposure vs. typical campus candidates","+1%"]] },
+  "morgan stanley":  { chance:4,  salary:"$110–120k", bonus:"+$80–100k", ideal:"Real Estate Investing Analyst – Morgan Stanley Real Assets / AIP",               desc:"Analyze real estate fund investments, acquisitions, and capital markets transactions across Morgan Stanley's $50B+ RE investing platform.",      factors:[["Homerun tier baseline","5%"],["Highly selective IB/investing program; MS REIB and Real Assets are well-respected","-2%"],["Blue Owl internship demonstrates relevant deal experience","+1%"]] },
+  "stonepeak":       { chance:9,  salary:"$100–115k", bonus:"+$60–80k",  ideal:"Analyst, Infrastructure Investing – Stonepeak",                                  desc:"Underwrite infrastructure investments in digital, energy, and transport sectors for Stonepeak's $70B+ infrastructure-focused fund platform.",    factors:[["Homerun tier baseline","5%"],["Infrastructure-only focus reduces competition from generalist finance candidates","+3%"],["Blue Owl real assets exposure adjacent to infrastructure underwriting","+1%"]] },
+  "blackrock":       { chance:10, salary:"$100–115k", bonus:"+$60–80k",  ideal:"Analyst, Real Assets – BlackRock Alternatives (BREA)",                           desc:"Support portfolio analytics and investment management across BlackRock's $75B+ real assets platform spanning infrastructure and private credit.",   factors:[["Homerun tier baseline","5%"],["Statistics background aligns with BlackRock's quantitative investment culture","+3%"],["Structured analyst program with defined campus intake — clear and accessible recruiting process","+2%"]] },
+  // Reach
+  "ares":            { chance:12, salary:"$95–110k",  bonus:"+$50–75k",  ideal:"Analyst, Real Estate – Ares Real Estate Group (Credit or Equity)",               desc:"Originate and underwrite CRE debt and equity across Ares' $47B+ real estate platform spanning opportunistic and credit strategies.",            factors:[["Reach tier baseline","10%"],["Large RE credit and equity platforms generate consistent analyst demand across multiple strategies","+2%"]] },
+  "starwood":        { chance:9,  salary:"$90–110k",  bonus:"+$50–70k",  ideal:"Analyst, Acquisitions – Starwood Capital Group",                                 desc:"Execute value-add and opportunistic real estate acquisitions for Starwood's $60B+ diversified real estate investment and operating platform.",    factors:[["Reach tier baseline","10%"],["Highly selective for its size — Barry Sternlicht-founded; discerning hiring culture","-1%"]] },
+  "tpg":             { chance:8,  salary:"$95–115k",  bonus:"+$70–90k",  ideal:"Analyst, Real Estate Equity – TPG Real Estate Partners",                         desc:"Source and underwrite real estate equity investments across TPG's RE fund series focused on repositioning and value creation strategies.",        factors:[["Reach tier baseline","10%"],["TPG RE is a smaller team within a large PE firm — very few analyst spots per year","-2%"]] },
+  "cerberus":        { chance:11, salary:"$90–110k",  bonus:"+$50–70k",  ideal:"Analyst, Real Estate – Cerberus Real Estate Capital Management",                 desc:"Analyze distressed and opportunistic real estate debt and equity investments within Cerberus' diversified alternative investment platform.",     factors:[["Reach tier baseline","10%"],["Distressed RE focus creates unique demand for analytical profiles; less competition from generalists","+1%"]] },
+  "eqt":             { chance:13, salary:"$90–105k",  bonus:"+$45–65k",  ideal:"Analyst, Industrial Real Estate – EQT Exeter",                                  desc:"Underwrite and manage industrial real estate investments for EQT Exeter's global logistics-focused platform ($30B+ AUM).",                       factors:[["Reach tier baseline","10%"],["Industrial/logistics niche reduces competition — less glamour, genuine demand for analytical analysts","+3%"]] },
+  "exeter":          { chance:13, salary:"$90–105k",  bonus:"+$45–65k",  ideal:"Analyst, Industrial Real Estate – EQT Exeter",                                  desc:"Underwrite and manage industrial real estate investments for EQT Exeter's global logistics-focused platform ($30B+ AUM).",                       factors:[["Reach tier baseline","10%"],["Industrial/logistics niche reduces competition — less glamour, genuine demand for analytical analysts","+3%"]] },
+  "tishman":         { chance:12, salary:"$90–108k",  bonus:"+$50–70k",  ideal:"Analyst, Acquisitions & Development – Tishman Speyer",                          desc:"Support acquisition, development, and asset management of premier commercial properties across Tishman Speyer's global $65B+ portfolio.",       factors:[["Reach tier baseline","10%"],["NYC-based developer with consistent acquisitions analyst intake from campus recruiting programs","+2%"]] },
+  "related":         { chance:14, salary:"$85–105k",  bonus:"+$45–65k",  ideal:"Analyst, Acquisitions & Development Finance – Related Companies",               desc:"Analyze development, acquisition, and structured finance transactions at Related, one of the largest mixed-use real estate developers in the U.S.", factors:[["Reach tier baseline","10%"],["Large developer with diverse capital needs — higher analyst intake than pure-play PE peers","+4%"]] },
+  "rockpoint":       { chance:10, salary:"$90–108k",  bonus:"+$50–70k",  ideal:"Analyst, Real Estate Acquisitions – Rockpoint Group",                           desc:"Underwrite value-add multifamily and commercial real estate acquisitions for Rockpoint's opportunistic real estate fund series.",               factors:[["Reach tier baseline","10%"]] },
+  "pretium":         { chance:12, salary:"$90–105k",  bonus:"+$50–65k",  ideal:"Analyst, Real Estate or Residential Credit – Pretium Partners",                 desc:"Analyze single-family rental and residential credit investments across Pretium's $50B+ housing and mortgage credit platform.",                  factors:[["Reach tier baseline","10%"],["SFR/residential credit niche — fewer candidates specifically targeting this space vs. mainstream REPE","+2%"]] },
+  "dune":            { chance:16, salary:"$85–105k",  bonus:"+$45–65k",  ideal:"Analyst, Real Estate Acquisitions – Dune Real Estate Partners",                 desc:"Source and underwrite opportunistic real estate investments focused on distressed office repositioning and adaptive reuse in gateway markets.",   factors:[["Reach tier baseline","10%"],["Boutique firm — significantly fewer applicants per seat; niche office repositioning limits candidate pool","+6%"]] },
+  "harrison street": { chance:15, salary:"$90–105k",  bonus:"+$45–65k",  ideal:"Analyst, Acquisitions (Alternative Sectors) – Harrison Street",                 desc:"Underwrite alternative real estate investments in student housing, senior living, and life science for Harrison Street's $56B+ platform.",      factors:[["Reach tier baseline","10%"],["Alternative RE sectors attract fewer candidates — student housing/senior living are less glamorous than core REPE","+5%"]] },
+  "eastdil":         { chance:10, salary:"$85–105k",  bonus:"+$60–90k",  ideal:"Investment Banking Analyst – Eastdil Secured",                                  desc:"Execute institutional real estate investment sales, debt placement, and M&A advisory at the top-ranked real estate investment banking firm.",    factors:[["Reach tier baseline","10%"]] },
+  // Target
+  "blue owl":        { chance:42, salary:"$100–115k", bonus:"+$40–60k",  ideal:"Analyst, Real Estate Debt (Net Lease / CRE Credit) – Blue Owl Real Estate",     desc:"Originate and asset-manage net lease and CRE credit investments across Blue Owl's $22B+ real estate platform — intern relationship is a major edge.", factors:[["Target tier baseline","18%"],["Rapidly expanding RE platform — consistent need for new analyst hires across net lease and credit strategies","+2%"],["Returning intern at this exact firm — strongest possible signal for a full-time offer","+22%"]] },
+  "w.p. carey":      { chance:20, salary:"$85–100k",  bonus:"+$35–50k",  ideal:"Analyst, Net Lease Investments – W. P. Carey",                                  desc:"Analyze sale-leaseback and net lease acquisitions across W.P. Carey's $30B+ diversified global net lease REIT.",                               factors:[["Target tier baseline","18%"],["Net lease specialist — well-defined analyst role, consistent intake, less competition from generalist candidates","+2%"]] },
+  "digital realty":  { chance:21, salary:"$90–105k",  bonus:"+$35–50k",  ideal:"Analyst, Capital Markets & Acquisitions – Digital Realty",                      desc:"Support capital markets and acquisitions underwriting for Digital Realty's global data center REIT platform ($55B+ enterprise value).",         factors:[["Target tier baseline","18%"],["Data center/digital infrastructure narrows candidate pool; sector growth tailwind drives consistent analyst demand","+3%"]] },
+  "i squared":       { chance:18, salary:"$90–110k",  bonus:"+$50–70k",  ideal:"Infrastructure Investment Analyst – I Squared Capital",                         desc:"Underwrite mid-market infrastructure investments in utilities, transport, and digital infrastructure for I Squared's global fund series.",       factors:[["Target tier baseline","18%"]] },
+  "aew":             { chance:20, salary:"$85–105k",  bonus:"+$40–60k",  ideal:"Real Estate Investment Analyst – AEW Capital Management",                       desc:"Analyze core, value-add, and opportunistic commercial real estate investments across AEW's $88B+ global institutional platform.",                factors:[["Target tier baseline","18%"],["Diversified core-to-opportunistic mandate — consistent analyst demand across multiple funds and strategies","+2%"]] },
+  "lasalle":         { chance:22, salary:"$85–100k",  bonus:"+$35–55k",  ideal:"Analyst, Acquisitions or Asset Management – LaSalle Investment Management",     desc:"Support acquisitions, dispositions, and portfolio management across LaSalle's $89B+ diversified global real estate investment platform.",       factors:[["Target tier baseline","18%"],["Large global platform with structured campus recruiting programs across multiple strategies and regions","+4%"]] },
+  "bentallgreenoak": { chance:20, salary:"$85–100k",  bonus:"+$35–55k",  ideal:"Analyst, Real Estate (Debt or Equity) – BentallGreenOak",                      desc:"Underwrite and manage commercial real estate debt and equity investments across BentallGreenOak's $83B+ global real estate platform.",          factors:[["Target tier baseline","18%"],["Structured institutional platform with consistent analyst intake through campus recruiting programs","+2%"]] },
+  "clarion":         { chance:22, salary:"$85–100k",  bonus:"+$35–55k",  ideal:"Real Estate Investment Analyst – Clarion Partners",                             desc:"Analyze industrial, multifamily, and office investments across Clarion's $87B+ core and value-add institutional real estate fund platform.",    factors:[["Target tier baseline","18%"],["Broad investment mandate across asset classes — consistent analyst demand across multiple fund vehicles","+4%"]] },
+  "hines":           { chance:19, salary:"$85–105k",  bonus:"+$40–60k",  ideal:"Analyst, Acquisitions or Development – Hines",                                  desc:"Support acquisition, development, and asset management of premier commercial properties across Hines' $94B+ global portfolio.",               factors:[["Target tier baseline","18%"],["Development and acquisitions dual-track creates slightly more entry-level demand than pure PE","+1%"]] },
+  "nuveen":          { chance:22, salary:"$85–100k",  bonus:"+$35–50k",  ideal:"Real Estate Analyst – Nuveen Real Estate",                                      desc:"Analyze core and core-plus real estate investments spanning industrial, residential, and alternatives across Nuveen's $157B+ RE AUM platform.",  factors:[["Target tier baseline","18%"],["TIAA sponsorship provides institutional stability and a structured analyst program with consistent campus intake","+4%"]] },
+  "bridge":          { chance:24, salary:"$80–100k",  bonus:"+$35–55k",  ideal:"Investment Analyst – Bridge Investment Group (Multifamily / Workforce Housing)", desc:"Underwrite multifamily, workforce housing, and commercial real estate investments across Bridge Investment Group's $50B+ value-add platform.",  factors:[["Target tier baseline","18%"],["Workforce housing and attainable multifamily is a high-growth sector — consistent analyst demand across fund strategies","+6%"]] },
+  "heitman":         { chance:20, salary:"$90–110k",  bonus:"+$35–55k",  ideal:"Analyst, Real Estate Securities or Private Investments – Heitman",              desc:"Analyze listed REIT securities and direct real estate investments across Heitman's $51B+ global real estate investment management platform.",   factors:[["Target tier baseline","18%"],["Public securities and direct investments dual mandate — Statistics background adds meaningful differentiation","+2%"]] },
+  "walton street":   { chance:26, salary:"$85–100k",  bonus:"+$35–55k",  ideal:"Real Estate Analyst – Walton Street Capital",                                   desc:"Source and underwrite value-add and opportunistic real estate investments for Walton Street's Chicago-based private equity fund series.",       factors:[["Target tier baseline","18%"],["Chicago HQ — geographic familiarity from Blue Owl internship reduces information asymmetry vs. east coast candidates","+4%"],["Boutique PE firm — fewer applicants per seat than large institutional managers","+4%"]] },
+  "ta realty":       { chance:21, salary:"$85–100k",  bonus:"+$35–55k",  ideal:"Analyst, Acquisitions – TA Realty (Industrial / Multifamily)",                  desc:"Analyze industrial, multifamily, and office acquisitions across TA Realty's core-plus and value-add institutional real estate fund platform.",  factors:[["Target tier baseline","18%"],["Industrial and multifamily focus — high-demand sectors create consistent analyst hiring across fund cycles","+3%"]] },
+  "somera":          { chance:28, salary:"$80–100k",  bonus:"+$30–50k",  ideal:"Investment Analyst – Somera Road (Office Repositioning / Adaptive Reuse)",       desc:"Underwrite opportunistic office and mixed-use real estate investments focused on repositioning and adaptive reuse in gateway markets.",          factors:[["Target tier baseline","18%"],["Small boutique — very few applicants per seat; limited brand recognition reduces competition meaningfully","+6%"],["Office repositioning niche aligns with current cycle — fewer candidates targeting this strategy specifically","+4%"]] },
+  "jefferies":       { chance:18, salary:"$100–110k", bonus:"+$70–100k", ideal:"Investment Banking Analyst – Real Estate Group, Jefferies",                     desc:"Execute real estate M&A advisory, debt placement, and equity raises for REITs and real estate companies across Jefferies' IB division.",       factors:[["Target tier baseline","18%"]] },
+  // Safety
+  "jll":             { chance:29, salary:"$75–95k",   bonus:"+$20–40k",  ideal:"Analyst, Capital Markets – JLL (Investment Sales or Debt Advisory)",            desc:"Support debt advisory, equity placement, and investment sales for institutional CRE clients within JLL's top-ranked capital markets division.",  factors:[["Safety tier baseline","27%"],["High hiring volume across capital markets practice; well-defined analyst program with consistent campus intake","+2%"]] },
+  "cbre":            { chance:31, salary:"$75–95k",   bonus:"+$20–40k",  ideal:"Analyst, Capital Markets – CBRE (Investment Properties or Debt & Equity Finance)", desc:"Execute investment sales, structured debt, and equity advisory transactions across CBRE's market-leading commercial real estate platform.",     factors:[["Safety tier baseline","27%"],["World's largest CRE firm — high analyst demand across investment properties, debt & equity, and advisory","+4%"]] },
+  "cushman":         { chance:29, salary:"$70–90k",   bonus:"+$20–35k",  ideal:"Analyst, Capital Markets Advisory – Cushman & Wakefield",                       desc:"Analyze and execute capital markets advisory, debt placement, and investment sales for institutional commercial real estate clients.",            factors:[["Safety tier baseline","27%"],["Strong capital markets advisory practice with consistent analyst intake across debt and equity advisory groups","+2%"]] },
+  "walker":          { chance:27, salary:"$75–90k",   bonus:"+$25–40k",  ideal:"Analyst, Capital Markets or Multifamily Finance – Walker & Dunlop",             desc:"Originate and structure multifamily agency and bridge loans across Walker & Dunlop's leading commercial real estate finance platform.",          factors:[["Safety tier baseline","27%"]] },
+  "marcus":          { chance:36, salary:"$60–80k",   bonus:"+commission", ideal:"Investment Sales Analyst – Marcus & Millichap",                                desc:"Advise private and institutional investors on CRE investment sales and financing across Marcus & Millichap's national brokerage platform.",       factors:[["Safety tier baseline","27%"],["Commission-based model drives aggressive analyst hiring velocity — significantly more seats than fee-based advisory peers","+9%"]] },
+  "wells fargo":     { chance:25, salary:"$75–90k",   bonus:"+$20–35k",  ideal:"Analyst, Commercial Real Estate – Wells Fargo CRE Banking",                    desc:"Underwrite commercial real estate loans and credit facilities across Wells Fargo's institutional CRE lending platform spanning all major asset classes.", factors:[["Safety tier baseline","27%"],["Bank CRE lending tends to prefer accounting/finance backgrounds over pure RE — slightly less accessible than brokerage","-2%"]] },
+  "keybank":         { chance:27, salary:"$70–85k",   bonus:"+$20–35k",  ideal:"Analyst, Commercial Real Estate – KeyBanc Capital Markets (KBCM)",              desc:"Analyze multifamily and commercial real estate loan originations across KeyBank's Real Estate Capital and commercial mortgage banking platform.",  factors:[["Safety tier baseline","27%"]] },
+  "ubs":             { chance:22, salary:"$95–110k",  bonus:"+$50–80k",  ideal:"Investment Banking Analyst – Real Estate, Gaming & Lodging (UBS IBD)",         desc:"Support real estate investment banking and capital markets advisory within UBS's real estate, gaming, and lodging industry group.",              factors:[["Safety tier baseline","27%"],["Front-office IB — competes with BB/EB for same candidate pool; more selective than CRE brokerage or lending","-5%"]] },
+  "stifel":          { chance:33, salary:"$85–100k",  bonus:"+$40–65k",  ideal:"Investment Banking Analyst – Real Estate Group, Stifel",                       desc:"Execute real estate M&A, IPOs, and capital markets transactions for REITs and real estate companies across Stifel's IB division.",              factors:[["Safety tier baseline","27%"],["Aggressive campus hiring across multiple target schools; well-structured IB analyst program with clear intake","+6%"]] },
+  "revantage":       { chance:28, salary:"$75–90k",   bonus:"+$25–40k",  ideal:"Analyst, Portfolio Finance & Analytics – Revantage (Blackstone RE Services)",  desc:"Support corporate finance, portfolio analytics, and investment reporting across Revantage's platform serving Blackstone's global real estate portfolio.", factors:[["Safety tier baseline","27%"],["Blackstone affiliation provides prestigious platform context; primarily back-office/corporate services analyst role","+1%"]] },
+  "fidelity":        { chance:31, salary:"$80–95k",   bonus:"+$25–45k",  ideal:"Real Estate Analyst – Fidelity Investments (Private RE or Public Securities)",  desc:"Analyze private and public real estate investments across Fidelity's real estate investment group managing institutional and individual investor capital.", factors:[["Safety tier baseline","27%"],["Structured RE analyst program with consistent campus intake; broad investment scope across private and public markets","+4%"]] },
+  "state street":    { chance:33, salary:"$75–90k",   bonus:"+$25–40k",  ideal:"Analyst, Real Estate – State Street Global Advisors (SSGA)",                   desc:"Support real estate investment management, portfolio analytics, and client reporting across State Street's Global Advisors institutional platform.",  factors:[["Safety tier baseline","27%"],["SSGA systematic and quantitative RE approach — Statistics background differentiates; well-structured analyst program","+6%"]] },
+  "berkadia":        { chance:30, salary:"$75–90k",   bonus:"+$25–40k",  ideal:"Analyst, Investment Sales or Capital Markets – Berkadia",                       desc:"Originate agency multifamily loans and support investment sales advisory across Berkadia's leading national commercial real estate finance platform.",  factors:[["Safety tier baseline","27%"],["Berkshire Hathaway-backed stability — structured analyst program with consistent multifamily and capital markets focus","+3%"]] },
+};
+
+function getFirmInfo(firmName) {
+  const n = firmName.toLowerCase();
+  for (const [key, val] of Object.entries(FIRM_INFO)) {
+    if (n.includes(key)) return val;
+  }
+  return null;
+}
+
+function matchClass(pct) {
+  if (pct >= 30) return 'match-high';
+  if (pct >= 20) return 'match-good';
+  if (pct >= 10) return 'match-mid';
+  return 'match-low';
+}
+
+function computeBreakdown(firmName, tier, totalChance) {
+  const info = getFirmInfo(firmName);
+  if (info && info.factors) return info.factors;
+  // Fallback for any firm without explicit factors
+  const TIER_BASE = { homerun:5, reach:10, target:18, safety:27 };
+  const base = TIER_BASE[tier] || 15;
+  const adj = totalChance - base;
+  const rows = [];
+  rows.push([`${TIER_LABELS[tier]} tier base rate`, `${base}%`]);
+  if (adj !== 0) rows.push(['Firm-specific adjustment', `${adj > 0 ? '+' : ''}${adj}%`]);
+  return rows;
+}
+
+function toggleFirmExpand(cardId) {
+  const card   = document.getElementById(cardId);
+  const btn    = card.querySelector('.firm-name-btn');
+  const panel  = card.querySelector('.card-expand');
+  const isOpen = panel.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  panel.classList.toggle('open', !isOpen);
+}
+// ──────────────────────────────────────────────────────────────────────────
+
+let ALL_JOBS      = [];
+let RELEVANT_JOBS = [];
+let ALL_FIRMS     = [];
+let activeTier   = 'all';
+let searchQuery  = '';
 let pipelineChart, tierChart;
 
-// ── Load jobs.json ───────────────────────────────────────────────────────────
+// Count-up animation
+function countUp(el, target, dur = 680) {
+  if (!target) { el.textContent = '0'; return; }
+  const t0 = performance.now();
+  const tick = now => {
+    const p = Math.min((now - t0) / dur, 1);
+    el.textContent = Math.round((1 - Math.pow(1 - p, 4)) * target);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(tick);
+}
+
 async function loadJobs() {
   try {
     const r = await fetch('./jobs.json');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const data = await r.json();
-    ALL_JOBS  = data.jobs  || [];
-    ALL_FIRMS = data.firms || [];
+    ALL_JOBS      = data.jobs  || [];
+    RELEVANT_JOBS = ALL_JOBS.filter(isRelevantJob);
+    ALL_FIRMS     = data.firms || [];
     updateLastChecked(data.last_run);
     updateStats();
     renderExpiringSoon();
     renderGrid();
     renderTracker();
+    renderConnections();
     renderCharts();
   } catch (e) {
     document.getElementById('jobs-grid').innerHTML =
-      `<div class="empty-state"><h3>Could not load jobs.json</h3><p>${e.message}</p><p style="margin-top:8px;font-size:.75rem;">Run <code>python scraper.py</code> to generate it, then serve locally.</p></div>`;
+      `<div class="empty-state"><h3>Could not load jobs.json</h3><p>${e.message}</p><p style="margin-top:8px;">Run <code>python scraper.py</code> to generate it, then serve locally.</p></div>`;
   }
 }
 
 function updateLastChecked(ts) {
   if (!ts) return;
   const d = new Date(ts + 'Z');
-  const fmt = d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })
-            + ' ' + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
-  document.getElementById('last-checked').textContent = fmt;
+  document.getElementById('last-checked').textContent =
+    d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + ' ' +
+    d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 }
 
-function isNew(job) {
-  return job.is_new === true;
-}
+function isNew(job) { return job.is_new === true; }
 
-// ── Stats bar ────────────────────────────────────────────────────────────────
 function updateStats() {
-  const newCount = ALL_JOBS.filter(isNew).length;
-  document.getElementById('s-total').textContent   = ALL_JOBS.length;
-  document.getElementById('s-new').textContent     = newCount;
-  document.getElementById('s-homerun').textContent = ALL_FIRMS.filter(f=>f.tier==='homerun').length;
-  document.getElementById('s-reach').textContent   = ALL_FIRMS.filter(f=>f.tier==='reach').length;
-  document.getElementById('s-target').textContent  = ALL_FIRMS.filter(f=>f.tier==='target').length;
-  document.getElementById('s-safety').textContent  = ALL_FIRMS.filter(f=>f.tier==='safety').length;
+  const newCount = RELEVANT_JOBS.filter(isNew).length;
+  countUp(document.getElementById('s-total'),   RELEVANT_JOBS.length);
+  countUp(document.getElementById('s-new'),     newCount);
+  countUp(document.getElementById('s-homerun'), ALL_FIRMS.filter(f=>f.tier==='homerun').length);
+  countUp(document.getElementById('s-reach'),   ALL_FIRMS.filter(f=>f.tier==='reach').length);
+  countUp(document.getElementById('s-target'),  ALL_FIRMS.filter(f=>f.tier==='target').length);
+  countUp(document.getElementById('s-safety'),  ALL_FIRMS.filter(f=>f.tier==='safety').length);
   document.getElementById('header-count').textContent =
-    `${ALL_JOBS.length} role${ALL_JOBS.length!==1?'s':''} across ${ALL_FIRMS.length} firms`;
+    `${RELEVANT_JOBS.length} role${RELEVANT_JOBS.length!==1?'s':''} across ${ALL_FIRMS.length} firms`;
 }
 
-// ── Deadline helpers ─────────────────────────────────────────────────────────
-function daysUntil(dateStr) {
-  if (!dateStr) return null;
-  const diff = (new Date(dateStr) - new Date()) / 86400000;
-  return Math.ceil(diff);
+function daysUntil(s) {
+  if (!s) return null;
+  return Math.ceil((new Date(s) - new Date()) / 86400000);
 }
 
-function deadlineTag(dateStr) {
-  const d = daysUntil(dateStr);
+function deadlineTag(s) {
+  const d = daysUntil(s);
   if (d === null) return '';
-  const label = d < 0  ? `🗓 ${dateStr} (expired)` :
-                d === 0 ? `🗓 Today!` :
-                          `🗓 ${dateStr} (${d}d)`;
-  const cls = d <= 7 ? 'dl-urgent' : d <= 14 ? 'dl-warn' : 'dl-ok';
-  return `<span class="${cls}">${label}</span>`;
+  const label = d < 0 ? `${s} (expired)` : d === 0 ? 'Today' : `${s} (${d}d)`;
+  return `<span class="${d<=7?'dl-urgent':d<=14?'dl-warn':'dl-ok'}">${label}</span>`;
 }
 
 function renderExpiringSoon() {
-  const dismissed = getDismissed();
-  const state     = loadTrackerState();
-  const section   = document.getElementById('expiring-section');
-
-  // Dedupe by firm — one expiring entry per firm even if multiple roles
-  const seenFirms = new Set();
-  const expiring = ALL_JOBS.filter(j => {
-    if (dismissed.has(j.id)) return false;
-    if (seenFirms.has(j.firm)) return false;
+  const dismissed = getDismissed(), state = loadTrackerState();
+  const section = document.getElementById('expiring-section');
+  const seen = new Set();
+  const expiring = RELEVANT_JOBS.filter(j => {
+    if (dismissed.has(j.id) || seen.has(j.firm)) return false;
     const d = daysUntil(state[j.firm]?.deadline);
     if (d === null || d > 14) return false;
-    seenFirms.add(j.firm);
-    return true;
-  }).sort((a,b) => {
-    const dA = daysUntil(state[a.firm]?.deadline);
-    const dB = daysUntil(state[b.firm]?.deadline);
-    return dA - dB;
-  });
+    seen.add(j.firm); return true;
+  }).sort((a,b) => daysUntil(state[a.firm]?.deadline) - daysUntil(state[b.firm]?.deadline));
 
-  if (!expiring.length) { section.style.display = 'none'; return; }
-
-  const rows = expiring.map(j => {
-    const dl  = state[j.firm]?.deadline || '';
-    const tag = deadlineTag(dl);
-    return `
+  if (!expiring.length) { section.style.display='none'; return; }
+  section.style.display = 'block';
+  section.innerHTML = `<div class="expiring-header">Deadlines in the Next 2 Weeks</div>` +
+    expiring.map(j => `
       <div class="expiring-row">
         <span class="expiring-firm">${escHtml(j.firm)}</span>
         <span class="expiring-title">${escHtml(j.title)}</span>
-        ${tag}
-        <a class="apply-btn" href="${escHtml(j.url)}" target="_blank" rel="noopener" style="padding:4px 12px;font-size:.74rem">Apply →</a>
-      </div>`;
-  }).join('');
-
-  section.style.display = 'block';
-  section.innerHTML = `<div class="expiring-header">⚠️ Deadlines in the Next 2 Weeks</div>${rows}`;
+        ${deadlineTag(state[j.firm]?.deadline||'')}
+        <a class="apply-btn" href="${escHtml(j.url)}" target="_blank" rel="noopener" style="padding:4px 11px;font-size:.7rem">Apply →</a>
+      </div>`).join('');
 }
 
-// ── Dismiss helpers ──────────────────────────────────────────────────────────
 function getDismissed() {
-  try { return new Set(JSON.parse(localStorage.getItem('dismissed') || '[]')); }
-  catch { return new Set(); }
+  try { return new Set(JSON.parse(localStorage.getItem('dismissed')||'[]')); } catch { return new Set(); }
 }
 function dismissJob(id) {
-  const d = getDismissed();
-  d.add(id);
+  const d = getDismissed(); d.add(id);
   localStorage.setItem('dismissed', JSON.stringify([...d]));
-  renderGrid();
-  renderExpiringSoon();
+  renderGrid(); renderExpiringSoon();
 }
 
-// ── Job grid ─────────────────────────────────────────────────────────────────
 function filteredJobs() {
-  return ALL_JOBS.filter(j => {
+  return RELEVANT_JOBS.filter(j => {
     if (activeTier !== 'all' && j.tier !== activeTier) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
@@ -1001,258 +1180,288 @@ function filteredJobs() {
   });
 }
 
-function chanceBadge(chance) {
-  if (!chance) return '';
-  let cls = chance < 10 ? 'chance-low' : chance < 20 ? 'chance-mid' : chance < 35 ? 'chance-good' : 'chance-high';
-  return `<span class="chance-badge ${cls}">${chance}% chance</span>`;
+function chanceBadge(c) {
+  if (!c) return '';
+  return `<span class="chance-badge ${c<10?'chance-low':c<20?'chance-mid':c<35?'chance-good':'chance-high'}">${c}%</span>`;
 }
 
 function salaryRow(job) {
   if (!job.salary && !job.bonus && !job.hours) return '';
-  const parts = [];
-  if (job.salary) parts.push(`💰 ${job.salary}`);
-  if (job.bonus)  parts.push(`🎯 ${job.bonus}`);
-  if (job.hours)  parts.push(`⏱ ${job.hours}`);
-  return `<div class="salary-row">${parts.join('<span style="color:var(--gray200)">│</span>')}</div>`;
+  const parts = [job.salary&&`💰 ${job.salary}`, job.bonus&&`🎯 ${job.bonus}`, job.hours&&`⏱ ${job.hours}`].filter(Boolean);
+  return `<div class="salary-row">${parts.map(p=>`<span>${p}</span>`).join('<span class="salary-sep">·</span>')}</div>`;
 }
 
 function renderGrid() {
   const dismissed = getDismissed();
-  const grid      = document.getElementById('jobs-grid');
-  const tierOrder = { homerun:0, reach:1, target:2, safety:3 };
+  const grid = document.getElementById('jobs-grid');
+  const tierOrder = {homerun:0,reach:1,target:2,safety:3};
+  const visible = filteredJobs().filter(j => !dismissed.has(j.id));
 
-  // Visible jobs: pass active filter AND not dismissed
-  const visibleJobs = filteredJobs().filter(j => !dismissed.has(j.id));
-
-  // Group by firm — one card per firm, all its roles inside
   const byFirm = {};
-  for (const j of visibleJobs) {
-    if (!byFirm[j.firm]) byFirm[j.firm] = { tier: j.tier, jobs: [] };
+  for (const j of visible) {
+    if (!byFirm[j.firm]) byFirm[j.firm] = {tier:j.tier, jobs:[]};
     byFirm[j.firm].jobs.push(j);
   }
 
-  // Sort firm groups: any-new first, then by tier
-  const firmGroups = Object.entries(byFirm).sort(([,a],[,b]) => {
-    const aN = a.jobs.some(isNew) ? 0 : 1;
-    const bN = b.jobs.some(isNew) ? 0 : 1;
-    if (aN !== bN) return aN - bN;
-    return (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9);
+  const groups = Object.entries(byFirm).sort(([,a],[,b]) => {
+    const aN = a.jobs.some(isNew)?0:1, bN = b.jobs.some(isNew)?0:1;
+    return aN!==bN ? aN-bN : (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9);
   });
 
-  // Firms with no visible roles — passed to watchlist, not rendered in grid
-  const firmsWithVisibleJobs = new Set(Object.keys(byFirm));
-  const closedFirms = ALL_FIRMS.filter(f => !firmsWithVisibleJobs.has(f.name))
-    .sort((a,b) => (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9));
+  const withJobs = new Set(Object.keys(byFirm));
+  const closed = ALL_FIRMS.filter(f=>!withJobs.has(f.name))
+    .sort((a,b)=>(tierOrder[a.tier]??9)-(tierOrder[b.tier]??9));
 
-  if (!firmGroups.length) {
+  if (!groups.length) {
     grid.innerHTML = `<div class="empty-state"><h3>No roles match your filter.</h3></div>`;
   } else {
-    grid.innerHTML = firmGroups.map(([firmName, group]) => {
-      const hasNew   = group.jobs.some(isNew);
-      const newBadge = hasNew ? `<span class="new-badge">NEW</span>` : '';
-
-      const roleRows = group.jobs.map(job => {
-        const roleBadge = isNew(job) ? `<span class="new-badge" style="font-size:.58rem;vertical-align:middle">NEW</span> ` : '';
-        const trackerDL = loadTrackerState()[job.firm]?.deadline || '';
-        const meta = [
-          job.location    ? `📍 ${job.location}`    : '',
-          job.posted_date ? `📅 ${job.posted_date}` : '',
-        ].filter(Boolean).join('  ');
+    grid.innerHTML = groups.map(([firm, g], i) => {
+      const hasNew = g.jobs.some(isNew);
+      const roleRows = g.jobs.map(job => {
+        const info    = getFirmInfo(job.firm) || {};
+        const roleBadge = isNew(job) ? `<span class="new-badge" style="font-size:.52rem;padding:1px 5px;animation-delay:.4s">NEW</span> ` : '';
+        const dl      = loadTrackerState()[job.firm]?.deadline || '';
+        const meta    = [job.location, job.posted_date].filter(Boolean).join('  ·  ');
+        const salary  = job.salary || info.salary || '';
+        const bonus   = job.bonus  || info.bonus  || '';
+        const chance  = job.chance ?? info.chance ?? null;
+        const statsHtml = (salary || bonus || chance !== null) ? `
+          <div class="role-stats">
+            ${salary ? `<span class="salary-chip">${escHtml(salary)}</span>` : ''}
+            ${bonus  ? `<span class="salary-chip salary-chip-bonus">${escHtml(bonus)}</span>` : ''}
+            ${chance !== null ? `<span class="match-stat ${matchClass(chance)}"><span class="match-pct">${chance}%</span><span class="match-label">&nbsp;est. offer</span></span>` : ''}
+          </div>` : '';
         return `
           <div class="role-row">
             <div class="role-info">
               <div class="role-title">${roleBadge}${escHtml(job.title)}</div>
+              ${statsHtml}
               <div class="role-meta">
-                ${meta ? meta + (trackerDL ? '  ' : '') : ''}${deadlineTag(trackerDL)}
+                ${meta?`<span>${meta}</span>`:''}
+                ${dl ? deadlineTag(dl) : `<a class="verify-cycle" href="${escHtml(job.url)}" target="_blank" rel="noopener" title="Verify start date and application deadline on the posting">&#128197; Check deadline &amp; 2027 start &#8599;</a>`}
               </div>
-              ${salaryRow(job)}
             </div>
             <div class="role-actions">
               <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
-              <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss — won't show again">✕</button>
+              <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss">✕</button>
             </div>
           </div>`;
       }).join('');
 
+      const cardInfo   = getFirmInfo(firm) || {};
+      const cardDesc   = cardInfo.desc   || '';
+      const cardIdeal  = cardInfo.ideal  || '';
+      const cardChance = cardInfo.chance ?? null;
+      const cardId     = `card-${i}`;
+      const bdRows     = cardChance !== null ? computeBreakdown(firm, g.tier, cardChance) : [];
+      const bdHtml     = bdRows.length ? `
+        <div class="breakdown-label">How we estimated your ${cardChance}% chance</div>
+        <table class="breakdown-table">
+          ${bdRows.map(([lbl,val])=>`<tr><td>${escHtml(lbl)}</td><td>${escHtml(val)}</td></tr>`).join('')}
+          <tr class="bd-total"><td>Estimated offer chance</td><td>${cardChance}%</td></tr>
+          <tr class="bd-note"><td colspan="2">Based on tier, firm selectivity, school (SMU Econ/Stats, May 2027), and internship data. Not a guarantee.</td></tr>
+        </table>` : '';
       return `
-      <div class="job-card tier-accent-${group.tier}">
-        <div class="card-top">
-          <span class="tier-badge tier-${group.tier}">${TIER_LABELS[group.tier]||group.tier}</span>
-          ${newBadge}
-        </div>
-        <div class="card-firm">${escHtml(firmName)}</div>
-        <div class="role-list">${roleRows}</div>
-      </div>`;
+        <div class="job-card tc-${g.tier}" id="${cardId}" data-firm="${escHtml(firm)}" style="animation-delay:${i*40}ms">
+          <div class="card-header tint-${g.tier}">
+            <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
+              ${escHtml(firm)}<span class="firm-chevron">▾</span>
+            </button>
+            <div class="card-badges">
+              <span class="tier-badge tier-${g.tier}">${TIER_LABELS[g.tier]||g.tier}</span>
+              ${hasNew?'<span class="new-badge">NEW</span>':''}
+              <span class="conn-badge-wrap">${(()=>{const st=getConnStatus(firm);return st?`<span class="conn-badge ${st==='sent'?'conn-sent':'conn-draft'}">${st==='sent'?'✉ Sent':'✉ Draft'}</span>`:''})()}</span>
+            </div>
+          </div>
+          <div class="role-list">${roleRows}</div>
+          <div class="card-expand">
+            <div class="expand-inner">
+              ${cardIdeal ? `<div class="ideal-role"><span class="ideal-label">TARGET ROLE</span>${escHtml(cardIdeal)}</div>` : ''}
+              ${cardDesc ? `<p class="expand-desc">${escHtml(cardDesc)}</p>` : ''}
+              ${bdHtml}
+            </div>
+          </div>
+        </div>`;
     }).join('');
   }
 
-  renderWatchlist(closedFirms);
+  renderWatchlist(closed);
 }
 
-function renderWatchlist(closedFirms) {
+function renderWatchlist(closed) {
   const section = document.getElementById('watchlist-section');
-  const countEl = document.getElementById('wl-count');
   const gridEl  = document.getElementById('watchlist-grid');
-  if (!closedFirms.length) { section.style.display = 'none'; return; }
-
-  countEl.textContent = closedFirms.length;
+  if (!closed.length) { section.style.display='none'; return; }
+  document.getElementById('wl-count').textContent = closed.length;
   section.style.display = 'block';
-  gridEl.innerHTML = closedFirms.map(f => `
+  gridEl.innerHTML = closed.map(f => `
     <div class="watchlist-item wl-${f.tier}">
+      <span class="wl-dot"></span>
       <span class="watchlist-name">${escHtml(f.name)}</span>
       <a class="check-btn" href="${escHtml(f.careers_url)}" target="_blank" rel="noopener">Check →</a>
     </div>`).join('');
 }
 
 function toggleWatchlist() {
-  const toggle = document.getElementById('watchlist-toggle');
-  const gridEl = document.getElementById('watchlist-grid');
-  const open   = toggle.classList.toggle('open');
-  gridEl.style.display = open ? 'grid' : 'none';
+  const t = document.getElementById('watchlist-toggle');
+  const g = document.getElementById('watchlist-grid');
+  const open = t.classList.toggle('open');
+  g.style.display = open ? 'grid' : 'none';
 }
 
 function toggleGuide() {
-  const toggle = document.getElementById('guide-toggle');
-  const body   = document.getElementById('guide-body');
-  const open   = toggle.classList.toggle('open');
-  body.classList.toggle('open', open);
+  const t = document.getElementById('guide-toggle');
+  const b = document.getElementById('guide-body');
+  const open = t.classList.toggle('open');
+  b.classList.toggle('open', open);
 }
 
-// ── Status tracker ───────────────────────────────────────────────────────────
 function loadTrackerState() {
-  try { return JSON.parse(localStorage.getItem('tracker') || '{}'); }
-  catch { return {}; }
+  try { return JSON.parse(localStorage.getItem('tracker')||'{}'); } catch { return {}; }
 }
-function saveTrackerState(state) {
-  localStorage.setItem('tracker', JSON.stringify(state));
+function saveTrackerState(s) { localStorage.setItem('tracker', JSON.stringify(s)); }
+
+// ── Connections ─────────────────────────────────────────────────────────────
+function loadConns() {
+  try { return JSON.parse(localStorage.getItem('connections')||'{}'); } catch { return {}; }
 }
+function saveConns(s) { localStorage.setItem('connections', JSON.stringify(s)); }
+
+function getConnStatus(firmName) {
+  const c = loadConns()[firmName];
+  if (!c) return null;
+  if (c.sent) return 'sent';
+  if (c.contact || c.email || c.notes) return 'draft';
+  return null;
+}
+
+function renderConnections() {
+  const state = loadConns();
+  const body  = document.getElementById('connections-body');
+  if (!ALL_FIRMS.length) return;
+  const tierOrder = {homerun:0,reach:1,target:2,safety:3};
+  const sorted = [...ALL_FIRMS].sort((a,b)=>
+    (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9) || a.name.localeCompare(b.name));
+
+  body.innerHTML = sorted.map(firm => {
+    const k = firm.name, s = state[k]||{};
+    const isSent = !!s.sent;
+    return `<tr>
+      <td style="font-weight:600">${escHtml(firm.name)}</td>
+      <td><span class="tier-badge tier-${firm.tier}" style="font-size:.58rem">${TIER_LABELS[firm.tier]}</span></td>
+      <td><input class="notes-input" style="width:130px" type="text" placeholder="Name…" value="${escHtml(s.contact||'')}" data-firm="${escHtml(k)}" data-field="contact" onchange="onConnField(this)" /></td>
+      <td><input class="notes-input" style="width:160px" type="email" placeholder="email@firm.com" value="${escHtml(s.email||'')}" data-firm="${escHtml(k)}" data-field="email" onchange="onConnField(this)" /></td>
+      <td><input class="notes-input" style="width:100%" type="text" placeholder="Add note…" value="${escHtml(s.notes||'')}" data-firm="${escHtml(k)}" data-field="notes" onchange="onConnField(this)" /></td>
+      <td><button class="sent-btn${isSent?' sent':''}" data-firm="${escHtml(k)}" onclick="toggleConnSent(this)">${isSent?'✓ Sent':'Mark Sent'}</button></td>
+      <td><input class="deadline-input" type="date" value="${escHtml(s.sentDate||'')}" data-firm="${escHtml(k)}" data-field="sentDate" onchange="onConnField(this)" /></td>
+    </tr>`;
+  }).join('');
+}
+
+function onConnField(el) {
+  const s = loadConns(), k = el.dataset.firm, field = el.dataset.field;
+  if (!s[k]) s[k] = {};
+  s[k][field] = el.value;
+  saveConns(s);
+  refreshCardBadge(k);
+}
+
+function toggleConnSent(btn) {
+  const k = btn.dataset.firm;
+  const s = loadConns();
+  if (!s[k]) s[k] = {};
+  s[k].sent = !s[k].sent;
+  if (s[k].sent && !s[k].sentDate) {
+    s[k].sentDate = new Date().toISOString().slice(0,10);
+  }
+  saveConns(s);
+  renderConnections();
+  refreshCardBadge(k);
+}
+
+function refreshCardBadge(firmName) {
+  const card = document.querySelector(`.job-card[data-firm="${CSS.escape(firmName)}"]`);
+  if (!card) return;
+  const wrap = card.querySelector('.conn-badge-wrap');
+  if (!wrap) return;
+  const status = getConnStatus(firmName);
+  wrap.innerHTML = status
+    ? `<span class="conn-badge ${status==='sent'?'conn-sent':'conn-draft'}">${status==='sent'?'✉ Sent':'✉ Draft'}</span>`
+    : '';
+}
+// ────────────────────────────────────────────────────────────────────────────
 
 function renderTracker() {
   const state = loadTrackerState();
   const body  = document.getElementById('tracker-body');
   if (!ALL_FIRMS.length) return;
-
-  const tierOrder = { homerun:0, reach:1, target:2, safety:3 };
-  const sorted = [...ALL_FIRMS].sort((a,b) =>
-    (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9) || a.name.localeCompare(b.name)
-  );
-
-  const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
-               'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
+  const tierOrder = {homerun:0,reach:1,target:2,safety:3};
+  const sorted = [...ALL_FIRMS].sort((a,b)=>
+    (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9) || a.name.localeCompare(b.name));
+  const sc = {'Applied':'status-applied','Phone Screen':'status-phone','Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected'};
 
   body.innerHTML = sorted.map(firm => {
-    const key         = firm.name;
-    const saved       = state[key] || {};
-    const statusVal   = saved.status   || '—';
-    const notesVal    = saved.notes    || '';
-    const deadlineVal = saved.deadline || '';
-    const statusOpts  = STATUS_OPTS.map(s =>
-      `<option value="${s}" ${s===statusVal?'selected':''}>${s}</option>`
-    ).join('');
+    const k=firm.name, s=state[k]||{};
+    const sv=s.status||'—', nv=s.notes||'', dv=s.deadline||'';
+    const info = getFirmInfo(firm.name);
+    const chanceVal = info?.chance ?? null;
+    const chanceCell = chanceVal !== null
+      ? `<span class="match-stat ${matchClass(chanceVal)}" style="font-size:.62rem;padding:2px 7px"><span class="match-pct" style="font-size:.74rem">${chanceVal}%</span></span>`
+      : `<span style="color:var(--ink-3);font-size:.72rem">—</span>`;
     return `<tr>
       <td style="font-weight:600">${escHtml(firm.name)}</td>
-      <td><span class="tier-badge tier-${firm.tier}" style="font-size:.65rem">${TIER_LABELS[firm.tier]}</span></td>
-      <td>
-        <select class="status-select ${sc[statusVal]||''}" data-firm="${escHtml(firm.name)}" onchange="onStatusChange(this)">
-          ${statusOpts}
-        </select>
-      </td>
-      <td>
-        <input class="deadline-input" type="date" data-firm="${escHtml(firm.name)}"
-          value="${escHtml(deadlineVal)}" onchange="onDeadlineChange(this)" />
-      </td>
-      <td>
-        <input class="notes-input" type="text" placeholder="Add note…"
-          value="${escHtml(notesVal)}" data-firm="${escHtml(firm.name)}"
-          onchange="onNotesChange(this)" />
-      </td>
+      <td><span class="tier-badge tier-${firm.tier}" style="font-size:.58rem">${TIER_LABELS[firm.tier]}</span></td>
+      <td>${chanceCell}</td>
+      <td><select class="status-select ${sc[sv]||''}" data-firm="${escHtml(firm.name)}" onchange="onStatusChange(this)">${STATUS_OPTS.map(o=>`<option value="${o}"${o===sv?' selected':''}>${o}</option>`).join('')}</select></td>
+      <td><input class="deadline-input" type="date" data-firm="${escHtml(firm.name)}" value="${escHtml(dv)}" onchange="onDeadlineChange(this)" /></td>
+      <td><input class="notes-input" type="text" placeholder="Add note…" value="${escHtml(nv)}" data-firm="${escHtml(firm.name)}" onchange="onNotesChange(this)" /></td>
     </tr>`;
   }).join('');
 }
 
 function onStatusChange(el) {
-  const state = loadTrackerState();
-  const key   = el.dataset.firm;
-  if (!state[key]) state[key] = {};
-  state[key].status = el.value;
-  saveTrackerState(state);
-  const sc = { 'Applied':'status-applied','Phone Screen':'status-phone',
-               'Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected' };
-  el.className = `status-select ${sc[el.value]||''}`;
+  const s=loadTrackerState(), k=el.dataset.firm;
+  if (!s[k]) s[k]={};
+  s[k].status=el.value; saveTrackerState(s);
+  const sc={'Applied':'status-applied','Phone Screen':'status-phone','Superday':'status-superday','Offer':'status-offer','Rejected':'status-rejected'};
+  el.className=`status-select ${sc[el.value]||''}`;
   renderCharts();
 }
-
 function onNotesChange(el) {
-  const state = loadTrackerState();
-  const key   = el.dataset.firm;
-  if (!state[key]) state[key] = {};
-  state[key].notes = el.value;
-  saveTrackerState(state);
+  const s=loadTrackerState(),k=el.dataset.firm;
+  if(!s[k])s[k]={}; s[k].notes=el.value; saveTrackerState(s);
 }
-
 function onDeadlineChange(el) {
-  const state = loadTrackerState();
-  const key   = el.dataset.firm;
-  if (!state[key]) state[key] = {};
-  state[key].deadline = el.value;
-  saveTrackerState(state);
-  renderExpiringSoon();
-  renderGrid();
+  const s=loadTrackerState(),k=el.dataset.firm;
+  if(!s[k])s[k]={}; s[k].deadline=el.value; saveTrackerState(s);
+  renderExpiringSoon(); renderGrid();
 }
 
-// ── Charts ────────────────────────────────────────────────────────────────────
 function renderCharts() {
-  const state = loadTrackerState();
-  const statusCounts = { Applied:0, 'Phone Screen':0, Superday:0, Offer:0, Rejected:0, Tracking:0 };
-  ALL_FIRMS.forEach(f => {
-    const s = state[f.name]?.status || '—';
-    if (s === '—') statusCounts['Tracking']++;
-    else if (statusCounts[s] !== undefined) statusCounts[s]++;
+  const state=loadTrackerState();
+  const sc={Applied:0,'Phone Screen':0,Superday:0,Offer:0,Rejected:0,Tracking:0};
+  ALL_FIRMS.forEach(f=>{const s=state[f.name]?.status||'—';if(s==='—')sc.Tracking++;else if(sc[s]!==undefined)sc[s]++;});
+  const tc={homerun:0,reach:0,target:0,safety:0};
+  ALL_FIRMS.forEach(f=>{if(tc[f.tier]!==undefined)tc[f.tier]++;});
+
+  if(pipelineChart)pipelineChart.destroy();
+  pipelineChart=new Chart(document.getElementById('chart-pipeline'),{
+    type:'doughnut',
+    data:{labels:Object.keys(sc),datasets:[{data:Object.values(sc),backgroundColor:['#2563eb','#7c3aed','#d97706','#059669','#dc2626','#e4e0d8'],borderWidth:3,borderColor:'#fefefe'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11,family:'Inter'},boxWidth:10,padding:10}}}}
   });
 
-  const tierCounts = { homerun:0, reach:0, target:0, safety:0 };
-  ALL_FIRMS.forEach(f => { if (tierCounts[f.tier]!==undefined) tierCounts[f.tier]++; });
-
-  // Pipeline doughnut
-  if (pipelineChart) pipelineChart.destroy();
-  pipelineChart = new Chart(document.getElementById('chart-pipeline'), {
-    type: 'doughnut',
-    data: {
-      labels: Object.keys(statusCounts),
-      datasets: [{
-        data: Object.values(statusCounts),
-        backgroundColor: ['#3b82f6','#8b5cf6','#f59e0b','#10b981','#ef4444','#e2e8f0'],
-        borderWidth: 2, borderColor: '#fff',
-      }]
-    },
-    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ font:{ size:11 }, boxWidth:12 } } } }
-  });
-
-  // Tier bar
-  if (tierChart) tierChart.destroy();
-  tierChart = new Chart(document.getElementById('chart-tiers'), {
-    type: 'bar',
-    data: {
-      labels: ['Homerun','Reach','Target','Safety'],
-      datasets: [{
-        label: 'Open Roles',
-        data: [tierCounts.homerun, tierCounts.reach, tierCounts.target, tierCounts.safety],
-        backgroundColor: [TIER_COLORS.homerun, TIER_COLORS.reach, TIER_COLORS.target, TIER_COLORS.safety],
-        borderRadius: 5,
-      }]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ display:false } },
-      scales:{ y:{ beginAtZero:true, ticks:{ stepSize:1 }, grid:{ color:'#f1f5f9' } }, x:{ grid:{ display:false } } }
-    }
+  if(tierChart)tierChart.destroy();
+  tierChart=new Chart(document.getElementById('chart-tiers'),{
+    type:'bar',
+    data:{labels:['Homerun','Reach','Target','Safety'],datasets:[{label:'Firms',data:[tc.homerun,tc.reach,tc.target,tc.safety],backgroundColor:[TIER_COLORS.homerun,TIER_COLORS.reach,TIER_COLORS.target,TIER_COLORS.safety],borderRadius:6,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:11,family:'Inter'}},grid:{color:'#e4e0d8'}},x:{grid:{display:false},ticks:{font:{size:11,family:'Inter'}}}}}
   });
 }
 
-// ── Filter & search events ────────────────────────────────────────────────────
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     activeTier = btn.dataset.tier;
     renderGrid();
@@ -1264,80 +1473,61 @@ document.getElementById('search-input').addEventListener('input', e => {
   renderGrid();
 });
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 function escHtml(s) {
-  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Add Firm code generator ───────────────────────────────────────────────────
 const ATS_EXTRA_FIELDS = {
-  greenhouse:      [{ id: 'af-slug',      label: 'Board Slug',  placeholder: 'e.g. rockwoodcapital' }],
-  workday:         [{ id: 'af-subdomain', label: 'Subdomain',   placeholder: 'e.g. rockwood' },
-                   { id: 'af-jobsite',   label: 'Jobsite Slug', placeholder: 'e.g. RockwoodCareers' }],
-  lever:           [{ id: 'af-slug',      label: 'Lever Slug',  placeholder: 'e.g. rockwood-capital' }],
-  smartrecruiters: [{ id: 'af-slug',      label: 'Company ID',  placeholder: 'e.g. RockwoodCapital' }],
-  icims:           [{ id: 'af-slug',      label: 'iCIMS ID',    placeholder: 'e.g. 12345' }],
-  jobvite:         [{ id: 'af-slug',      label: 'Jobvite Key', placeholder: 'e.g. rockwoodcap' }],
-  playwright:      [],
+  greenhouse:[{id:'af-slug',label:'Board Slug',placeholder:'e.g. rockwoodcapital'}],
+  workday:[{id:'af-subdomain',label:'Subdomain',placeholder:'e.g. rockwood'},{id:'af-jobsite',label:'Jobsite Slug',placeholder:'e.g. RockwoodCareers'}],
+  lever:[{id:'af-slug',label:'Lever Slug',placeholder:'e.g. rockwood-capital'}],
+  smartrecruiters:[{id:'af-slug',label:'Company ID',placeholder:'e.g. RockwoodCapital'}],
+  icims:[{id:'af-slug',label:'iCIMS ID',placeholder:'e.g. 12345'}],
+  jobvite:[{id:'af-slug',label:'Jobvite Key',placeholder:'e.g. rockwoodcap'}],
+  playwright:[],
 };
 
 function generateFirmCode() {
-  const name  = document.getElementById('af-name').value.trim();
-  const tier  = document.getElementById('af-tier').value;
-  const track = document.getElementById('af-track').value.split(' ')[0];
-  const ats   = document.getElementById('af-ats').value;
-  const url   = document.getElementById('af-url').value.trim();
+  const name=document.getElementById('af-name').value.trim();
+  const tier=document.getElementById('af-tier').value;
+  const track=document.getElementById('af-track').value.split(' ')[0];
+  const ats=document.getElementById('af-ats').value;
+  const url=document.getElementById('af-url').value.trim();
 
-  // Render extra ATS fields
-  const extraRow = document.getElementById('af-extra-row');
-  const fields   = ATS_EXTRA_FIELDS[ats] || [];
-  extraRow.innerHTML = fields.map(f =>
+  const extraRow=document.getElementById('af-extra-row');
+  extraRow.innerHTML=(ATS_EXTRA_FIELDS[ats]||[]).map(f=>
     `<div class="af-field"><label>${f.label}</label><input id="${f.id}" type="text" placeholder="${f.placeholder}" oninput="generateFirmCode()" /></div>`
   ).join('');
 
-  if (!name) { document.getElementById('af-output').style.display = 'none'; return; }
+  if(!name){document.getElementById('af-output').style.display='none';return;}
 
-  const slug      = document.getElementById('af-slug')?.value.trim()      || '';
-  const subdomain = document.getElementById('af-subdomain')?.value.trim() || '';
-  const jobsite   = document.getElementById('af-jobsite')?.value.trim()   || '';
+  const slug=document.getElementById('af-slug')?.value.trim()||'';
+  const subdomain=document.getElementById('af-subdomain')?.value.trim()||'';
+  const jobsite=document.getElementById('af-jobsite')?.value.trim()||'';
 
-  let scraperLine = '';
-  if (ats === 'greenhouse') {
-    scraperLine = `{ "firm": "${name}", "slug": "${slug || 'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
-  } else if (ats === 'workday') {
-    scraperLine = `{ "firm": "${name}", "subdomain": "${subdomain || 'SUBDOMAIN'}", "jobsite": "${jobsite || 'JOBSITE'}", "wdver": "wd1", "tier": "${tier}", "track": "${track}" }`;
-  } else if (ats === 'lever') {
-    scraperLine = `{ "firm": "${name}", "slug": "${slug || 'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
-  } else if (ats === 'smartrecruiters') {
-    scraperLine = `{ "firm": "${name}", "company_id": "${slug || 'COMPANY_ID'}", "tier": "${tier}", "track": "${track}" }`;
-  } else if (ats === 'icims') {
-    scraperLine = `{ "firm": "${name}", "client_id": "${slug || 'CLIENT_ID'}", "tier": "${tier}", "track": "${track}" }`;
-  } else if (ats === 'jobvite') {
-    scraperLine = `{ "firm": "${name}", "key": "${slug || 'KEY_HERE'}", "tier": "${tier}", "track": "${track}" }`;
-  } else {
-    const safeUrl = url || 'https://firmname.com/careers';
-    scraperLine = `{ "firm": "${name}", "url": "${safeUrl}", "tier": "${tier}", "track": "${track}", "bot_protected": False }`;
-  }
+  let sc='';
+  if(ats==='greenhouse')      sc=`{ "firm": "${name}", "slug": "${slug||'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  else if(ats==='workday')    sc=`{ "firm": "${name}", "subdomain": "${subdomain||'SUBDOMAIN'}", "jobsite": "${jobsite||'JOBSITE'}", "wdver": "wd1", "tier": "${tier}", "track": "${track}" }`;
+  else if(ats==='lever')      sc=`{ "firm": "${name}", "slug": "${slug||'SLUG_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  else if(ats==='smartrecruiters') sc=`{ "firm": "${name}", "company_id": "${slug||'COMPANY_ID'}", "tier": "${tier}", "track": "${track}" }`;
+  else if(ats==='icims')      sc=`{ "firm": "${name}", "client_id": "${slug||'CLIENT_ID'}", "tier": "${tier}", "track": "${track}" }`;
+  else if(ats==='jobvite')    sc=`{ "firm": "${name}", "key": "${slug||'KEY_HERE'}", "tier": "${tier}", "track": "${track}" }`;
+  else sc=`{ "firm": "${name}", "url": "${url||'https://firmname.com/careers'}", "tier": "${tier}", "track": "${track}", "bot_protected": False }`;
 
-  const masterLine = `{ "name": "${name}", "tier": "${tier}", "track": "${track}", "careers_url": "${url || 'https://firmname.com/careers'}" }`;
-
-  const atsFileMap = { greenhouse:'scrapers/greenhouse.py', workday:'scrapers/workday.py', lever:'scrapers/lever.py', smartrecruiters:'scrapers/smartrecruiters.py', icims:'scrapers/icims.py', jobvite:'scrapers/jobvite.py', playwright:'scrapers/playwright_scraper.py' };
-
-  document.getElementById('af-scraper-code').textContent = `# ${atsFileMap[ats]} → FIRMS list\n${scraperLine},`;
-  document.getElementById('af-master-code').textContent  = `# scraper.py → MASTER_FIRMS list\n${masterLine},`;
-  document.getElementById('af-output').style.display = 'block';
+  const mc=`{ "name": "${name}", "tier": "${tier}", "track": "${track}", "careers_url": "${url||'https://firmname.com/careers'}" }`;
+  const fm={greenhouse:'scrapers/greenhouse.py',workday:'scrapers/workday.py',lever:'scrapers/lever.py',smartrecruiters:'scrapers/smartrecruiters.py',icims:'scrapers/icims.py',jobvite:'scrapers/jobvite.py',playwright:'scrapers/playwright_scraper.py'};
+  document.getElementById('af-scraper-code').textContent=`# ${fm[ats]} → FIRMS list\n${sc},`;
+  document.getElementById('af-master-code').textContent=`# scraper.py → MASTER_FIRMS list\n${mc},`;
+  document.getElementById('af-output').style.display='block';
 }
 
-function copyCode(id, btn) {
-  const text = document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+function copyCode(id,btn) {
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{
+    btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
   });
 }
 
-// ── Boot ──────────────────────────────────────────────────────────────────────
 loadJobs();
 </script>
 </body>
