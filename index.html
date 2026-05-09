@@ -640,19 +640,26 @@
     .copy-btn.copied { background: var(--new-green); color: #fff; }
 
     /* ── Firm roles section (in expand panel) ── */
+    .careers-links {
+      display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px;
+    }
     .careers-page-link {
       display: inline-flex; align-items: center; gap: 5px;
       padding: 5px 12px; border-radius: 6px;
       border: 1.5px solid var(--accent); color: var(--accent);
       font-size: .74rem; font-weight: 600; text-decoration: none;
-      margin-bottom: 12px;
       transition: background-color 150ms var(--ease), color 150ms var(--ease), transform 100ms var(--ease);
-      width: fit-content;
     }
     @media (hover: hover) and (pointer: fine) {
       .careers-page-link:hover { background: var(--accent); color: #fff; }
     }
     .careers-page-link:active { transform: scale(0.97); }
+    .careers-page-link--li {
+      border-color: #0077b5; color: #0077b5;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .careers-page-link--li:hover { background: #0077b5; color: #fff; }
+    }
 
     .firm-roles-section { margin-bottom: 13px; }
     .firm-roles-label {
@@ -1181,6 +1188,21 @@ const FIRM_CAREERS_URL = {
   "berkadia":        "https://boards.greenhouse.io/berkadia",
 };
 
+// LinkedIn company IDs — same values as scrapers/linkedin.py
+const FIRM_LINKEDIN_ID = {
+  "blackstone":"16140","kkr":"2197","apollo":"153457","carlyle":"3009",
+  "brookfield":"78340","goldman":"1441","morgan stanley":"1550","stonepeak":"19131555","blackrock":"3090",
+  "ares":"8803","starwood":"8814","tpg":"3080952","cerberus":"11879","eqt":"167704",
+  "tishman":"9140","related":"9443","rockpoint":"19668","pretium":"2586429","dune":"3158630",
+  "harrison street":"47996","eastdil":"19206",
+  "blue owl":"71828392","w.p. carey":"3436","digital realty":"11600","i squared":"2737253","aew":"9218",
+  "lasalle":"9287","bentallgreenoak":"823421","clarion":"32681","hines":"3255","nuveen":"11896",
+  "bridge":"2396033","heitman":"20140","walton street":"27153","ta realty":"12780","somera":"10405518","jefferies":"2945",
+  "jll":"1180","cbre":"1267","cushman":"4027","walker":"47420","marcus":"4808",
+  "wells fargo":"3525","keybank":"3543","ubs":"2660","stifel":"4928","revantage":"18907418",
+  "fidelity":"1138","state street":"1856","berkadia":"10509",
+};
+
 const FIRM_TIER = {
   "blackstone":"homerun","kkr":"homerun","apollo":"homerun","carlyle":"homerun",
   "brookfield":"homerun","goldman":"homerun","morgan stanley":"homerun","stonepeak":"homerun","blackrock":"homerun",
@@ -1376,6 +1398,10 @@ function buildExpandInner(key, displayName, tier, cardChance, cardIdeal, cardDes
   const careersUrl = FIRM_CAREERS_URL[key] || '';
   const roles = FIRM_ROLES[key] || [];
   const bdRows = cardChance !== null ? computeBreakdown(displayName, tier, cardChance) : [];
+  const liId = FIRM_LINKEDIN_ID[key] || '';
+  const liSearch = liId
+    ? `https://www.linkedin.com/jobs/search/?keywords=analyst+associate&f_C=${liId}&location=United+States&f_E=1%2C2&sortBy=DD`
+    : `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(displayName + ' analyst associate')}&location=United+States&f_E=1%2C2&sortBy=DD`;
   const bdHtml = bdRows.length ? `
     <div class="breakdown-label">How we estimated your ${cardChance}% chance</div>
     <table class="breakdown-table">
@@ -1390,10 +1416,11 @@ function buildExpandInner(key, displayName, tier, cardChance, cardIdeal, cardDes
         ${roles.map((r,i) => `<li class="${i===0?'roles-top':''}">${escHtml(r)}</li>`).join('')}
       </ol>
     </div>` : '';
-  const careersHtml = careersUrl ? `
-    <a class="careers-page-link" href="${escHtml(careersUrl)}" target="_blank" rel="noopener">
-      View ${escHtml(displayName)} Careers Page →
-    </a>` : '';
+  const careersHtml = `
+    <div class="careers-links">
+      ${careersUrl ? `<a class="careers-page-link" href="${escHtml(careersUrl)}" target="_blank" rel="noopener">Careers Page ↗</a>` : ''}
+      <a class="careers-page-link careers-page-link--li" href="${liSearch}" target="_blank" rel="noopener">Search LinkedIn ↗</a>
+    </div>`;
   return `
     ${cardIdeal ? `<div class="ideal-role"><span class="ideal-label">TARGET ROLE</span>${escHtml(cardIdeal)}</div>` : ''}
     ${careersHtml}

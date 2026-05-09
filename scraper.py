@@ -6,7 +6,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scrapers import greenhouse, workday, lever, smartrecruiters, icims, jobvite, playwright_scraper
+from scrapers import greenhouse, workday, lever, smartrecruiters, icims, jobvite, playwright_scraper, linkedin
+from scrapers.validate import validate
 from notifier import send_alert
 
 # All 50 target firms — used to generate "not open yet" entries in jobs.json
@@ -141,12 +142,27 @@ def mark_new_jobs(all_jobs: list[dict], known_ids: set[str]) -> list[dict]:
 
 
 def deduplicate(jobs: list[dict]) -> list[dict]:
-    seen = set()
-    out  = []
-    for job in jobs:
-        if job["id"] not in seen:
-            seen.add(job["id"])
-            out.append(job)
+    """Dedup by ID, then by (firm + normalized title) to catch cross-source dupes.
+
+    LinkedIn and Greenhouse/Workday can surface the same posting with different IDs.
+    When that happens, prefer the non-LinkedIn source because its URL goes directly
+    to the ATS application form rather than a LinkedIn interstitial.
+    """
+    seen_ids:    set[str] = set()
+    seen_titles: set[str] = set()
+    out: list[dict] = []
+
+    # Process non-LinkedIn first so ATS URLs win over LinkedIn URLs
+    ordered = sorted(jobs, key=lambda j: 1 if j.get("source") == "linkedin" else 0)
+
+    for job in ordered:
+        norm_title = f"{job['firm'].lower()}|{job['title'].lower().split('-')[0].strip()}"
+        if job["id"] in seen_ids or norm_title in seen_titles:
+            continue
+        seen_ids.add(job["id"])
+        seen_titles.add(norm_title)
+        out.append(job)
+
     return out
 
 
@@ -187,8 +203,17 @@ def main():
     log.info("Running Playwright scrapers...")
     all_jobs.extend(playwright_scraper.scrape_all(log_fn=log.info))
 
+    # --- LinkedIn (covers all 50 firms, including bot-protected ones) ---
+    log.info("Running LinkedIn scrapers...")
+    all_jobs.extend(linkedin.scrape_all(log_fn=log.info))
+
     all_jobs = deduplicate(all_jobs)
     log.info(f"Total matches after dedup: {len(all_jobs)}")
+
+    # --- Validate URLs — remove dead links before they hit the dashboard ---
+    log.info("Validating job URLs...")
+    all_jobs = validate(all_jobs, log_fn=log.info)
+    log.info(f"Total matches after validation: {len(all_jobs)}")
 
     # Detect new jobs and mark them
     new_jobs = mark_new_jobs(all_jobs, known_ids)
