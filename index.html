@@ -345,7 +345,7 @@
       border-top: 0px solid var(--border);
     }
     .card-expand.open {
-      max-height: 500px;
+      max-height: 700px;
       border-top: 1px solid var(--border);
     }
     .expand-inner { padding: 14px 18px 16px; background: var(--bg); }
@@ -638,6 +638,63 @@
     .copy-btn { position: absolute; top: 7px; right: 7px; background: rgba(255,255,255,.1); color: #e2e8f0; border: none; border-radius: 5px; padding: 3px 9px; font-size: .65rem; font-family: inherit; cursor: pointer; transition: background-color 140ms var(--ease); }
     .copy-btn:hover { background: rgba(255,255,255,.2); }
     .copy-btn.copied { background: var(--new-green); color: #fff; }
+
+    /* ── Firm roles section (in expand panel) ── */
+    .careers-page-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 6px;
+      border: 1.5px solid var(--accent); color: var(--accent);
+      font-size: .74rem; font-weight: 600; text-decoration: none;
+      margin-bottom: 12px;
+      transition: background-color 150ms var(--ease), color 150ms var(--ease), transform 100ms var(--ease);
+      width: fit-content;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .careers-page-link:hover { background: var(--accent); color: #fff; }
+    }
+    .careers-page-link:active { transform: scale(0.97); }
+
+    .firm-roles-section { margin-bottom: 13px; }
+    .firm-roles-label {
+      font-size: .6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: var(--ink-3); margin-bottom: 7px;
+    }
+    .firm-roles-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .firm-roles-list li {
+      font-size: .77rem; color: var(--ink-2);
+      padding: 4px 0; border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 6px;
+      line-height: 1.4;
+    }
+    .firm-roles-list li:last-child { border-bottom: none; }
+    .firm-roles-list li::before {
+      content: counter(list-item, decimal);
+      counter-increment: list-item;
+      font-size: .58rem; font-weight: 700; color: var(--ink-3);
+      min-width: 13px; flex-shrink: 0;
+    }
+    .firm-roles-list { counter-reset: list-item; }
+    .firm-roles-list li.roles-top {
+      color: var(--ink); font-weight: 600;
+    }
+    .firm-roles-list li.roles-top::before { color: var(--accent); }
+
+    /* ── No openings states ── */
+    .no-open-roles {
+      font-size: .74rem; color: var(--ink-3);
+      padding: 10px 0 4px;
+      font-style: italic;
+    }
+    .no-roles-badge {
+      padding: 2px 8px; border-radius: 999px;
+      font-size: .6rem; font-weight: 600;
+      background: var(--surface-hover); color: var(--ink-3);
+      border: 1px solid var(--border); white-space: nowrap;
+    }
 
     @media (max-width: 640px) {
       header, .stats-row, .filter-row, .jobs-grid,
@@ -1069,6 +1126,130 @@ let activeTier   = 'all';
 let searchQuery  = '';
 let pipelineChart, tierChart;
 
+// ── Firm careers URLs ─────────────────────────────────────────────────────────
+const FIRM_CAREERS_URL = {
+  "blackstone":      "https://careers.smartrecruiters.com/Blackstone",
+  "kkr":             "https://www.kkr.com/careers/career-opportunities",
+  "apollo":          "https://boards.greenhouse.io/apollo",
+  "carlyle":         "https://www.carlyle.com/careers",
+  "brookfield":      "https://brookfield.com/careers",
+  "goldman":         "https://www.goldmansachs.com/careers/search.html",
+  "morgan stanley":  "https://www.morganstanley.com/people-opportunities/search",
+  "stonepeak":       "https://jobs.ashbyhq.com/stonepeak",
+  "blackrock":       "https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional",
+  "ares":            "https://careers.smartrecruiters.com/Ares",
+  "starwood":        "https://www.starwoodcapital.com/about/careers",
+  "tpg":             "https://boards.greenhouse.io/tpgcareers",
+  "cerberus":        "https://www.cerberuscapital.com/careers",
+  "eqt":             "https://careers.eqtgroup.com",
+  "exeter":          "https://careers.eqtgroup.com",
+  "tishman":         "https://www.tishmanspeyer.com/about/careers",
+  "related":         "https://www.related.jobs/",
+  "rockpoint":       "https://www.rockpointgroup.com/careers",
+  "pretium":         "https://jobs.ashbyhq.com/pretium",
+  "dune":            "https://www.dunerep.com",
+  "harrison street": "https://www.harrisonst.com/careers",
+  "eastdil":         "https://www.eastdilsecured.com/careers",
+  "blue owl":        "https://blueowl.wd1.myworkdayjobs.com/blueowl",
+  "w.p. carey":      "https://jobs.jobvite.com/wpccareers",
+  "digital realty":  "https://careers.digitalrealty.com/",
+  "i squared":       "https://isquaredcapital.com/careers",
+  "aew":             "https://www.aew.com/about/careers",
+  "lasalle":         "https://jll.wd1.myworkdayjobs.com/lasallecareers",
+  "bentallgreenoak": "https://www.bentallgreenoak.com/about-us/careers/",
+  "clarion":         "https://www.clarionpartners.com/about-us/careers",
+  "hines":           "https://www.hines.com/careers",
+  "nuveen":          "https://tiaa.wd1.myworkdayjobs.com/Search",
+  "bridge":          "https://jobs.ashbyhq.com/bridge-investment-group",
+  "heitman":         "https://www.heitman.com/careers",
+  "walton street":   "https://www.waltonst.com",
+  "ta realty":       "https://www.tarealty.com/careers",
+  "somera":          "https://someraroadinc.com",
+  "jefferies":       "https://www.jefferies.com/careers/",
+  "jll":             "https://jll.wd1.myworkdayjobs.com/jllcareers",
+  "cbre":            "https://careers.cbre.com/en_US/careers/SearchJobs/",
+  "cushman":         "https://cw.wd1.myworkdayjobs.com/External",
+  "walker":          "https://walkerdunlop.wd1.myworkdayjobs.com/WD",
+  "marcus":          "https://www.marcusmillichap.com/careers",
+  "wells fargo":     "https://www.wellsfargojobs.com/en/",
+  "keybank":         "https://keybank.wd5.myworkdayjobs.com/External_Career_Site",
+  "ubs":             "https://www.ubs.com/global/en/careers/professional-careers.html",
+  "stifel":          "https://www.stifel.com/careers",
+  "revantage":       "https://www.revantage.com/careers",
+  "fidelity":        "https://jobs.fidelity.com",
+  "state street":    "https://careers.statestreet.com/jobs/en-US/search",
+  "berkadia":        "https://boards.greenhouse.io/berkadia",
+};
+
+const FIRM_TIER = {
+  "blackstone":"homerun","kkr":"homerun","apollo":"homerun","carlyle":"homerun",
+  "brookfield":"homerun","goldman":"homerun","morgan stanley":"homerun","stonepeak":"homerun","blackrock":"homerun",
+  "ares":"reach","starwood":"reach","tpg":"reach","cerberus":"reach","eqt":"reach","exeter":"reach",
+  "tishman":"reach","related":"reach","rockpoint":"reach","pretium":"reach","dune":"reach",
+  "harrison street":"reach","eastdil":"reach",
+  "blue owl":"target","w.p. carey":"target","digital realty":"target","i squared":"target","aew":"target",
+  "lasalle":"target","bentallgreenoak":"target","clarion":"target","hines":"target","nuveen":"target",
+  "bridge":"target","heitman":"target","walton street":"target","ta realty":"target","somera":"target","jefferies":"target",
+  "jll":"safety","cbre":"safety","cushman":"safety","walker":"safety","marcus":"safety",
+  "wells fargo":"safety","keybank":"safety","ubs":"safety","stifel":"safety","revantage":"safety",
+  "fidelity":"safety","state street":"safety","berkadia":"safety",
+};
+
+// Top 5 analyst roles at each firm, ordered by Andrew's fit (REPE → Infra → CM → IB → other)
+const FIRM_ROLES = {
+  "blackstone":      ["Real Estate Analyst – BREP (Blackstone Real Estate Partners)","Real Estate Credit Analyst – BREDS","Analyst, Tactical Opportunities (Real Assets)","Infrastructure Analyst – BIP","Real Estate Portfolio Management Analyst"],
+  "kkr":             ["Analyst, Real Estate","Analyst, Real Estate Finance (KREF)","Analyst, Infrastructure","Analyst, Real Assets","Analyst, Credit"],
+  "apollo":          ["Analyst, Real Estate","Analyst, Real Estate Debt","Credit Analyst, Real Estate","Analyst, Infrastructure","Analyst, Credit"],
+  "carlyle":         ["Analyst, Real Estate","Analyst, Infrastructure","Analyst, Global Credit (Real Estate)","Real Estate Finance Analyst","Analyst, Corporate Private Equity"],
+  "brookfield":      ["Analyst, Real Estate Private Equity","Analyst, Infrastructure","Analyst, Renewable Power & Transition","Analyst, Real Estate Debt","Analyst, Credit"],
+  "goldman":         ["Investment Banking Analyst – Real Estate, Gaming & Lodging","Investment Banking Analyst – Infrastructure & Transportation","Analyst, Real Estate Investing (MBD)","Investment Banking Analyst – Financial Sponsors","Analyst, Alternative Investments"],
+  "morgan stanley":  ["Investment Banking Analyst – Real Estate, Gaming & Lodging","Real Estate Investing Analyst – MS Real Assets","Investment Banking Analyst – Infrastructure","Analyst, Alternative Investments","Investment Banking Analyst – Financial Sponsors"],
+  "stonepeak":       ["Analyst, Infrastructure","Analyst, Digital Infrastructure","Analyst, Energy Infrastructure","Analyst, Transportation Infrastructure","Analyst, Infrastructure Credit"],
+  "blackrock":       ["Analyst, Real Assets (BREA)","Analyst, Infrastructure","Analyst, Real Estate","Investment Analytics Analyst, Real Assets","Analyst, Alternative Investments"],
+  "ares":            ["Analyst, Real Estate Equity","Analyst, Real Estate Debt (AREC)","Analyst, Infrastructure Opportunities","Analyst, Infrastructure Debt","Credit Analyst, Real Estate"],
+  "starwood":        ["Analyst, Acquisitions","Analyst, Real Estate","Analyst, Debt & Equity Finance","Analyst, Starwood Property Trust (STWD)","Analyst, Asset Management"],
+  "tpg":             ["Analyst, Real Estate Partners","Analyst, Real Estate Finance (TPGREP)","Credit Analyst, Real Estate","Analyst, Infrastructure","Analyst, Real Assets"],
+  "cerberus":        ["Analyst, Real Estate","Analyst, Real Estate Debt","Analyst, Residential Credit","Analyst, Distressed Real Estate","Credit Analyst"],
+  "eqt":             ["Analyst, Industrial Real Estate – EQT Exeter","Analyst, Acquisitions & Asset Management – Exeter","Analyst, European Real Estate","Analyst, Infrastructure – EQT Infrastructure","Analyst, Value-Add Real Estate"],
+  "exeter":          ["Analyst, Industrial Real Estate – EQT Exeter","Analyst, Acquisitions & Asset Management","Analyst, Value-Add Industrial","Analyst, Portfolio Management","Financial Analyst, Real Estate"],
+  "tishman":         ["Analyst, Acquisitions","Analyst, Development Finance","Analyst, Asset Management","Analyst, Capital Markets","Analyst, Structured Finance"],
+  "related":         ["Analyst, Acquisitions & Development Finance","Analyst, Acquisitions","Analyst, Structured Finance","Analyst, Capital Markets","Analyst, Asset Management"],
+  "rockpoint":       ["Analyst, Real Estate Acquisitions","Analyst, Debt Acquisitions","Analyst, Asset Management","Investment Analyst","Financial Analyst, Real Estate"],
+  "pretium":         ["Analyst, Real Estate","Analyst, Single-Family Rental (SFR)","Credit Analyst, Residential Mortgage","Analyst, Real Estate Debt","Analyst, Asset Management"],
+  "dune":            ["Analyst, Real Estate Acquisitions","Investment Analyst","Analyst, Office Repositioning","Analyst, Debt Investments","Financial Analyst, Real Estate"],
+  "harrison street": ["Analyst, Acquisitions – Life Sciences & Healthcare","Analyst, Acquisitions – Student Housing","Analyst, Acquisitions – Senior Housing & Care","Analyst, Asset Management","Analyst, Capital Markets"],
+  "eastdil":         ["Investment Banking Analyst","Analyst, Investment Sales Advisory","Analyst, Debt & Structured Finance","Analyst, M&A Advisory","Analyst, Equity Capital Markets"],
+  "blue owl":        ["Analyst, Real Estate Debt (Net Lease / CRE Credit)","Commercial Real Estate Debt Asset Management Analyst","Analyst, Net Lease Acquisitions","Analyst, CRE Credit Underwriting","Analyst, Real Estate Finance"],
+  "w.p. carey":      ["Analyst, Net Lease Investments","Analyst, Sale-Leaseback Acquisitions","Research Analyst, Net Lease","Financial Analyst, Net Lease","Analyst, Asset Management"],
+  "digital realty":  ["Analyst, Capital Markets & Acquisitions","Analyst, Global Investments","Financial Analyst, Corporate Finance","Analyst, Data Center Investments","Analyst, Real Estate Finance"],
+  "i squared":       ["Infrastructure Investment Analyst","Analyst, Infrastructure","Analyst, Energy Infrastructure","Analyst, Digital Infrastructure","Analyst, Transportation & Logistics"],
+  "aew":             ["Real Estate Investment Analyst","Analyst, Acquisitions","Analyst, Asset Management","Analyst, Capital Markets","Analyst, Debt Investments"],
+  "lasalle":         ["Analyst, Acquisitions","Analyst, Asset Management","Analyst, Investor Relations","Research Analyst, Real Estate","Analyst, Capital Markets"],
+  "bentallgreenoak": ["Analyst, Real Estate Equity","Analyst, Real Estate Debt","Analyst, Acquisitions","Investment Analyst","Analyst, Portfolio Management"],
+  "clarion":         ["Analyst, Real Estate Investments","Analyst, Industrial Acquisitions","Analyst, Multifamily Acquisitions","Analyst, Office & Mixed-Use","Research Analyst"],
+  "hines":           ["Analyst, Acquisitions","Analyst, Development Finance","Analyst, Capital Markets","Analyst, Asset Management","Analyst, Finance & Accounting"],
+  "nuveen":          ["Analyst, Housing Acquisitions","Analyst, Industrial Acquisitions","Analyst, Debt Origination","Analyst, Portfolio Management","Investment Performance Analytics Analyst"],
+  "bridge":          ["Investment Analyst, Multifamily","Investment Analyst, Workforce Housing","Analyst, Debt Strategies","Analyst, Net Lease","Analyst, Logistics & Industrial"],
+  "heitman":         ["Analyst, Public Real Estate Securities","Analyst, Private Equity Real Estate","Analyst, Real Estate Debt","Research Analyst","Analyst, Portfolio Analytics"],
+  "walton street":   ["Real Estate Analyst","Analyst, Acquisitions","Analyst, Asset Management","Financial Analyst","Analyst, Debt & Equity Finance"],
+  "ta realty":       ["Analyst, Industrial Acquisitions","Analyst, Multifamily Acquisitions","Analyst, Asset Management","Analyst, Real Estate Finance","Portfolio Analyst"],
+  "somera":          ["Investment Analyst","Analyst, Acquisitions","Analyst, Office Repositioning","Analyst, Adaptive Reuse","Financial Analyst, Real Estate"],
+  "jefferies":       ["Investment Banking Analyst – Real Estate","Investment Banking Analyst – Real Estate, Gaming & Lodging","Investment Banking Analyst – Infrastructure","Investment Banking Analyst – Financial Sponsors","Analyst, Leveraged Finance"],
+  "jll":             ["Analyst, Capital Markets – Investment Sales","Analyst, Capital Markets – Debt Advisory","Financial Analyst, Capital Markets","Analyst, Capital Markets – Equity Advisory","Analyst, Valuation & Advisory"],
+  "cbre":            ["Analyst, Capital Markets – Investment Properties","Transaction Analyst, Capital Markets","Analyst, Debt & Equity Finance","Analyst, Structured Finance","Financial Analyst, Capital Markets"],
+  "cushman":         ["Financial Analyst, Capital Markets","Transaction Analyst","Analyst, Investment Sales","Analyst, Debt Advisory","Analyst, Valuation & Advisory"],
+  "walker":          ["Analyst, Capital Markets","Analyst, Multifamily Finance","Analyst, Agency Lending","Financial Analyst","Analyst, Debt Capital Markets"],
+  "marcus":          ["Investment Sales Analyst","Financial Analyst, Investment Sales","Analyst, Net Lease","Analyst, Multifamily","Analyst, National Retail Group"],
+  "wells fargo":     ["Analyst, Commercial Real Estate Banking","Commercial Real Estate Underwriting Associate","Analyst, Real Estate Capital Markets","Analyst, CRE Structured Finance","Analyst, CRE Loan Origination"],
+  "keybank":         ["Analyst, Real Estate Capital – Multifamily","Multifamily Production Analyst","Analyst, Commercial Real Estate Banking","Analyst, Real Estate Structured Finance","Analyst, Commercial Mortgage Banking"],
+  "ubs":             ["Investment Banking Analyst – Real Estate, Gaming & Lodging","Investment Banking Analyst – Infrastructure","Analyst, Real Estate Securities","Investment Banking Analyst – Financial Sponsors","Analyst, Leveraged Finance"],
+  "stifel":          ["Investment Banking Analyst – Real Estate","Investment Banking Analyst – REIT & Real Estate Services","Investment Banking Analyst – Infrastructure","Investment Banking Analyst – Diversified Industrials","Analyst, Capital Markets"],
+  "revantage":       ["Analyst, Portfolio Finance & Analytics","Analyst, Corporate Finance","Analyst, Capital Markets Reporting","Financial Analyst","Analyst, Investment Reporting"],
+  "fidelity":        ["Analyst, Real Estate Equity Investments","Analyst, Real Estate Debt Investments","Analyst, REIT Securities","Analyst, Alternative Investments","Research Analyst, Real Estate"],
+  "state street":    ["Analyst, Real Estate Investment Management (SSGA)","Analyst, Portfolio Analytics – Real Assets","Analyst, Real Estate Securities","Investment Performance Analyst","Analyst, Alternative Investments"],
+  "berkadia":        ["Analyst, Investment Sales","Analyst, Capital Markets","Analyst, Agency Lending","Analyst, Mortgage Banking","Structured Finance Analyst"],
+};
+
 // Count-up animation
 function countUp(el, target, dur = 680) {
   if (!target) { el.textContent = '0'; return; }
@@ -1191,115 +1372,158 @@ function salaryRow(job) {
   return `<div class="salary-row">${parts.map(p=>`<span>${p}</span>`).join('<span class="salary-sep">·</span>')}</div>`;
 }
 
+function buildExpandInner(key, displayName, tier, cardChance, cardIdeal, cardDesc) {
+  const careersUrl = FIRM_CAREERS_URL[key] || '';
+  const roles = FIRM_ROLES[key] || [];
+  const bdRows = cardChance !== null ? computeBreakdown(displayName, tier, cardChance) : [];
+  const bdHtml = bdRows.length ? `
+    <div class="breakdown-label">How we estimated your ${cardChance}% chance</div>
+    <table class="breakdown-table">
+      ${bdRows.map(([lbl,val])=>`<tr><td>${escHtml(lbl)}</td><td>${escHtml(val)}</td></tr>`).join('')}
+      <tr class="bd-total"><td>Estimated offer chance</td><td>${cardChance}%</td></tr>
+      <tr class="bd-note"><td colspan="2">Based on tier, firm selectivity, school (SMU Econ/Stats, May 2027), and internship data. Not a guarantee.</td></tr>
+    </table>` : '';
+  const rolesHtml = roles.length ? `
+    <div class="firm-roles-section">
+      <div class="firm-roles-label">ROLES THEY HIRE FOR — BEST FIT FIRST</div>
+      <ol class="firm-roles-list">
+        ${roles.map((r,i) => `<li class="${i===0?'roles-top':''}">${escHtml(r)}</li>`).join('')}
+      </ol>
+    </div>` : '';
+  const careersHtml = careersUrl ? `
+    <a class="careers-page-link" href="${escHtml(careersUrl)}" target="_blank" rel="noopener">
+      View ${escHtml(displayName)} Careers Page →
+    </a>` : '';
+  return `
+    ${cardIdeal ? `<div class="ideal-role"><span class="ideal-label">TARGET ROLE</span>${escHtml(cardIdeal)}</div>` : ''}
+    ${careersHtml}
+    ${rolesHtml}
+    ${cardDesc ? `<p class="expand-desc">${escHtml(cardDesc)}</p>` : ''}
+    ${bdHtml}`;
+}
+
 function renderGrid() {
   const dismissed = getDismissed();
   const grid = document.getElementById('jobs-grid');
   const tierOrder = {homerun:0,reach:1,target:2,safety:3};
-  const visible = filteredJobs().filter(j => !dismissed.has(j.id));
 
-  const byFirm = {};
-  for (const j of visible) {
-    if (!byFirm[j.firm]) byFirm[j.firm] = {tier:j.tier, jobs:[]};
-    byFirm[j.firm].jobs.push(j);
+  // Open relevant jobs grouped by FIRM_INFO key
+  const openByKey = {};
+  for (const j of RELEVANT_JOBS) {
+    if (dismissed.has(j.id)) continue;
+    const key = Object.keys(FIRM_INFO).find(k => j.firm.toLowerCase().includes(k));
+    if (!key) continue;
+    if (!openByKey[key]) openByKey[key] = [];
+    openByKey[key].push(j);
   }
 
-  const groups = Object.entries(byFirm).sort(([,a],[,b]) => {
-    const aN = a.jobs.some(isNew)?0:1, bN = b.jobs.some(isNew)?0:1;
-    return aN!==bN ? aN-bN : (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9);
+  // All 50 firms, filtered and sorted
+  const tierFilter = activeTier;
+  const q = searchQuery.toLowerCase();
+  const firms = Object.entries(FIRM_INFO).map(([key, info]) => {
+    const tier = FIRM_TIER[key] || 'target';
+    const jobs = (openByKey[key] || []).sort((a,b) => (b.is_new?1:0)-(a.is_new?1:0));
+    return {key, info, tier, jobs};
+  }).filter(({key, tier, jobs}) => {
+    if (tierFilter !== 'all' && tier !== tierFilter) return false;
+    if (q) {
+      const nameHit = key.includes(q);
+      const roleHit = (FIRM_ROLES[key]||[]).some(r=>r.toLowerCase().includes(q));
+      const jobHit  = jobs.some(j=>j.title.toLowerCase().includes(q));
+      if (!nameHit && !roleHit && !jobHit) return false;
+    }
+    return true;
+  }).sort((a,b) => {
+    const aNew = a.jobs.some(isNew)?0:1, bNew = b.jobs.some(isNew)?0:1;
+    const aOpen = a.jobs.length?0:1,     bOpen = b.jobs.length?0:1;
+    if (aNew!==bNew) return aNew-bNew;
+    if (aOpen!==bOpen) return aOpen-bOpen;
+    return (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9);
   });
 
-  const withJobs = new Set(Object.keys(byFirm));
-  const closed = ALL_FIRMS.filter(f=>!withJobs.has(f.name))
-    .sort((a,b)=>(tierOrder[a.tier]??9)-(tierOrder[b.tier]??9));
+  // Display name: prefer ALL_FIRMS entry, else title-case the key
+  function displayName(key) {
+    const f = ALL_FIRMS.find(f=>f.name.toLowerCase().includes(key)||key.split(' ').every(w=>f.name.toLowerCase().includes(w)));
+    if (f) return f.name;
+    return key.replace(/\b\w/g,c=>c.toUpperCase());
+  }
 
-  if (!groups.length) {
-    grid.innerHTML = `<div class="empty-state"><h3>No roles match your filter.</h3></div>`;
-  } else {
-    grid.innerHTML = groups.map(([firm, g], i) => {
-      const hasNew = g.jobs.some(isNew);
-      const roleRows = g.jobs.map(job => {
-        const info    = getFirmInfo(job.firm) || {};
-        const roleBadge = isNew(job) ? `<span class="new-badge" style="font-size:.52rem;padding:1px 5px;animation-delay:.4s">NEW</span> ` : '';
-        const dl      = loadTrackerState()[job.firm]?.deadline || '';
-        const meta    = [job.location, job.posted_date].filter(Boolean).join('  ·  ');
-        const salary  = job.salary || info.salary || '';
-        const bonus   = job.bonus  || info.bonus  || '';
-        const chance  = job.chance ?? info.chance ?? null;
-        const statsHtml = (salary || bonus || chance !== null) ? `
-          <div class="role-stats">
-            ${salary ? `<span class="salary-chip">${escHtml(salary)}</span>` : ''}
-            ${bonus  ? `<span class="salary-chip salary-chip-bonus">${escHtml(bonus)}</span>` : ''}
-            ${chance !== null ? `<span class="match-stat ${matchClass(chance)}"><span class="match-pct">${chance}%</span><span class="match-label">&nbsp;est. offer</span></span>` : ''}
-          </div>` : '';
-        return `
-          <div class="role-row">
-            <div class="role-info">
-              <div class="role-title">${roleBadge}${escHtml(job.title)}</div>
-              ${statsHtml}
-              <div class="role-meta">
-                ${meta?`<span>${meta}</span>`:''}
-                ${dl ? deadlineTag(dl) : `<a class="verify-cycle" href="${escHtml(job.url)}" target="_blank" rel="noopener" title="Verify start date and application deadline on the posting">&#128197; Check deadline &amp; 2027 start &#8599;</a>`}
-              </div>
-            </div>
-            <div class="role-actions">
-              <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
-              <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss">✕</button>
-            </div>
-          </div>`;
-      }).join('');
+  if (!firms.length) {
+    grid.innerHTML = `<div class="empty-state"><h3>No firms match your filter.</h3></div>`;
+    document.getElementById('watchlist-section').style.display = 'none';
+    return;
+  }
 
-      const cardInfo   = getFirmInfo(firm) || {};
-      const cardDesc   = cardInfo.desc   || '';
-      const cardIdeal  = cardInfo.ideal  || '';
-      const cardChance = cardInfo.chance ?? null;
-      const cardId     = `card-${i}`;
-      const bdRows     = cardChance !== null ? computeBreakdown(firm, g.tier, cardChance) : [];
-      const bdHtml     = bdRows.length ? `
-        <div class="breakdown-label">How we estimated your ${cardChance}% chance</div>
-        <table class="breakdown-table">
-          ${bdRows.map(([lbl,val])=>`<tr><td>${escHtml(lbl)}</td><td>${escHtml(val)}</td></tr>`).join('')}
-          <tr class="bd-total"><td>Estimated offer chance</td><td>${cardChance}%</td></tr>
-          <tr class="bd-note"><td colspan="2">Based on tier, firm selectivity, school (SMU Econ/Stats, May 2027), and internship data. Not a guarantee.</td></tr>
-        </table>` : '';
+  grid.innerHTML = firms.map(({key, info, tier, jobs}, i) => {
+    const name    = displayName(key);
+    const hasNew  = jobs.some(isNew);
+    const hasOpen = jobs.length > 0;
+    const cardId  = `card-${i}`;
+    const cardInfo   = info;
+    const cardIdeal  = cardInfo.ideal  || '';
+    const cardDesc   = cardInfo.desc   || '';
+    const cardChance = cardInfo.chance ?? null;
+
+    const roleRows = jobs.map(job => {
+      const dl  = loadTrackerState()[job.firm]?.deadline || '';
+      const meta = [job.location, job.posted_date].filter(Boolean).join('  ·  ');
+      const salary = job.salary || cardInfo.salary || '';
+      const bonus  = job.bonus  || cardInfo.bonus  || '';
+      const chance = job.chance ?? cardChance ?? null;
+      const statsHtml = (salary||bonus||chance!==null) ? `
+        <div class="role-stats">
+          ${salary?`<span class="salary-chip">${escHtml(salary)}</span>`:''}
+          ${bonus ?`<span class="salary-chip salary-chip-bonus">${escHtml(bonus)}</span>`:''}
+          ${chance!==null?`<span class="match-stat ${matchClass(chance)}"><span class="match-pct">${chance}%</span><span class="match-label">&nbsp;est. offer</span></span>`:''}
+        </div>` : '';
       return `
-        <div class="job-card tc-${g.tier}" id="${cardId}" data-firm="${escHtml(firm)}" style="animation-delay:${i*40}ms">
-          <div class="card-header tint-${g.tier}">
-            <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
-              ${escHtml(firm)}<span class="firm-chevron">▾</span>
-            </button>
-            <div class="card-badges">
-              <span class="tier-badge tier-${g.tier}">${TIER_LABELS[g.tier]||g.tier}</span>
-              ${hasNew?'<span class="new-badge">NEW</span>':''}
-              <span class="conn-badge-wrap">${(()=>{const st=getConnStatus(firm);return st?`<span class="conn-badge ${st==='sent'?'conn-sent':'conn-draft'}">${st==='sent'?'✉ Sent':'✉ Draft'}</span>`:''})()}</span>
+        <div class="role-row">
+          <div class="role-info">
+            <div class="role-title">${isNew(job)?'<span class="new-badge" style="font-size:.52rem;padding:1px 5px;animation-delay:.4s">NEW</span> ':''}${escHtml(job.title)}</div>
+            ${statsHtml}
+            <div class="role-meta">
+              ${meta?`<span>${meta}</span>`:''}
+              ${dl?deadlineTag(dl):`<a class="verify-cycle" href="${escHtml(job.url)}" target="_blank" rel="noopener">&#128197; Check deadline &amp; 2027 start &#8599;</a>`}
             </div>
           </div>
-          <div class="role-list">${roleRows}</div>
-          <div class="card-expand">
-            <div class="expand-inner">
-              ${cardIdeal ? `<div class="ideal-role"><span class="ideal-label">TARGET ROLE</span>${escHtml(cardIdeal)}</div>` : ''}
-              ${cardDesc ? `<p class="expand-desc">${escHtml(cardDesc)}</p>` : ''}
-              ${bdHtml}
-            </div>
+          <div class="role-actions">
+            <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
+            <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss">✕</button>
           </div>
         </div>`;
     }).join('');
-  }
 
-  renderWatchlist(closed);
+    const noOpenHtml = !hasOpen ? `<div class="no-open-roles">No current openings detected — check careers page below</div>` : '';
+    const connSt = getConnStatus(name);
+    const connBadge = connSt ? `<span class="conn-badge ${connSt==='sent'?'conn-sent':'conn-draft'}">${connSt==='sent'?'✉ Sent':'✉ Draft'}</span>` : '';
+
+    return `
+      <div class="job-card tc-${tier}" id="${cardId}" data-firm="${escHtml(name)}" style="animation-delay:${i*35}ms">
+        <div class="card-header tint-${tier}">
+          <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
+            ${escHtml(name)}<span class="firm-chevron">▾</span>
+          </button>
+          <div class="card-badges">
+            <span class="tier-badge tier-${tier}">${TIER_LABELS[tier]||tier}</span>
+            ${hasNew?'<span class="new-badge">NEW</span>':''}
+            ${hasOpen?'':`<span class="no-roles-badge">No openings</span>`}
+            <span class="conn-badge-wrap">${connBadge}</span>
+          </div>
+        </div>
+        <div class="role-list">${roleRows}${noOpenHtml}</div>
+        <div class="card-expand">
+          <div class="expand-inner">
+            ${buildExpandInner(key, name, tier, cardChance, cardIdeal, cardDesc)}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('watchlist-section').style.display = 'none';
 }
 
-function renderWatchlist(closed) {
-  const section = document.getElementById('watchlist-section');
-  const gridEl  = document.getElementById('watchlist-grid');
-  if (!closed.length) { section.style.display='none'; return; }
-  document.getElementById('wl-count').textContent = closed.length;
-  section.style.display = 'block';
-  gridEl.innerHTML = closed.map(f => `
-    <div class="watchlist-item wl-${f.tier}">
-      <span class="wl-dot"></span>
-      <span class="watchlist-name">${escHtml(f.name)}</span>
-      <a class="check-btn" href="${escHtml(f.careers_url)}" target="_blank" rel="noopener">Check →</a>
-    </div>`).join('');
+function renderWatchlist() {
+  document.getElementById('watchlist-section').style.display = 'none';
 }
 
 function toggleWatchlist() {
