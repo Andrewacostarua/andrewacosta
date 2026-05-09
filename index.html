@@ -1084,7 +1084,7 @@ function countUp(el, target, dur = 680) {
 
 async function loadJobs() {
   try {
-    const r = await fetch('./jobs.json');
+    const r = await fetch(`./jobs.json?v=${Date.now()}`);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const data = await r.json();
     ALL_JOBS      = data.jobs  || [];
