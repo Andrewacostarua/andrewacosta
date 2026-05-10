@@ -89,8 +89,7 @@ def _fetch_page(company_id: str, start: int = 0) -> list[dict]:
         "keywords":  "analyst associate",
         "f_C":       company_id,
         "location":  "United States",
-        "f_TPR":     "r2592000",   # posted in last 30 days
-        "f_E":       "1,2",        # entry-level + associate (filters out senior)
+        "f_TPR":     "r7776000",   # posted in last 90 days (firms tag FT roles inconsistently)
         "start":     start,
     }
     try:
