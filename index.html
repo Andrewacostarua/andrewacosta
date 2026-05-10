@@ -811,7 +811,7 @@
     <span class="grid-section-count" id="watch-count"></span>
     <em class="grid-section-chevron" id="watch-chevron">▾</em>
   </div>
-  <div class="jobs-grid" id="jobs-grid" style="display:none">
+  <div class="jobs-grid" id="jobs-grid">
     <div class="empty-state"><h3>Loading…</h3></div>
   </div>
 </div>
@@ -1180,59 +1180,63 @@ let activeTier   = 'all';
 let searchQuery  = '';
 let pipelineChart, tierChart;
 
-// ── Firm careers URLs ─────────────────────────────────────────────────────────
+// ── Firm careers URLs — main corporate /careers pages, not fragile ATS links ──
 const FIRM_CAREERS_URL = {
-  "blackstone":      "https://careers.smartrecruiters.com/Blackstone",
+  // Homerun
+  "blackstone":      "https://www.blackstone.com/careers/",
   "kkr":             "https://www.kkr.com/careers/career-opportunities",
-  "apollo":          "https://boards.greenhouse.io/apollo",
+  "apollo":          "https://www.apollo.com/careers",
   "carlyle":         "https://www.carlyle.com/careers",
-  "brookfield":      "https://brookfield.com/careers",
-  "goldman":         "https://www.goldmansachs.com/careers/search.html",
-  "morgan stanley":  "https://www.morganstanley.com/people-opportunities/search",
+  "brookfield":      "https://bam.brookfield.com/careers",
+  "goldman":         "https://www.goldmansachs.com/careers/",
+  "morgan stanley":  "https://www.morganstanley.com/people-opportunities",
   "stonepeak":       "https://jobs.ashbyhq.com/stonepeak",
-  "blackrock":       "https://blackrock.wd1.myworkdayjobs.com/BlackRock_Professional",
-  "ares":            "https://careers.smartrecruiters.com/Ares",
+  "blackrock":       "https://careers.blackrock.com/",
+  // Reach
+  "ares":            "https://www.aresmgmt.com/careers",
   "starwood":        "https://www.starwoodcapital.com/about/careers",
-  "tpg":             "https://boards.greenhouse.io/tpgcareers",
+  "tpg":             "https://www.tpg.com/about/careers",
   "cerberus":        "https://www.cerberuscapital.com/careers",
-  "eqt":             "https://careers.eqtgroup.com",
-  "exeter":          "https://careers.eqtgroup.com",
+  "eqt":             "https://eqtgroup.com/careers/",
+  "exeter":          "https://eqtgroup.com/careers/",
   "tishman":         "https://www.tishmanspeyer.com/about/careers",
-  "related":         "https://www.related.jobs/",
+  "related":         "https://www.related.com/careers",
   "rockpoint":       "https://www.rockpointgroup.com/careers",
   "pretium":         "https://jobs.ashbyhq.com/pretium",
-  "dune":            "https://www.dunerep.com",
+  "dune":            "https://www.dunerealestatepartners.com/",
   "harrison street": "https://www.harrisonst.com/careers",
   "eastdil":         "https://www.eastdilsecured.com/careers",
-  "blue owl":        "https://blueowl.wd1.myworkdayjobs.com/blueowl",
-  "w.p. carey":      "https://jobs.jobvite.com/wpccareers",
-  "digital realty":  "https://careers.digitalrealty.com/",
+  // Target
+  "blue owl":        "https://www.blueowlcapital.com/careers",
+  "w.p. carey":      "https://www.wpcarey.com/about-us/careers",
+  "digital realty":  "https://www.digitalrealty.com/about/careers",
   "i squared":       "https://isquaredcapital.com/careers",
   "aew":             "https://www.aew.com/about/careers",
-  "lasalle":         "https://jll.wd1.myworkdayjobs.com/lasallecareers",
+  "lasalle":         "https://www.lasalle.com/about/careers",
   "bentallgreenoak": "https://www.bentallgreenoak.com/about-us/careers/",
   "clarion":         "https://www.clarionpartners.com/about-us/careers",
   "hines":           "https://www.hines.com/careers",
-  "nuveen":          "https://tiaa.wd1.myworkdayjobs.com/Search",
+  "nuveen":          "https://www.nuveen.com/en-us/about-us/careers",
   "bridge":          "https://jobs.ashbyhq.com/bridge-investment-group",
   "heitman":         "https://www.heitman.com/careers",
-  "walton street":   "https://www.waltonst.com",
+  "walton street":   "https://www.waltonst.com/about/",
   "ta realty":       "https://www.tarealty.com/careers",
-  "somera":          "https://someraroadinc.com",
-  "jefferies":       "https://www.jefferies.com/careers/",
-  "jll":             "https://jll.wd1.myworkdayjobs.com/jllcareers",
-  "cbre":            "https://careers.cbre.com/en_US/careers/SearchJobs/",
-  "cushman":         "https://cw.wd1.myworkdayjobs.com/External",
-  "walker":          "https://walkerdunlop.wd1.myworkdayjobs.com/WD",
+  "somera":          "https://someraroadinc.com/",
+  "jefferies":       "https://jefferies.com/careers/",
+  // Safety
+  "jll":             "https://www.jll.com/en/careers",
+  "cbre":            "https://careers.cbre.com/",
+  "cushman":         "https://careers.cushmanwakefield.com/",
+  "walker":          "https://www.walkerdunlop.com/about/careers/",
   "marcus":          "https://www.marcusmillichap.com/careers",
   "wells fargo":     "https://www.wellsfargojobs.com/en/",
-  "keybank":         "https://keybank.wd5.myworkdayjobs.com/External_Career_Site",
-  "ubs":             "https://www.ubs.com/global/en/careers/professional-careers.html",
+  "keybank":         "https://www.key.com/about/careers/index.html",
+  "ubs":             "https://www.ubs.com/global/en/careers.html",
   "stifel":          "https://www.stifel.com/careers",
   "revantage":       "https://www.revantage.com/careers",
   "fidelity":        "https://jobs.fidelity.com",
-  "state street":    "https://careers.statestreet.com/jobs/en-US/search",
-  "berkadia":        "https://boards.greenhouse.io/berkadia",
+  "state street":    "https://careers.statestreet.com/",
+  "berkadia":        "https://www.berkadia.com/careers/",
 };
 
 // LinkedIn company IDs — same values as scrapers/linkedin.py
@@ -1615,9 +1619,13 @@ function toggleWatchSection() {
   const grid    = document.getElementById('jobs-grid');
   const chevron = document.getElementById('watch-chevron');
   const isOpen  = grid.style.display !== 'none';
-  grid.style.display   = isOpen ? 'none' : 'grid';
+  grid.style.display   = isOpen ? 'none' : '';
   chevron.classList.toggle('open', !isOpen);
 }
+// Open by default on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('watch-chevron')?.classList.add('open');
+});
 
 function renderWatchlist() {
   document.getElementById('watchlist-section').style.display = 'none';
