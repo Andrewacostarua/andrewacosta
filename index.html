@@ -639,6 +639,36 @@
     .copy-btn:hover { background: rgba(255,255,255,.2); }
     .copy-btn.copied { background: var(--new-green); color: #fff; }
 
+    /* ── Grid section headers ── */
+    .grid-section-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 36px 10px;
+    }
+    .grid-section-title {
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--ink-2);
+    }
+    .grid-section-count {
+      font-size: .65rem; font-weight: 600; color: var(--ink-3);
+      background: var(--surface-hover); border: 1px solid var(--border);
+      border-radius: 999px; padding: 1px 8px;
+    }
+    .grid-section-header--watch {
+      cursor: pointer; padding-top: 6px; padding-bottom: 6px;
+      border-top: 1px solid var(--border); margin-top: 20px;
+      user-select: none;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .grid-section-header--watch:hover .grid-section-title { color: var(--ink); }
+    }
+    .grid-section-chevron {
+      font-style: normal; font-size: .65rem; color: var(--ink-3);
+      margin-left: auto;
+      transition: transform 220ms var(--ease);
+    }
+    .grid-section-chevron.open { transform: rotate(180deg); }
+
     /* ── Firm roles section (in expand panel) ── */
     .careers-links {
       display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px;
@@ -765,8 +795,25 @@
 
 <div id="expiring-section" class="expiring-section" style="display:none"></div>
 
-<div class="jobs-grid" id="jobs-grid">
-  <div class="empty-state"><h3>Loading roles…</h3></div>
+<!-- Active openings section -->
+<div id="active-section" style="display:none">
+  <div class="grid-section-header">
+    <span class="grid-section-title">Active Openings</span>
+    <span class="grid-section-count" id="active-count"></span>
+  </div>
+  <div class="jobs-grid" id="active-grid"></div>
+</div>
+
+<!-- All-firms watchlist section -->
+<div id="watch-section">
+  <div class="grid-section-header grid-section-header--watch" id="watch-toggle" onclick="toggleWatchSection()">
+    <span class="grid-section-title">All 50 Firms</span>
+    <span class="grid-section-count" id="watch-count"></span>
+    <em class="grid-section-chevron" id="watch-chevron">▾</em>
+  </div>
+  <div class="jobs-grid" id="jobs-grid" style="display:none">
+    <div class="empty-state"><h3>Loading…</h3></div>
+  </div>
 </div>
 
 <div class="watchlist-section" id="watchlist-section" style="display:none">
@@ -1429,12 +1476,81 @@ function buildExpandInner(key, displayName, tier, cardChance, cardIdeal, cardDes
     ${bdHtml}`;
 }
 
-function renderGrid() {
-  const dismissed = getDismissed();
-  const grid = document.getElementById('jobs-grid');
-  const tierOrder = {homerun:0,reach:1,target:2,safety:3};
+function buildCard(key, info, tier, jobs, cardIndex) {
+  function displayName(k) {
+    const f = ALL_FIRMS.find(f=>f.name.toLowerCase().includes(k)||k.split(' ').every(w=>f.name.toLowerCase().includes(w)));
+    return f ? f.name : k.replace(/\b\w/g,c=>c.toUpperCase());
+  }
+  const name     = displayName(key);
+  const hasNew   = jobs.some(isNew);
+  const hasOpen  = jobs.length > 0;
+  const cardId   = `card-${cardIndex}`;
+  const cardIdeal  = info.ideal  || '';
+  const cardDesc   = info.desc   || '';
+  const cardChance = info.chance ?? null;
+  const connSt   = getConnStatus(name);
+  const connBadge = connSt ? `<span class="conn-badge ${connSt==='sent'?'conn-sent':'conn-draft'}">${connSt==='sent'?'✉ Sent':'✉ Draft'}</span>` : '';
 
-  // Open relevant jobs grouped by FIRM_INFO key
+  const roleRows = jobs.map(job => {
+    const dl     = loadTrackerState()[job.firm]?.deadline || '';
+    const meta   = [job.location, job.posted_date].filter(Boolean).join('  ·  ');
+    const salary = job.salary || info.salary || '';
+    const bonus  = job.bonus  || info.bonus  || '';
+    const chance = job.chance ?? cardChance ?? null;
+    const statsHtml = (salary||bonus||chance!==null) ? `
+      <div class="role-stats">
+        ${salary?`<span class="salary-chip">${escHtml(salary)}</span>`:''}
+        ${bonus ?`<span class="salary-chip salary-chip-bonus">${escHtml(bonus)}</span>`:''}
+        ${chance!==null?`<span class="match-stat ${matchClass(chance)}"><span class="match-pct">${chance}%</span><span class="match-label">&nbsp;est. offer</span></span>`:''}
+      </div>` : '';
+    return `
+      <div class="role-row">
+        <div class="role-info">
+          <div class="role-title">${isNew(job)?'<span class="new-badge" style="font-size:.52rem;padding:1px 5px;animation-delay:.4s">NEW</span> ':''}${escHtml(job.title)}</div>
+          ${statsHtml}
+          <div class="role-meta">
+            ${meta?`<span>${meta}</span>`:''}
+            ${dl?deadlineTag(dl):`<a class="verify-cycle" href="${escHtml(job.url)}" target="_blank" rel="noopener">&#128197; Check deadline &amp; 2027 start &#8599;</a>`}
+          </div>
+        </div>
+        <div class="role-actions">
+          <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
+          <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss">✕</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  const noOpenHtml = !hasOpen ? `<div class="no-open-roles">No current openings detected — check careers page below</div>` : '';
+
+  return `
+    <div class="job-card tc-${tier}" id="${cardId}" data-firm="${escHtml(name)}" style="animation-delay:${cardIndex*35}ms">
+      <div class="card-header tint-${tier}">
+        <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
+          ${escHtml(name)}<span class="firm-chevron">▾</span>
+        </button>
+        <div class="card-badges">
+          <span class="tier-badge tier-${tier}">${TIER_LABELS[tier]||tier}</span>
+          ${hasNew?'<span class="new-badge">NEW</span>':''}
+          ${hasOpen?'':`<span class="no-roles-badge">No openings</span>`}
+          <span class="conn-badge-wrap">${connBadge}</span>
+        </div>
+      </div>
+      <div class="role-list">${roleRows}${noOpenHtml}</div>
+      <div class="card-expand">
+        <div class="expand-inner">
+          ${buildExpandInner(key, name, tier, cardChance, cardIdeal, cardDesc)}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderGrid() {
+  const dismissed  = getDismissed();
+  const tierOrder  = {homerun:0,reach:1,target:2,safety:3};
+  const tierFilter = activeTier;
+  const q          = searchQuery.toLowerCase();
+
+  // Group open jobs by FIRM_INFO key
   const openByKey = {};
   for (const j of RELEVANT_JOBS) {
     if (dismissed.has(j.id)) continue;
@@ -1444,9 +1560,7 @@ function renderGrid() {
     openByKey[key].push(j);
   }
 
-  // All 50 firms, filtered and sorted
-  const tierFilter = activeTier;
-  const q = searchQuery.toLowerCase();
+  // Build filtered firm list
   const firms = Object.entries(FIRM_INFO).map(([key, info]) => {
     const tier = FIRM_TIER[key] || 'target';
     const jobs = (openByKey[key] || []).sort((a,b) => (b.is_new?1:0)-(a.is_new?1:0));
@@ -1460,93 +1574,49 @@ function renderGrid() {
       if (!nameHit && !roleHit && !jobHit) return false;
     }
     return true;
-  }).sort((a,b) => {
-    const aNew = a.jobs.some(isNew)?0:1, bNew = b.jobs.some(isNew)?0:1;
-    const aOpen = a.jobs.length?0:1,     bOpen = b.jobs.length?0:1;
-    if (aNew!==bNew) return aNew-bNew;
-    if (aOpen!==bOpen) return aOpen-bOpen;
-    return (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9);
   });
 
-  // Display name: prefer ALL_FIRMS entry, else title-case the key
-  function displayName(key) {
-    const f = ALL_FIRMS.find(f=>f.name.toLowerCase().includes(key)||key.split(' ').every(w=>f.name.toLowerCase().includes(w)));
-    if (f) return f.name;
-    return key.replace(/\b\w/g,c=>c.toUpperCase());
+  // Split: firms with open roles vs. firms on watch
+  const withRoles = firms.filter(f => f.jobs.length > 0).sort((a,b) => {
+    const aNew = a.jobs.some(isNew)?0:1, bNew = b.jobs.some(isNew)?0:1;
+    if (aNew !== bNew) return aNew - bNew;
+    return (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9);
+  });
+  const noRoles = firms.filter(f => f.jobs.length === 0).sort((a,b) =>
+    (tierOrder[a.tier]??9)-(tierOrder[b.tier]??9)
+  );
+
+  // Render active openings section
+  const activeSection = document.getElementById('active-section');
+  const activeGrid    = document.getElementById('active-grid');
+  const activeCount   = document.getElementById('active-count');
+
+  if (withRoles.length) {
+    activeSection.style.display = '';
+    activeCount.textContent = `${withRoles.length} firm${withRoles.length!==1?'s':''}`;
+    activeGrid.innerHTML = withRoles.map((f, i) => buildCard(f.key, f.info, f.tier, f.jobs, i)).join('');
+  } else {
+    activeSection.style.display = 'none';
   }
 
-  if (!firms.length) {
-    grid.innerHTML = `<div class="empty-state"><h3>No firms match your filter.</h3></div>`;
-    document.getElementById('watchlist-section').style.display = 'none';
-    return;
-  }
-
-  grid.innerHTML = firms.map(({key, info, tier, jobs}, i) => {
-    const name    = displayName(key);
-    const hasNew  = jobs.some(isNew);
-    const hasOpen = jobs.length > 0;
-    const cardId  = `card-${i}`;
-    const cardInfo   = info;
-    const cardIdeal  = cardInfo.ideal  || '';
-    const cardDesc   = cardInfo.desc   || '';
-    const cardChance = cardInfo.chance ?? null;
-
-    const roleRows = jobs.map(job => {
-      const dl  = loadTrackerState()[job.firm]?.deadline || '';
-      const meta = [job.location, job.posted_date].filter(Boolean).join('  ·  ');
-      const salary = job.salary || cardInfo.salary || '';
-      const bonus  = job.bonus  || cardInfo.bonus  || '';
-      const chance = job.chance ?? cardChance ?? null;
-      const statsHtml = (salary||bonus||chance!==null) ? `
-        <div class="role-stats">
-          ${salary?`<span class="salary-chip">${escHtml(salary)}</span>`:''}
-          ${bonus ?`<span class="salary-chip salary-chip-bonus">${escHtml(bonus)}</span>`:''}
-          ${chance!==null?`<span class="match-stat ${matchClass(chance)}"><span class="match-pct">${chance}%</span><span class="match-label">&nbsp;est. offer</span></span>`:''}
-        </div>` : '';
-      return `
-        <div class="role-row">
-          <div class="role-info">
-            <div class="role-title">${isNew(job)?'<span class="new-badge" style="font-size:.52rem;padding:1px 5px;animation-delay:.4s">NEW</span> ':''}${escHtml(job.title)}</div>
-            ${statsHtml}
-            <div class="role-meta">
-              ${meta?`<span>${meta}</span>`:''}
-              ${dl?deadlineTag(dl):`<a class="verify-cycle" href="${escHtml(job.url)}" target="_blank" rel="noopener">&#128197; Check deadline &amp; 2027 start &#8599;</a>`}
-            </div>
-          </div>
-          <div class="role-actions">
-            <a class="apply-btn" href="${escHtml(job.url)}" target="_blank" rel="noopener">Apply →</a>
-            <button class="dismiss-btn" onclick="dismissJob('${escHtml(job.id)}')" title="Dismiss">✕</button>
-          </div>
-        </div>`;
-    }).join('');
-
-    const noOpenHtml = !hasOpen ? `<div class="no-open-roles">No current openings detected — check careers page below</div>` : '';
-    const connSt = getConnStatus(name);
-    const connBadge = connSt ? `<span class="conn-badge ${connSt==='sent'?'conn-sent':'conn-draft'}">${connSt==='sent'?'✉ Sent':'✉ Draft'}</span>` : '';
-
-    return `
-      <div class="job-card tc-${tier}" id="${cardId}" data-firm="${escHtml(name)}" style="animation-delay:${i*35}ms">
-        <div class="card-header tint-${tier}">
-          <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
-            ${escHtml(name)}<span class="firm-chevron">▾</span>
-          </button>
-          <div class="card-badges">
-            <span class="tier-badge tier-${tier}">${TIER_LABELS[tier]||tier}</span>
-            ${hasNew?'<span class="new-badge">NEW</span>':''}
-            ${hasOpen?'':`<span class="no-roles-badge">No openings</span>`}
-            <span class="conn-badge-wrap">${connBadge}</span>
-          </div>
-        </div>
-        <div class="role-list">${roleRows}${noOpenHtml}</div>
-        <div class="card-expand">
-          <div class="expand-inner">
-            ${buildExpandInner(key, name, tier, cardChance, cardIdeal, cardDesc)}
-          </div>
-        </div>
-      </div>`;
-  }).join('');
+  // Render all-firms watchlist section
+  const watchGrid  = document.getElementById('jobs-grid');
+  const watchCount = document.getElementById('watch-count');
+  watchCount.textContent = `${noRoles.length} firm${noRoles.length!==1?'s':''} · no openings`;
+  const offset = withRoles.length;
+  watchGrid.innerHTML = noRoles.length
+    ? noRoles.map((f, i) => buildCard(f.key, f.info, f.tier, f.jobs, offset + i)).join('')
+    : `<div class="empty-state"><h3>No firms match your filter.</h3></div>`;
 
   document.getElementById('watchlist-section').style.display = 'none';
+}
+
+function toggleWatchSection() {
+  const grid    = document.getElementById('jobs-grid');
+  const chevron = document.getElementById('watch-chevron');
+  const isOpen  = grid.style.display !== 'none';
+  grid.style.display   = isOpen ? 'none' : 'grid';
+  chevron.classList.toggle('open', !isOpen);
 }
 
 function renderWatchlist() {
