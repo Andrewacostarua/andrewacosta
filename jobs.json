@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-05-10T13:26:29",
-  "total_found": 0,
+  "last_run": "2026-05-10T15:39:38",
+  "total_found": 4,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 0
+      "open_count": 4
     },
     {
       "name": "Morgan Stanley",
@@ -353,5 +353,74 @@
       "open_count": 0
     }
   ],
-  "jobs": []
+  "jobs": [
+    {
+      "id": "li-compliance-and-operations-analyst-global-equity-at-google-4406536187",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Compliance and Operations Analyst, Global Equity",
+      "url": "https://www.linkedin.com/jobs/view/compliance-and-operations-analyst-global-equity-at-google-4406536187",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-04-28",
+      "first_seen": null,
+      "is_new": true,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-financial-analyst-google-cloud-at-google-4406560182",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, Google Cloud",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-google-cloud-at-google-4406560182",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-04-28",
+      "first_seen": null,
+      "is_new": true,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-financial-analyst-ii-at-google-4406536186",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst II",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-ii-at-google-4406536186",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-04-28",
+      "first_seen": null,
+      "is_new": true,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-financial-analyst-ads-privacy-safety-and-regulations-at-google-4404248055",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, Ads Privacy, Safety, and Regulations",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-ads-privacy-safety-and-regulations-at-google-4404248055",
+      "location": "Mountain View, CA",
+      "posted_date": "2026-04-22",
+      "first_seen": null,
+      "is_new": true,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    }
+  ]
 }
