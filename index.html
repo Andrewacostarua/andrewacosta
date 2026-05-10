@@ -639,6 +639,28 @@
     .copy-btn:hover { background: rgba(255,255,255,.2); }
     .copy-btn.copied { background: var(--new-green); color: #fff; }
 
+    /* ── Uncertainty indicator ── */
+    .uncertainty-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #fee2e2; color: #dc2626;
+      font-size: .58rem; font-weight: 800; line-height: 1;
+      border: 1px solid rgba(220,38,38,.3);
+      cursor: pointer; flex-shrink: 0;
+      font-family: inherit;
+      transition: background-color 140ms var(--ease), transform 100ms var(--ease);
+      vertical-align: middle; margin-left: 4px;
+    }
+    .uncertainty-btn:hover { background: #fca5a5; transform: scale(1.15); }
+    .uncertainty-note {
+      display: none; grid-column: 1/-1;
+      background: #fff8f8; border: 1px solid rgba(220,38,38,.2);
+      border-radius: 7px; padding: 9px 13px;
+      font-size: .73rem; color: #7f1d1d; line-height: 1.55;
+      margin: 6px 18px 2px;
+    }
+    .uncertainty-note.visible { display: block; }
+
     /* ── Grid section headers ── */
     .grid-section-header {
       display: flex; align-items: center; gap: 10px;
@@ -1254,6 +1276,20 @@ const FIRM_LINKEDIN_ID = {
   "fidelity":"1138","state street":"1856","berkadia":"10509",
 };
 
+// Firms where we can't guarantee complete job coverage — shown as a red ! on the card
+const FIRM_UNCERTAINTY = {
+  "goldman":       "Goldman's career site blocks automated scrapers (Cloudflare). We search LinkedIn instead — roles posted only internally or via campus recruiting portals will not appear here.",
+  "morgan stanley":"Morgan Stanley's career site blocks automated scrapers (Cloudflare). We search LinkedIn — some roles may be missed if not posted there.",
+  "blackstone":    "Blackstone's career site blocks automated scrapers (Cloudflare). We search LinkedIn — roles posted only on their internal portal may not appear.",
+  "brookfield":    "Brookfield uses a heavily JS-rendered career site. Scraping is unreliable; LinkedIn is the backup source and may miss some postings.",
+  "cerberus":      "Cerberus has a minimal public job board. Analyst roles are often filled via direct outreach or networks before appearing publicly.",
+  "dune":          "Dune Real Estate Partners has no formal public job board. Roles are rarely listed online — LinkedIn is your best active check.",
+  "walton street": "Walton Street has no dedicated careers page or job board. Openings are typically filled through direct outreach and networks.",
+  "somera":        "Somera Road is a small boutique with no public job board. Roles are almost never listed publicly — LinkedIn or direct contact is needed.",
+  "rockpoint":     "Rockpoint has a minimal public web presence for jobs. Coverage here relies on LinkedIn and may be incomplete.",
+  "eastdil":       "Eastdil Secured does not maintain a standard public ATS. Roles often appear on LinkedIn before (or instead of) their own site.",
+};
+
 const FIRM_TIER = {
   "blackstone":"homerun","kkr":"homerun","apollo":"homerun","carlyle":"homerun",
   "brookfield":"homerun","goldman":"homerun","morgan stanley":"homerun","stonepeak":"homerun","blackrock":"homerun",
@@ -1494,6 +1530,13 @@ function buildCard(key, info, tier, jobs, cardIndex) {
   const cardChance = info.chance ?? null;
   const connSt   = getConnStatus(name);
   const connBadge = connSt ? `<span class="conn-badge ${connSt==='sent'?'conn-sent':'conn-draft'}">${connSt==='sent'?'✉ Sent':'✉ Draft'}</span>` : '';
+  const uncertainty = FIRM_UNCERTAINTY[key] || '';
+  const uncertaintyBtn = uncertainty
+    ? `<button class="uncertainty-btn" onclick="toggleUncertainty('${cardId}');event.stopPropagation();" title="Data coverage note">!</button>`
+    : '';
+  const uncertaintyNote = uncertainty
+    ? `<div class="uncertainty-note" id="un-${cardId}">⚠ ${escHtml(uncertainty)}</div>`
+    : '';
 
   const roleRows = jobs.map(job => {
     const dl     = loadTrackerState()[job.firm]?.deadline || '';
@@ -1530,7 +1573,7 @@ function buildCard(key, info, tier, jobs, cardIndex) {
     <div class="job-card tc-${tier}" id="${cardId}" data-firm="${escHtml(name)}" style="animation-delay:${cardIndex*35}ms">
       <div class="card-header tint-${tier}">
         <button class="firm-name-btn" onclick="toggleFirmExpand('${cardId}')" aria-expanded="false">
-          ${escHtml(name)}<span class="firm-chevron">▾</span>
+          ${escHtml(name)}${uncertaintyBtn}<span class="firm-chevron">▾</span>
         </button>
         <div class="card-badges">
           <span class="tier-badge tier-${tier}">${TIER_LABELS[tier]||tier}</span>
@@ -1539,6 +1582,7 @@ function buildCard(key, info, tier, jobs, cardIndex) {
           <span class="conn-badge-wrap">${connBadge}</span>
         </div>
       </div>
+      ${uncertaintyNote}
       <div class="role-list">${roleRows}${noOpenHtml}</div>
       <div class="card-expand">
         <div class="expand-inner">
@@ -1613,6 +1657,11 @@ function renderGrid() {
     : `<div class="empty-state"><h3>No firms match your filter.</h3></div>`;
 
   document.getElementById('watchlist-section').style.display = 'none';
+}
+
+function toggleUncertainty(cardId) {
+  const note = document.getElementById('un-' + cardId);
+  if (note) note.classList.toggle('visible');
 }
 
 function toggleWatchSection() {
