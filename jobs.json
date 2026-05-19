@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-05-18T18:29:30",
-  "total_found": 1,
+  "last_run": "2026-05-19T18:33:51",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 0
+      "open_count": 3
     },
     {
       "name": "Morgan Stanley",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -355,19 +355,54 @@
   ],
   "jobs": [
     {
-      "id": "pw-cbre-capital-marke-276809",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Analyst Asset Management, Retail (fluent in Czech or Slovak)",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Analyst-Asset-Management-Retail-fluent-in-Czech-or-Slovak/276809",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-05-18",
+      "id": "li-financial-analyst-gtech-at-google-4415656751",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, gTech",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-gtech-at-google-4415656751",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-05-18",
+      "first_seen": null,
       "is_new": true,
-      "chance": null,
+      "source": "linkedin",
       "salary": null,
       "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-compliance-and-operations-analyst-global-equity-at-google-4406536187",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Compliance and Operations Analyst, Global Equity",
+      "url": "https://www.linkedin.com/jobs/view/compliance-and-operations-analyst-global-equity-at-google-4406536187",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-04-28",
+      "first_seen": null,
+      "is_new": false,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-financial-analyst-ads-privacy-safety-and-regulations-at-google-4404248055",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, Ads Privacy, Safety, and Regulations",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-ads-privacy-safety-and-regulations-at-google-4404248055",
+      "location": "Mountain View, CA",
+      "posted_date": "2026-05-13",
+      "first_seen": null,
+      "is_new": false,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
       "hours": null
     }
   ]
