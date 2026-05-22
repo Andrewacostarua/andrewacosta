@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-05-21T18:34:46",
-  "total_found": 1,
+  "last_run": "2026-05-22T18:30:38",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 2
     },
     {
       "name": "Cushman & Wakefield",
@@ -355,6 +355,38 @@
   ],
   "jobs": [
     {
+      "id": "pw-cbre-capital-marke-277270",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Real Estate Sr Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Real-Estate-Sr-Analyst/277270",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-05-22",
+      "is_new": true,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-277567",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Transaction Management Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Transaction-Management-Analyst/277567",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-05-22",
+      "is_new": true,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
       "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
       "firm": "Morgan Stanley",
       "tier": "homerun",
@@ -364,7 +396,7 @@
       "location": "Pasadena, CA",
       "posted_date": "2026-05-14",
       "first_seen": null,
-      "is_new": true,
+      "is_new": false,
       "source": "linkedin",
       "salary": null,
       "bonus": null,
