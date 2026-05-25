@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-05-24T15:54:24",
-  "total_found": 2,
+  "last_run": "2026-05-25T18:18:10",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -49,7 +49,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.morganstanley.com/people-opportunities/search",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Stonepeak",
@@ -363,7 +363,23 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7747482003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-05-23",
-      "first_seen": "2026-05-24",
+      "first_seen": "2026-05-25",
+      "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-277521",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Valuation Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Analyst/277521",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-05-25",
       "is_new": true,
       "chance": null,
       "salary": null,
@@ -371,19 +387,20 @@
       "hours": null
     },
     {
-      "id": "pw-cbre-capital-marke-277567",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Transaction Management Analyst",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Transaction-Management-Analyst/277567",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-05-24",
+      "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "firm": "Morgan Stanley",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Clinical Research Financial Analyst",
+      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "location": "Pasadena, CA",
+      "posted_date": "2026-05-14",
+      "first_seen": null,
       "is_new": false,
-      "chance": null,
+      "source": "linkedin",
       "salary": null,
       "bonus": null,
+      "chance": null,
       "hours": null
     }
   ]
