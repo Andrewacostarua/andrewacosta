@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-06-14T14:28:25",
-  "total_found": 1,
+  "last_run": "2026-06-15T17:32:22",
+  "total_found": 2,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,8 +363,24 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7747482003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-05-23",
-      "first_seen": "2026-06-14",
+      "first_seen": "2026-06-15",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-281129",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Valuation Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Analyst/281129",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-06-15",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
