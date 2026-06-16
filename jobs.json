@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-06-15T17:32:22",
+  "last_run": "2026-06-16T17:22:52",
   "total_found": 2,
   "firms": [
     {
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Morgan Stanley",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7747482003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-05-23",
-      "first_seen": "2026-06-15",
+      "first_seen": "2026-06-16",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,19 +371,20 @@
       "hours": null
     },
     {
-      "id": "pw-cbre-capital-marke-281129",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Valuation Analyst",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Analyst/281129",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-06-15",
+      "id": "li-financial-analyst-cloud-finance-at-google-4427713108",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, Cloud Finance",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-cloud-finance-at-google-4427713108",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-06-15",
+      "first_seen": null,
       "is_new": true,
-      "chance": null,
+      "source": "linkedin",
       "salary": null,
       "bonus": null,
+      "chance": null,
       "hours": null
     }
   ]
