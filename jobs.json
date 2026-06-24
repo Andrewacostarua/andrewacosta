@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-06-23T15:25:53",
+  "last_run": "2026-06-24T14:56:20",
   "total_found": 3,
   "firms": [
     {
@@ -42,14 +42,14 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Morgan Stanley",
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.morganstanley.com/people-opportunities/search",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Stonepeak",
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cerberus Capital",
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "LaSalle Investment",
@@ -355,22 +355,6 @@
   ],
   "jobs": [
     {
-      "id": "gh-tpgcareers-7747482003",
-      "firm": "TPG Real Estate",
-      "tier": "reach",
-      "track": "repe",
-      "title": "Talent Acquisition, Analyst",
-      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7747482003",
-      "location": "New York - 245 Park Avenue",
-      "posted_date": "2026-05-23",
-      "first_seen": "2026-06-23",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
       "id": "gh-berkadia-7748477003",
       "firm": "Berkadia",
       "tier": "safety",
@@ -379,7 +363,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7748477003?gh_jid=7748477003",
       "location": "San Francisco, California, United States",
       "posted_date": "2026-06-22",
-      "first_seen": "2026-06-23",
+      "first_seen": "2026-06-24",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -387,14 +371,30 @@
       "hours": null
     },
     {
-      "id": "li-financial-analyst-i-cloud-central-at-google-4429660050",
-      "firm": "Goldman Sachs",
+      "id": "pw-aew-capital-mgmt-acquisitions-analyst",
+      "firm": "AEW Capital Mgmt",
+      "tier": "target",
+      "track": "repe",
+      "title": "North AmericaAcquisitions AnalystLos Angeles, CAView Details",
+      "url": "https://www.aew.com/about/careers/acquisitions-analyst",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-06-24",
+      "is_new": true,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "firm": "Morgan Stanley",
       "tier": "homerun",
       "track": "ib",
-      "title": "Financial Analyst I, Cloud Central",
-      "url": "https://www.linkedin.com/jobs/view/financial-analyst-i-cloud-central-at-google-4429660050",
-      "location": "Sunnyvale, CA",
-      "posted_date": "2026-06-19",
+      "title": "Clinical Research Financial Analyst",
+      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "location": "Pasadena, CA",
+      "posted_date": "2026-05-14",
       "first_seen": null,
       "is_new": false,
       "source": "linkedin",
