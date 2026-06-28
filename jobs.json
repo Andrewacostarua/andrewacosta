@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-06-27T14:06:04",
-  "total_found": 2,
+  "last_run": "2026-06-28T14:13:13",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,8 +363,24 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7748477003?gh_jid=7748477003",
       "location": "San Francisco, California, United States",
       "posted_date": "2026-06-22",
-      "first_seen": "2026-06-27",
+      "first_seen": "2026-06-28",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-282129",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Financial Analyst, Development Investment",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Financial-Analyst-Development-Investment/282129",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-06-28",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
@@ -379,7 +395,7 @@
       "url": "https://www.aew.com/about/careers/acquisitions-analyst",
       "location": "",
       "posted_date": "",
-      "first_seen": "2026-06-27",
+      "first_seen": "2026-06-28",
       "is_new": false,
       "chance": null,
       "salary": null,
