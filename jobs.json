@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-07-05T14:04:59",
-  "total_found": 3,
+  "last_run": "2026-07-06T15:57:33",
+  "total_found": 1,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 2
+      "open_count": 0
     },
     {
       "name": "Morgan Stanley",
@@ -354,40 +354,6 @@
     }
   ],
   "jobs": [
-    {
-      "id": "li-financial-analyst-i-cloud-central-at-google-4429660050",
-      "firm": "Goldman Sachs",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Financial Analyst I, Cloud Central",
-      "url": "https://www.linkedin.com/jobs/view/financial-analyst-i-cloud-central-at-google-4429660050",
-      "location": "Sunnyvale, CA",
-      "posted_date": "2026-06-19",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
-      "salary": null,
-      "bonus": null,
-      "chance": null,
-      "hours": null
-    },
-    {
-      "id": "li-financial-analyst-cloud-finance-at-google-4427713108",
-      "firm": "Goldman Sachs",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Financial Analyst, Cloud Finance",
-      "url": "https://www.linkedin.com/jobs/view/financial-analyst-cloud-finance-at-google-4427713108",
-      "location": "Sunnyvale, CA",
-      "posted_date": "2026-06-15",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
-      "salary": null,
-      "bonus": null,
-      "chance": null,
-      "hours": null
-    },
     {
       "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
       "firm": "Morgan Stanley",
