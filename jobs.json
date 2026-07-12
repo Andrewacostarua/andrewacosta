@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-07-11T13:50:20",
-  "total_found": 2,
+  "last_run": "2026-07-12T13:51:32",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -49,7 +49,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.morganstanley.com/people-opportunities/search",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Stonepeak",
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "LaSalle Investment",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-07-09",
-      "first_seen": "2026-07-11",
+      "first_seen": "2026-07-12",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,20 +371,35 @@
       "hours": null
     },
     {
-      "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
-      "firm": "Morgan Stanley",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Clinical Research Financial Analyst",
-      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
-      "location": "Pasadena, CA",
-      "posted_date": "2026-05-14",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
+      "id": "pw-cbre-capital-marke-279701",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Transaction Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Transaction-Analyst/279701",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-07-12",
+      "is_new": true,
+      "chance": null,
       "salary": null,
       "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-aew-capital-mgmt-acquisitions-analyst",
+      "firm": "AEW Capital Mgmt",
+      "tier": "target",
+      "track": "repe",
+      "title": "North AmericaAcquisitions AnalystLos Angeles, CAView Details",
+      "url": "https://www.aew.com/about/careers/acquisitions-analyst",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-07-12",
+      "is_new": false,
       "chance": null,
+      "salary": null,
+      "bonus": null,
       "hours": null
     }
   ]
