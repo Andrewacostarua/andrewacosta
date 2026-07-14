@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-07-13T14:59:37",
+  "last_run": "2026-07-14T14:10:15",
   "total_found": 2,
   "firms": [
     {
@@ -42,14 +42,14 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Morgan Stanley",
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.morganstanley.com/people-opportunities/search",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Stonepeak",
@@ -363,7 +363,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-07-09",
-      "first_seen": "2026-07-13",
+      "first_seen": "2026-07-14",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,14 +371,14 @@
       "hours": null
     },
     {
-      "id": "li-financial-analyst-i-cloud-central-at-google-4429660050",
-      "firm": "Goldman Sachs",
+      "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "firm": "Morgan Stanley",
       "tier": "homerun",
       "track": "ib",
-      "title": "Financial Analyst I, Cloud Central",
-      "url": "https://www.linkedin.com/jobs/view/financial-analyst-i-cloud-central-at-google-4429660050",
-      "location": "Sunnyvale, CA",
-      "posted_date": "2026-07-10",
+      "title": "Clinical Research Financial Analyst",
+      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
+      "location": "Pasadena, CA",
+      "posted_date": "2026-05-14",
       "first_seen": null,
       "is_new": false,
       "source": "linkedin",
