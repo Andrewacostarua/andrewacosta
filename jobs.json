@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-07-29T14:32:51",
-  "total_found": 2,
+  "last_run": "2026-07-30T14:31:18",
+  "total_found": 0,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cerberus Capital",
@@ -350,41 +350,8 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://boards.greenhouse.io/berkadia",
-      "open_count": 1
+      "open_count": 0
     }
   ],
-  "jobs": [
-    {
-      "id": "gh-tpgcareers-7804828003",
-      "firm": "TPG Real Estate",
-      "tier": "reach",
-      "track": "repe",
-      "title": "Asset-Based Finance, Asset Management, Analyst",
-      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
-      "location": "New York - 245 Park Avenue",
-      "posted_date": "2026-07-23",
-      "first_seen": "2026-07-29",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "gh-berkadia-7782361003",
-      "firm": "Berkadia",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Underwriting Analyst - Proprietary Lending Program",
-      "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
-      "location": "Atlanta, Georgia, United States",
-      "posted_date": "2026-07-23",
-      "first_seen": "2026-07-29",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    }
-  ]
+  "jobs": []
 }
