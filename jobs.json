@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-02T13:50:55",
-  "total_found": 2,
+  "last_run": "2026-08-03T15:14:02",
+  "total_found": 4,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -350,7 +350,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://boards.greenhouse.io/berkadia",
-      "open_count": 1
+      "open_count": 2
     }
   ],
   "jobs": [
@@ -363,7 +363,23 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-02",
+      "first_seen": "2026-08-03",
+      "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "gh-berkadia-7795942003",
+      "firm": "Berkadia",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Financial Analyst- Remote",
+      "url": "https://boards.greenhouse.io/berkadia/jobs/7795942003?gh_jid=7795942003",
+      "location": "Philadelphia, Pennsylvania, United States",
+      "posted_date": "2026-08-03",
+      "first_seen": "2026-08-03",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,8 +395,24 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-07-29",
-      "first_seen": "2026-08-02",
+      "first_seen": "2026-08-03",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-288837",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Analyste en \u00e9valuation immobili\u00e8re (F/H) - CDD Bordeaux",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Analyste-en-valuation-immobili-re-F-H-CDD-Bordeaux/288837",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-08-03",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
