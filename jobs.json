@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-11T13:28:08",
-  "total_found": 4,
+  "last_run": "2026-08-12T13:32:58",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -49,7 +49,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.morganstanley.com/people-opportunities/search",
-      "open_count": 2
+      "open_count": 0
     },
     {
       "name": "Stonepeak",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-11",
+      "first_seen": "2026-08-12",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,7 +379,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-08-07",
-      "first_seen": "2026-08-11",
+      "first_seen": "2026-08-12",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -387,37 +387,19 @@
       "hours": null
     },
     {
-      "id": "li-clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
-      "firm": "Morgan Stanley",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Clinical Research Financial Analyst",
-      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-at-kaiser-permanente-4414596162",
-      "location": "Pasadena, CA",
-      "posted_date": "2026-05-14",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
+      "id": "pw-cbre-capital-marke-290769",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Valuation Sr Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Sr-Analyst/290769",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-08-12",
+      "is_new": true,
+      "chance": null,
       "salary": null,
       "bonus": null,
-      "chance": null,
-      "hours": null
-    },
-    {
-      "id": "li-clinical-research-financial-analyst-iii-durational-with-benefits-at-kaiser-permanente-4414586540",
-      "firm": "Morgan Stanley",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Clinical Research Financial Analyst III (Durational with Benefits)",
-      "url": "https://www.linkedin.com/jobs/view/clinical-research-financial-analyst-iii-durational-with-benefits-at-kaiser-permanente-4414586540",
-      "location": "Pasadena, CA",
-      "posted_date": "2026-05-14",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
-      "salary": null,
-      "bonus": null,
-      "chance": null,
       "hours": null
     }
   ]
