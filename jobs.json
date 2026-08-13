@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-08-12T13:32:58",
+  "last_run": "2026-08-13T13:40:43",
   "total_found": 3,
   "firms": [
     {
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Morgan Stanley",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-12",
+      "first_seen": "2026-08-13",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,7 +379,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-08-07",
-      "first_seen": "2026-08-12",
+      "first_seen": "2026-08-13",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -387,19 +387,20 @@
       "hours": null
     },
     {
-      "id": "pw-cbre-capital-marke-290769",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Valuation Sr Analyst",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Sr-Analyst/290769",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-08-12",
+      "id": "li-financial-analyst-corporate-financial-planning-and-analysis-at-google-4452768114",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst, Corporate Financial Planning and Analysis",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-corporate-financial-planning-and-analysis-at-google-4452768114",
+      "location": "Sunnyvale, CA",
+      "posted_date": "2026-08-12",
+      "first_seen": null,
       "is_new": true,
-      "chance": null,
+      "source": "linkedin",
       "salary": null,
       "bonus": null,
+      "chance": null,
       "hours": null
     }
   ]
