@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-13T13:40:43",
-  "total_found": 3,
+  "last_run": "2026-08-14T13:28:58",
+  "total_found": 6,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 1
+      "open_count": 2
     },
     {
       "name": "Morgan Stanley",
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 1
+      "open_count": 2
     },
     {
       "name": "Cerberus Capital",
@@ -350,7 +350,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://boards.greenhouse.io/berkadia",
-      "open_count": 1
+      "open_count": 2
     }
   ],
   "jobs": [
@@ -363,8 +363,40 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-13",
+      "first_seen": "2026-08-14",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "gh-tpgcareers-7820987003",
+      "firm": "TPG Real Estate",
+      "tier": "reach",
+      "track": "repe",
+      "title": "Credit Finance, Client Reporting, Analyst ",
+      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
+      "location": "New York - 245 Park Avenue",
+      "posted_date": "2026-08-13",
+      "first_seen": "2026-08-14",
+      "is_new": true,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "gh-berkadia-7870062003",
+      "firm": "Berkadia",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Real Estate Analyst (Tax Credit Equity)",
+      "url": "https://boards.greenhouse.io/berkadia/jobs/7870062003?gh_jid=7870062003",
+      "location": "Philadelphia, Pennsylvania, United States",
+      "posted_date": "2026-08-14",
+      "first_seen": "2026-08-14",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
@@ -379,7 +411,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7782361003?gh_jid=7782361003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-08-07",
-      "first_seen": "2026-08-13",
+      "first_seen": "2026-08-14",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -395,6 +427,23 @@
       "url": "https://www.linkedin.com/jobs/view/financial-analyst-corporate-financial-planning-and-analysis-at-google-4452768114",
       "location": "Sunnyvale, CA",
       "posted_date": "2026-08-12",
+      "first_seen": null,
+      "is_new": false,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
+      "hours": null
+    },
+    {
+      "id": "li-financial-analyst-ii-strategy-and-operations-at-google-4450343703",
+      "firm": "Goldman Sachs",
+      "tier": "homerun",
+      "track": "ib",
+      "title": "Financial Analyst II, Strategy and Operations",
+      "url": "https://www.linkedin.com/jobs/view/financial-analyst-ii-strategy-and-operations-at-google-4450343703",
+      "location": "Mountain View, CA",
+      "posted_date": "2026-08-07",
       "first_seen": null,
       "is_new": true,
       "source": "linkedin",
