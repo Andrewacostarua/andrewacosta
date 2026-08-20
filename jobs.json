@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-19T13:06:34",
-  "total_found": 4,
+  "last_run": "2026-08-20T13:09:01",
+  "total_found": 7,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -350,7 +350,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://boards.greenhouse.io/berkadia",
-      "open_count": 2
+      "open_count": 3
     }
   ],
   "jobs": [
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-19",
+      "first_seen": "2026-08-20",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,7 +379,23 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-13",
-      "first_seen": "2026-08-19",
+      "first_seen": "2026-08-20",
+      "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "gh-berkadia-7795942003",
+      "firm": "Berkadia",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Financial Analyst- Remote",
+      "url": "https://boards.greenhouse.io/berkadia/jobs/7795942003?gh_jid=7795942003",
+      "location": "Philadelphia, Pennsylvania, United States",
+      "posted_date": "2026-08-19",
+      "first_seen": "2026-08-20",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -395,7 +411,7 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7870062003?gh_jid=7870062003",
       "location": "Philadelphia, Pennsylvania, United States",
       "posted_date": "2026-08-14",
-      "first_seen": "2026-08-19",
+      "first_seen": "2026-08-20",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -411,11 +427,44 @@
       "url": "https://boards.greenhouse.io/berkadia/jobs/7893691003?gh_jid=7893691003",
       "location": "Atlanta, Georgia, United States",
       "posted_date": "2026-08-18",
-      "first_seen": "2026-08-19",
+      "first_seen": "2026-08-20",
       "is_new": false,
       "chance": null,
       "salary": null,
       "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-288805",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Real Estate Analyst (Weekend Roster required)",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Real-Estate-Analyst-Weekend-Roster-required/288805",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-08-20",
+      "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "li-global-real-estate-operations-analyst-at-otis-elevator-co-4455445532",
+      "firm": "Stifel",
+      "tier": "safety",
+      "track": "ib",
+      "title": "Global Real Estate Operations Analyst",
+      "url": "https://www.linkedin.com/jobs/view/global-real-estate-operations-analyst-at-otis-elevator-co-4455445532",
+      "location": "Farmington, CT",
+      "posted_date": "2026-08-19",
+      "first_seen": null,
+      "is_new": true,
+      "source": "linkedin",
+      "salary": null,
+      "bonus": null,
+      "chance": null,
       "hours": null
     }
   ]
