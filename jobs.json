@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-08-30T16:40:05",
-  "total_found": 6,
+  "last_run": "2026-08-31T19:10:44",
+  "total_found": 4,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "LaSalle Investment",
@@ -350,7 +350,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://boards.greenhouse.io/berkadia",
-      "open_count": 3
+      "open_count": 0
     }
   ],
   "jobs": [
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-07-23",
-      "first_seen": "2026-08-30",
+      "first_seen": "2026-08-31",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,7 +379,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-13",
-      "first_seen": "2026-08-30",
+      "first_seen": "2026-08-31",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -387,47 +387,15 @@
       "hours": null
     },
     {
-      "id": "gh-berkadia-7886142003",
-      "firm": "Berkadia",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Portfolio Analyst",
-      "url": "https://boards.greenhouse.io/berkadia/jobs/7886142003?gh_jid=7886142003",
-      "location": "Ambler, Pennsylvania, United States",
-      "posted_date": "2026-08-25",
-      "first_seen": "2026-08-30",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "gh-berkadia-7870062003",
-      "firm": "Berkadia",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Real Estate Analyst (Tax Credit Equity)",
-      "url": "https://boards.greenhouse.io/berkadia/jobs/7870062003?gh_jid=7870062003",
-      "location": "Philadelphia, Pennsylvania, United States",
-      "posted_date": "2026-08-14",
-      "first_seen": "2026-08-30",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "gh-berkadia-7893691003",
-      "firm": "Berkadia",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Underwriting Analyst - Proprietary Lending Program",
-      "url": "https://boards.greenhouse.io/berkadia/jobs/7893691003?gh_jid=7893691003",
-      "location": "Atlanta, Georgia, United States",
-      "posted_date": "2026-08-18",
-      "first_seen": "2026-08-30",
+      "id": "pw-aew-capital-mgmt-fund-analyst-2",
+      "firm": "AEW Capital Mgmt",
+      "tier": "target",
+      "track": "repe",
+      "title": "North AmericaFund AnalystBoston, MAView Details",
+      "url": "https://www.aew.com/about/careers/fund-analyst-2",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-08-31",
       "is_new": false,
       "chance": null,
       "salary": null,
