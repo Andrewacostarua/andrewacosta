@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-09-01T16:35:05",
-  "total_found": 4,
+  "last_run": "2026-09-02T16:34:36",
+  "total_found": 5,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-31",
-      "first_seen": "2026-09-01",
+      "first_seen": "2026-09-02",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,8 +379,24 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-31",
-      "first_seen": "2026-09-01",
+      "first_seen": "2026-09-02",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-294336",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Portfolio Analyst",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Portfolio-Analyst/294336",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-09-02",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
@@ -395,7 +411,7 @@
       "url": "https://www.aew.com/about/careers/fund-analyst-2",
       "location": "",
       "posted_date": "",
-      "first_seen": "2026-09-01",
+      "first_seen": "2026-09-02",
       "is_new": false,
       "chance": null,
       "salary": null,
