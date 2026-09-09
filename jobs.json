@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-09-08T16:38:07",
-  "total_found": 4,
+  "last_run": "2026-09-09T16:34:04",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 2
+      "open_count": 1
     },
     {
       "name": "Cerberus Capital",
@@ -363,23 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-31",
-      "first_seen": "2026-09-08",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "gh-tpgcareers-7820987003",
-      "firm": "TPG Real Estate",
-      "tier": "reach",
-      "track": "repe",
-      "title": "Credit Finance, Client Reporting, Analyst ",
-      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
-      "location": "New York - 245 Park Avenue",
-      "posted_date": "2026-08-31",
-      "first_seen": "2026-09-08",
+      "first_seen": "2026-09-09",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -395,7 +379,7 @@
       "url": "https://www.aew.com/about/careers/fund-analyst-2",
       "location": "",
       "posted_date": "",
-      "first_seen": "2026-09-08",
+      "first_seen": "2026-09-09",
       "is_new": false,
       "chance": null,
       "salary": null,
