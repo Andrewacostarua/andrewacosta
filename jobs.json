@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-09-18T16:23:17",
+  "last_run": "2026-09-19T15:53:38",
   "total_found": 3,
   "firms": [
     {
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 1
+      "open_count": 2
     },
     {
       "name": "Cerberus Capital",
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "LaSalle Investment",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-31",
-      "first_seen": "2026-09-18",
+      "first_seen": "2026-09-19",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,15 +371,15 @@
       "hours": null
     },
     {
-      "id": "pw-aew-capital-mgmt-fund-analyst-2",
-      "firm": "AEW Capital Mgmt",
-      "tier": "target",
+      "id": "gh-tpgcareers-7820987003",
+      "firm": "TPG Real Estate",
+      "tier": "reach",
       "track": "repe",
-      "title": "North AmericaFund AnalystBoston, MAView Details",
-      "url": "https://www.aew.com/about/careers/fund-analyst-2",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-09-18",
+      "title": "Credit Finance - Client Reporting, Analyst ",
+      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
+      "location": "New York - 245 Park Avenue",
+      "posted_date": "2026-09-09",
+      "first_seen": "2026-09-19",
       "is_new": false,
       "chance": null,
       "salary": null,
