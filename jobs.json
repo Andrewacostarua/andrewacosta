@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-09-22T16:54:18",
-  "total_found": 2,
+  "last_run": "2026-09-23T16:50:28",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "Cushman & Wakefield",
@@ -355,16 +355,32 @@
   ],
   "jobs": [
     {
-      "id": "gh-tpgcareers-7804828003",
+      "id": "gh-tpgcareers-7820987003",
       "firm": "TPG Real Estate",
       "tier": "reach",
       "track": "repe",
-      "title": "Asset-Based Finance, Asset Management, Analyst",
-      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
+      "title": "Credit Finance - Client Reporting, Analyst ",
+      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7820987003",
       "location": "New York - 245 Park Avenue",
-      "posted_date": "2026-08-31",
-      "first_seen": "2026-09-22",
+      "posted_date": "2026-09-09",
+      "first_seen": "2026-09-23",
       "is_new": false,
+      "chance": null,
+      "salary": null,
+      "bonus": null,
+      "hours": null
+    },
+    {
+      "id": "pw-cbre-capital-marke-295030",
+      "firm": "CBRE Capital Markets",
+      "tier": "safety",
+      "track": "cm",
+      "title": "Analyste en \u00e9valuation immobili\u00e8re (H/F) - Paris",
+      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Analyste-en-valuation-immobili-re-H-F-Paris/295030",
+      "location": "",
+      "posted_date": "",
+      "first_seen": "2026-09-23",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
