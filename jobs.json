@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-10-08T18:53:32",
+  "last_run": "2026-10-09T18:23:42",
   "total_found": 3,
   "firms": [
     {
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 0
+      "open_count": 1
     },
     {
       "name": "LaSalle Investment",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-08-31",
-      "first_seen": "2026-10-08",
+      "first_seen": "2026-10-09",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -379,7 +379,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7860999003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-09-24",
-      "first_seen": "2026-10-08",
+      "first_seen": "2026-10-09",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -387,16 +387,16 @@
       "hours": null
     },
     {
-      "id": "pw-cbre-capital-marke-300045",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Valuation Sr Analyst",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Valuation-Sr-Analyst/300045",
+      "id": "pw-aew-capital-mgmt-asset-management-analyst-3",
+      "firm": "AEW Capital Mgmt",
+      "tier": "target",
+      "track": "repe",
+      "title": "North AmericaAsset Management AnalystLos Angeles, CAView Details",
+      "url": "https://www.aew.com/about/careers/asset-management-analyst-3",
       "location": "",
       "posted_date": "",
-      "first_seen": "2026-10-08",
-      "is_new": true,
+      "first_seen": "2026-10-09",
+      "is_new": false,
       "chance": null,
       "salary": null,
       "bonus": null,
