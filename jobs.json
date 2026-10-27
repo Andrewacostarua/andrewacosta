@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-10-26T18:50:21",
-  "total_found": 4,
+  "last_run": "2026-10-27T17:59:15",
+  "total_found": 3,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -182,7 +182,7 @@
       "tier": "target",
       "track": "repe",
       "careers_url": "https://www.aew.com/about/careers",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "LaSalle Investment",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-10-23",
-      "first_seen": "2026-10-26",
+      "first_seen": "2026-10-27",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,32 +371,16 @@
       "hours": null
     },
     {
-      "id": "gh-tpgcareers-7860999003",
+      "id": "gh-tpgcareers-8036104003",
       "firm": "TPG Real Estate",
       "tier": "reach",
       "track": "repe",
-      "title": "Real Estate Finance, Investment Accountant (US), Associate",
-      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7860999003",
+      "title": "Investment Operations, Analyst or Associate ",
+      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/8036104003",
       "location": "New York - 245 Park Avenue",
-      "posted_date": "2026-10-23",
-      "first_seen": "2026-10-26",
-      "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "pw-aew-capital-mgmt-asset-management-analyst-3",
-      "firm": "AEW Capital Mgmt",
-      "tier": "target",
-      "track": "repe",
-      "title": "North AmericaAsset Management AnalystLos Angeles, CAView Details",
-      "url": "https://www.aew.com/about/careers/asset-management-analyst-3",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-10-26",
-      "is_new": false,
+      "posted_date": "2026-10-26",
+      "first_seen": "2026-10-27",
+      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
