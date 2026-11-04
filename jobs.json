@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-11-03T19:31:03",
+  "last_run": "2026-11-04T19:46:26",
   "total_found": 2,
   "firms": [
     {
@@ -84,7 +84,7 @@
       "tier": "reach",
       "track": "repe",
       "careers_url": "https://boards.greenhouse.io/tpgcareers",
-      "open_count": 1
+      "open_count": 2
     },
     {
       "name": "Cerberus Capital",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,7 +363,7 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-10-30",
-      "first_seen": "2026-11-03",
+      "first_seen": "2026-11-04",
       "is_new": false,
       "chance": null,
       "salary": null,
@@ -371,16 +371,16 @@
       "hours": null
     },
     {
-      "id": "pw-cbre-capital-marke-303905",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Stage d'Analyste en \u00e9valuation immobili\u00e8re (H/F) - Paris janvier 2027",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Stage-d-Analyste-en-valuation-immobili-re-H-F-Paris-janvier-2027/303905",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-11-03",
-      "is_new": true,
+      "id": "gh-tpgcareers-8036104003",
+      "firm": "TPG Real Estate",
+      "tier": "reach",
+      "track": "repe",
+      "title": "Investment Operations, Analyst or Associate ",
+      "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/8036104003",
+      "location": "New York - 245 Park Avenue",
+      "posted_date": "2026-11-03",
+      "first_seen": "2026-11-04",
+      "is_new": false,
       "chance": null,
       "salary": null,
       "bonus": null,
