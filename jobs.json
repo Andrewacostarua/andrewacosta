@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-11-12T19:54:39",
-  "total_found": 2,
+  "last_run": "2026-11-13T19:37:50",
+  "total_found": 1,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -42,7 +42,7 @@
       "tier": "homerun",
       "track": "ib",
       "careers_url": "https://www.goldmansachs.com/careers/search.html",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Morgan Stanley",
@@ -363,28 +363,11 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-10-30",
-      "first_seen": "2026-11-12",
+      "first_seen": "2026-11-13",
       "is_new": false,
       "chance": null,
       "salary": null,
       "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "li-strategic-financial-analyst-pixel-product-finance-at-google-4481388511",
-      "firm": "Goldman Sachs",
-      "tier": "homerun",
-      "track": "ib",
-      "title": "Strategic Financial Analyst, Pixel Product Finance",
-      "url": "https://www.linkedin.com/jobs/view/strategic-financial-analyst-pixel-product-finance-at-google-4481388511",
-      "location": "Mountain View, CA",
-      "posted_date": "2026-10-22",
-      "first_seen": null,
-      "is_new": false,
-      "source": "linkedin",
-      "salary": null,
-      "bonus": null,
-      "chance": null,
       "hours": null
     }
   ]
