@@ -26974,3 +26974,145 @@ Call log:
 2026-11-18T20:28:02Z jobs.json written
 2026-11-18T20:28:02Z No new jobs — no email sent
 2026-11-18T20:28:02Z === Run complete in 378s — 1 total, 0 new ===
+2026-11-19T20:25:52Z === Scraper run started ===
+2026-11-19T20:25:52Z Known IDs loaded: 94
+2026-11-19T20:25:52Z Running Greenhouse scrapers...
+2026-11-19T20:25:53Z [greenhouse] Apollo Global Management: 0 match(es)
+2026-11-19T20:25:53Z [greenhouse] TPG Real Estate: 1 match(es)
+2026-11-19T20:25:53Z [greenhouse] ERROR Berkadia (berkadia): 404 Client Error: Not Found for url: https://boards-api.greenhouse.io/v1/boards/berkadia/jobs
+2026-11-19T20:25:53Z Running Workday scrapers...
+2026-11-19T20:25:53Z [workday] BlackRock Real Assets: 0 match(es)
+2026-11-19T20:25:54Z [workday] Blue Owl Capital: 0 match(es)
+2026-11-19T20:25:54Z [workday] ERROR LaSalle Investment (jll): 429 Client Error: Too Many Requests for url: https://jll.wd1.myworkdayjobs.com/wday/cxs/jll/lasallecareers/jobs
+2026-11-19T20:25:55Z [workday] Nuveen Real Estate: 1 match(es)
+2026-11-19T20:25:56Z [workday] JLL Capital Markets: 2 match(es)
+2026-11-19T20:25:58Z [workday] Cushman & Wakefield: 2 match(es)
+2026-11-19T20:25:58Z [workday] ERROR KeyBank RE (keybank): 429 Client Error: Too Many Requests for url: https://keybank.wd5.myworkdayjobs.com/wday/cxs/keybank/External_Career_Site/jobs
+2026-11-19T20:25:58Z [workday] ERROR Walker & Dunlop (walkerdunlop): 429 Client Error: Too Many Requests for url: https://walkerdunlop.wd1.myworkdayjobs.com/wday/cxs/walkerdunlop/WD/jobs
+2026-11-19T20:25:58Z Running Lever scrapers...
+2026-11-19T20:25:58Z Running Jobvite scrapers...
+2026-11-19T20:25:58Z [jobvite] W. P. Carey: 0 match(es)
+2026-11-19T20:25:58Z Running SmartRecruiters scrapers...
+2026-11-19T20:25:59Z [smartrecruiters] Ares Management: 0 match(es)
+2026-11-19T20:25:59Z Running iCIMS scrapers...
+2026-11-19T20:25:59Z [icims] Related Companies: 0 match(es)
+2026-11-19T20:25:59Z Running Playwright scrapers...
+2026-11-19T20:26:05Z [playwright] Blackstone (BREP): 0 match(es)
+2026-11-19T20:26:12Z [playwright] Brookfield Asset Mgmt: 0 match(es)
+2026-11-19T20:26:18Z [playwright] Goldman Sachs: 0 match(es)
+2026-11-19T20:26:18Z [playwright] Morgan Stanley: blocked/error (bot protection expected) — Page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.morganstanley.com/people-opportunities/search
+Call log:
+  - navigating to "https://www.morganstanley.com/people-opportunities/search", waiting until "networkidle"
+
+2026-11-19T20:26:22Z [playwright] Stonepeak: 0 match(es)
+2026-11-19T20:26:26Z [playwright] Pretium Partners: 0 match(es)
+2026-11-19T20:26:30Z [playwright] Bridge Investment Group: 0 match(es)
+2026-11-19T20:27:00Z [playwright] ERROR KKR Real Estate: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.kkr.com/careers/career-opportunities", waiting until "networkidle"
+
+2026-11-19T20:27:30Z [playwright] ERROR Carlyle Group: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.carlyle.com/careers", waiting until "networkidle"
+
+2026-11-19T20:27:37Z [playwright] Digital Realty Trust: 0 match(es)
+2026-11-19T20:27:43Z [playwright] BentallGreenOak: 0 match(es)
+2026-11-19T20:28:13Z [playwright] ERROR Hines: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.hines.com/careers", waiting until "networkidle"
+
+2026-11-19T20:28:22Z [playwright] CBRE Capital Markets: 0 match(es)
+2026-11-19T20:28:27Z [playwright] Wells Fargo RE: 0 match(es)
+2026-11-19T20:28:34Z [playwright] UBS Wealth Management: 0 match(es)
+2026-11-19T20:28:42Z [playwright] State Street (SSGA): 0 match(es)
+2026-11-19T20:28:48Z [playwright] Jefferies: 0 match(es)
+2026-11-19T20:28:54Z [playwright] Starwood Capital: 0 match(es)
+2026-11-19T20:28:58Z [playwright] Cerberus Capital: 0 match(es)
+2026-11-19T20:28:58Z [playwright] ERROR EQT / Exeter RE: Page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://careers.eqtgroup.com/
+Call log:
+  - navigating to "https://careers.eqtgroup.com/", waiting until "networkidle"
+
+2026-11-19T20:29:28Z [playwright] ERROR Tishman Speyer: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.tishmanspeyer.com/about/careers", waiting until "networkidle"
+
+2026-11-19T20:29:32Z [playwright] Rockpoint Group: 0 match(es)
+2026-11-19T20:29:32Z [playwright] ERROR Dune Real Estate: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.dunerep.com/
+Call log:
+  - navigating to "https://www.dunerep.com/", waiting until "networkidle"
+
+2026-11-19T20:29:37Z [playwright] Harrison Street RE: 0 match(es)
+2026-11-19T20:29:41Z [playwright] Eastdil Secured: 0 match(es)
+2026-11-19T20:29:48Z [playwright] I Squared Capital: 0 match(es)
+2026-11-19T20:30:18Z [playwright] ERROR AEW Capital Mgmt: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.aew.com/about/careers", waiting until "networkidle"
+
+2026-11-19T20:30:23Z [playwright] Clarion Partners: 0 match(es)
+2026-11-19T20:30:28Z [playwright] Heitman: 3 match(es)
+2026-11-19T20:30:32Z [playwright] Walton Street Capital: 0 match(es)
+2026-11-19T20:30:37Z [playwright] TA Realty: 0 match(es)
+2026-11-19T20:30:46Z [playwright] Somera Road: 0 match(es)
+2026-11-19T20:30:52Z [playwright] Marcus & Millichap: 0 match(es)
+2026-11-19T20:30:57Z [playwright] Stifel Financial: 0 match(es)
+2026-11-19T20:31:01Z [playwright] Revantage (Blackstone): 0 match(es)
+2026-11-19T20:31:06Z [playwright] Fidelity Investments: 0 match(es)
+2026-11-19T20:31:06Z Running LinkedIn scrapers...
+2026-11-19T20:31:07Z [linkedin] Goldman Sachs: 1 match(es) (saw 10 listings)
+2026-11-19T20:31:09Z [linkedin] Morgan Stanley: 0 match(es) (saw 10 listings)
+2026-11-19T20:31:10Z [linkedin] Blackstone: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:11Z [linkedin] KKR: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:13Z [linkedin] Apollo Global Management: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:14Z [linkedin] Carlyle Group: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:15Z [linkedin] Brookfield Asset Mgmt: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:17Z [linkedin] BlackRock: 0 match(es) (saw 1 listings)
+2026-11-19T20:31:18Z [linkedin] Stonepeak: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:20Z [linkedin] Ares Management: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:21Z [linkedin] Starwood Capital Group: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:22Z [linkedin] TPG: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:24Z [linkedin] Cerberus Capital Mgmt: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:26Z [linkedin] EQT: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:27Z [linkedin] Tishman Speyer: 0 match(es) (saw 2 listings)
+2026-11-19T20:31:28Z [linkedin] Related Companies: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:30Z [linkedin] Rockpoint Group: 0 match(es) (saw 3 listings)
+2026-11-19T20:31:31Z [linkedin] Pretium Partners: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:33Z [linkedin] Dune Real Estate Partners: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:34Z [linkedin] Harrison Street: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:35Z [linkedin] Eastdil Secured: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:37Z [linkedin] Blue Owl Capital: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:38Z [linkedin] W. P. Carey: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:40Z [linkedin] Digital Realty: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:41Z [linkedin] I Squared Capital: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:42Z [linkedin] AEW Capital Management: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:44Z [linkedin] LaSalle Investment Mgmt: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:45Z [linkedin] BentallGreenOak: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:46Z [linkedin] Clarion Partners: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:48Z [linkedin] Hines: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:49Z [linkedin] Nuveen: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:50Z [linkedin] Bridge Investment Group: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:52Z [linkedin] Heitman: 0 match(es) (saw 1 listings)
+2026-11-19T20:31:53Z [linkedin] Walton Street Capital: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:55Z [linkedin] TA Realty: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:56Z [linkedin] Somera Road: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:57Z [linkedin] Jefferies: 0 match(es) (saw 0 listings)
+2026-11-19T20:31:59Z [linkedin] JLL: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:00Z [linkedin] CBRE: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:01Z [linkedin] Cushman & Wakefield: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:03Z [linkedin] Walker & Dunlop: 0 match(es) (saw 10 listings)
+2026-11-19T20:32:04Z [linkedin] Marcus & Millichap: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:06Z [linkedin] Wells Fargo: 0 match(es) (saw 1 listings)
+2026-11-19T20:32:07Z [linkedin] KeyBank: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:09Z [linkedin] UBS: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:10Z [linkedin] Stifel: 0 match(es) (saw 3 listings)
+2026-11-19T20:32:11Z [linkedin] Revantage: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:13Z [linkedin] Fidelity Investments: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:14Z [linkedin] State Street: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:16Z [linkedin] Berkadia: 0 match(es) (saw 0 listings)
+2026-11-19T20:32:17Z Total matches after dedup: 10
+2026-11-19T20:32:17Z Validating job URLs...
+2026-11-19T20:32:20Z [validate] Removed 8 dead link(s): Nuveen Real Estate, JLL Capital Markets, JLL Capital Markets, Cushman & Wakefield, Cushman & Wakefield, Heitman, Heitman, Heitman
+2026-11-19T20:32:20Z Total matches after validation: 2
+2026-11-19T20:32:20Z New jobs this run: 0
+2026-11-19T20:32:20Z jobs.json written
+2026-11-19T20:32:20Z No new jobs — no email sent
+2026-11-19T20:32:20Z === Run complete in 387s — 2 total, 0 new ===
