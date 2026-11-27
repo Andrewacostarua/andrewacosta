@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-11-26T21:27:08",
-  "total_found": 2,
+  "last_run": "2026-11-27T21:08:09",
+  "total_found": 1,
   "firms": [
     {
       "name": "Blackstone (BREP)",
@@ -273,7 +273,7 @@
       "tier": "safety",
       "track": "cm",
       "careers_url": "https://careers.cbre.com/en_US/careers/SearchJobs/",
-      "open_count": 1
+      "open_count": 0
     },
     {
       "name": "Cushman & Wakefield",
@@ -363,24 +363,8 @@
       "url": "https://job-boards.greenhouse.io/tpgcareers/jobs/7804828003",
       "location": "New York - 245 Park Avenue",
       "posted_date": "2026-10-30",
-      "first_seen": "2026-11-26",
+      "first_seen": "2026-11-27",
       "is_new": false,
-      "chance": null,
-      "salary": null,
-      "bonus": null,
-      "hours": null
-    },
-    {
-      "id": "pw-cbre-capital-marke-305917",
-      "firm": "CBRE Capital Markets",
-      "tier": "safety",
-      "track": "cm",
-      "title": "Analyst, Indirect Private Real Estate",
-      "url": "https://careers.cbre.com/en_US/careers/JobDetail/Analyst-Indirect-Private-Real-Estate/305917",
-      "location": "",
-      "posted_date": "",
-      "first_seen": "2026-11-26",
-      "is_new": true,
       "chance": null,
       "salary": null,
       "bonus": null,
